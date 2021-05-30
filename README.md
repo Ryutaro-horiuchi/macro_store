@@ -34,7 +34,8 @@
 - 社会人になって脂肪がつくようになり、体型が気になってきた20~30代サラリーマン
 
 
-[画面遷移図](https://xd.adobe.com/view/355eed41-de73-4aa5-8ffb-daee51c044e0-600d/grid)
+#### 画面遷移図
+https://xd.adobe.com/view/355eed41-de73-4aa5-8ffb-daee51c044e0-600d/grid
 
 
 
