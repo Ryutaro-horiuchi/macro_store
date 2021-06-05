@@ -42,4 +42,5 @@
 https://xd.adobe.com/view/355eed41-de73-4aa5-8ffb-daee51c044e0-600d/grid
 
 #### ER図
-https://gyazo.com/12ca0c92bb1da13be49037c33d349f5a
+https://gyazo.com/471a51a5486ed051f917bf8c7fd6b9ed
+
