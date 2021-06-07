@@ -56,7 +56,10 @@
 
 
 #### 画面遷移図
+---
 https://xd.adobe.com/view/355eed41-de73-4aa5-8ffb-daee51c044e0-600d/grid
 
 #### ER図
-https://gyazo.com/57057e8aa7239d6caf76e3143f10363c
+---
+https://gyazo.com/b20945b6881184f882b1ac59cd2b9880
+
