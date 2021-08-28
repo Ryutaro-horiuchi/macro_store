@@ -1,0 +1,92 @@
+inherit_from: .rubocop_todo.yml
+
+require:
+  - rubocop-rails
+
+AllCops:
+  # 除外
+  Exclude:
+    - "vendor/**/*"
+    - "bin/**/*"
+    - "lib/**/*"
+    - "db/**/*"
+    - "config/**/*"
+    - "spec/**/*"
+    - "script/**/*"
+    - "node_modules/**/*"
+    - "Gemfile"
+  DisplayCopNames: true
+
+# ブロックの開始後に複数行の終了ブロックに改行があるかどうかを確認
+Layout/MultilineBlockLayout:
+  Exclude:
+    - "spec/**/*_spec.rb"
+
+# ソースコードの行の長さ　チェック対象外
+Layout/LineLength:
+  Enabled: false
+
+# メソッドのABCサイズが構成された25を超えていないことを確認。
+Metrics/AbcSize:
+  Max: 25
+
+# ブロックの長さが最大値を超えているかどうかをチェック
+Metrics/BlockLength:
+  Max: 30
+  Exclude:
+    - "Gemfile"
+    - "config/**/*"
+    - "spec/**/*_spec.rb"
+
+# クラスの長さが300を超えているかどうかをチェック
+Metrics/ClassLength:
+  # コメントは数えない
+  CountComments: false
+  Max: 300
+
+# 循環的複雑度が30を超えていないかどうかをチェック
+Metrics/CyclomaticComplexity:
+  Max: 30
+
+# メソッドの長さをチェック
+Metrics/MethodLength:
+  CountComments: false
+  Max: 30
+
+# 適切な名前が付けられていることを確認
+Naming/AccessorMethodName:
+  Exclude:
+    - "app/controllers/**/*"
+
+# コメント内の文字が英語を使われているかをチェックする　対象外
+Style/AsciiComments:
+  Enabled: false
+
+# 中括弧の使用を確認するか、単一行または複数行のブロックの周囲で実行/終了
+Style/BlockDelimiters:
+  Exclude:
+    - "spec/**/*_spec.rb"
+
+# クラス内のクラスなどを定義する際の形式を強制 対象外
+Style/ClassAndModuleChildren:
+  Enabled: false
+
+# クラスとモジュールの欠落しているドキュメントをチェック　対象外
+Style/Documentation:
+  Enabled: false
+
+Style/FrozenStringLiteralComment:
+  Enabled: false
+
+# 修飾子 `if` /` unless`として記述された場合に1行に収まる `if`および` unless`ステートメントをチェック
+Style/IfUnlessModifier:
+  Enabled: true
+
+#  while / untilを修飾子として記述した場合に1行に収まるwhileステートメントと
+#  untilステートメントをチェック。　対象外
+Style/WhileUntilModifier:
+  Enabled: false
+
+# アルファベット順に並べ替える　対象外
+Bundler/OrderedGems:
+  Enabled: false
