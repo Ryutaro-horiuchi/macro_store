@@ -1,79 +1,51 @@
 version: 2.1 # Use 2.1 to enable using orbs and other features.
 
-# 使用するオーブ(パッケージ)の宣言
-orbs:
-  ruby: circleci/ruby@1.0
-  node: circleci/node@2
-
 jobs:
-  build: # ビルドコマンドの内容
+  build:
     docker:
-      - image: cimg/ruby:2.7-node # カスタマイズされているdockerのイメージを使用
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD
-    steps:
-      - checkout # gitコードをプルダウンする
-      - ruby/install-deps # rubyorbを使用して依存関係をインストールする
-      # ノードorbを使用してパッケージをインストールする
-      # yarnを使用し、`yarn.lock`で依存関係をキャッシュすることを指定する
-      # learn more: https://circleci.com/docs/2.0/caching/
-      - node/install-packages:
-          pkg-manager: yarn
-          cache-key: "yarn.lock"
+      - image: circleci/ruby:2.6.4-node-browsers
+        environment:
+          - BUNDLER_VERSION: 2.1.4
+          - RAILS_ENV: "test"
+          - PGHOST: 127.0.0.1
+      - image: circleci/postgres:13.4
+        environment:
+          - POSTGRES_USER: macro_store
+          - POSTGRES_PASSWORD: "true"
+          - POSTGRES_DB: macro_store_test # macro_storeのテスト環境を参照
+    working_directory: ~/macro_store
 
-  test: # テストの内容
-    # 並列ジョブコンテナを実行して、テストの高速化を可能にします。
-    # これにより、テストが複数のコンテナに分割されます。
-    parallelism: 3
-    # ここでは、2つのDockerイメージを設定します。
-    docker:
-      - image: cimg/ruby:2.7-node # これは、ステップコマンドが実行されるプライマリDockerイメージ。
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD # context / project UI env-var reference
-      - image: circleci/postgres:9.5-alpine
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD # context / project UI env-var reference
-        environment: # POSTGRES環境変数を追加します。
-          POSTGRES_USER: circleci-demo-ruby
-          POSTGRES_DB: rails_blog_test
-          POSTGRES_PASSWORD: ""
-    # プライマリコンテナに適用されるRubyとRailsに固有の環境変数。
-    environment:
-      BUNDLE_JOBS: "3"
-      BUNDLE_RETRY: "3"
-      PGHOST: 127.0.0.1
-      PGUSER: circleci-demo-ruby
-      PGPASSWORD: ""
-      RAILS_ENV: test
-    # 実行する一連の手順です。いくつかは「ビルド」のものに似ています.
     steps:
-      - checkout
-      - ruby/install-deps
-      - node/install-packages:
-          pkg-manager: yarn
-          cache-key: "yarn.lock"
-      # ここでは、データベースで操作を実行する前に、
-      # セカンダリコンテナが起動することを確認します
+      - checkout # ~/macro_storeディレクトリ内にgithubのコードをプルダウンする
+      - restore_cache: # 以下がキャッシュされていれば使用する
+          keys:
+            - v1-dependencies-{{ checksum "Gemfile.lock" }}
+            - yarn-packages-{{ checksum "yarn.lock" }}
+
       - run:
-          name: Wait for DB
-          command: dockerize -wait tcp://localhost:5432 -timeout 1m
+          name: install dependencies
+          command: |
+            gem install bundler -v 2.1.4
+            bundle install --jobs=4 --retry=3 --path vendor/bundle
+            yarn install --frozen-lockfile --cache-folder ~/.cache/yarn
+      - save_cache: #ファイルをキャッシュする
+          paths:
+            - ./vendor/bundle #キャッシュするファイルの指定
+          key: v1-dependencies-{{ checksum "Gemfile.lock" }} #キャッシュの名前
+      - save_cache:
+          paths:
+            - ~/.cache/yarn
+          key: yarn-packages-{{ checksum "yarn.lock" }}
+
       - run:
           name: Database setup
-          command: bundle exec rails db:schema:load --trace
-      # rspecを並行して実行する
-      - ruby/rspec-test
+          command: |
+            bundle exec rake db:create
+            bundle exec rake db:schema:load
 
-# ワークフローを使用して、上記で宣言したジョブを調整します。
-workflows:
-  version: 2
-  build_and_test: # ワークフローの名前は "build_and_test" です
-    jobs: # このワークフローの一部として実行するジョブのリストです
-      - build # 最初にビルドを実行します
-      - test: # 次に、テストを実行します
-          requires: # テストを実行するには、ビルドに合格する必要があります
-            - build # 最後に、ビルドジョブを実行します。
-
-# 参照URL https://circleci.com/docs/2.0/language-ruby/#build-the-demo-ruby-on-rails-project-yourself
+      - run:
+          name: Rubocop
+          command: bundle exec rubocop
+      - run:
+          name: rspec
+          command: bundle exec rspec
