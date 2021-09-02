@@ -1,0 +1,51 @@
+version: 2.1 # Use 2.1 to enable using orbs and other features.
+
+jobs:
+  build:
+    docker:
+      - image: circleci/ruby:2.6.4-node-browsers
+        environment:
+          - BUNDLER_VERSION: 2.1.4
+          - RAILS_ENV: "test"
+          - PGHOST: 127.0.0.1
+      - image: circleci/postgres:13.4
+        environment:
+          - POSTGRES_USER: macro_store
+          - POSTGRES_PASSWORD: "true"
+          - POSTGRES_DB: macro_store_test # macro_storeのテスト環境を参照
+    working_directory: ~/macro_store
+
+    steps:
+      - checkout # ~/macro_storeディレクトリ内にgithubのコードをプルダウンする
+      - restore_cache: # 以下がキャッシュされていれば使用する
+          keys:
+            - v1-dependencies-{{ checksum "Gemfile.lock" }}
+            - yarn-packages-{{ checksum "yarn.lock" }}
+
+      - run:
+          name: install dependencies
+          command: |
+            gem install bundler -v 2.1.4
+            bundle install --jobs=4 --retry=3 --path vendor/bundle
+            yarn install --frozen-lockfile --cache-folder ~/.cache/yarn
+      - save_cache: #ファイルをキャッシュする
+          paths:
+            - ./vendor/bundle #キャッシュするファイルの指定
+          key: v1-dependencies-{{ checksum "Gemfile.lock" }} #キャッシュの名前
+      - save_cache:
+          paths:
+            - ~/.cache/yarn
+          key: yarn-packages-{{ checksum "yarn.lock" }}
+
+      - run:
+          name: Database setup
+          command: |
+            bundle exec rake db:create
+            bundle exec rake db:schema:load
+
+      - run:
+          name: Rubocop
+          command: bundle exec rubocop
+      - run:
+          name: rspec
+          command: bundle exec rspec
