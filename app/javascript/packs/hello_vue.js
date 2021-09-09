@@ -7,8 +7,8 @@
 
 import Vue from 'vue'
 import App from '../app.vue'
-import vuetify from './vty'
-import router from '../router/index'
+import vuetify from '../vuetify/vuetify'
+import router from '../router/router'
 
 document.addEventListener('DOMContentLoaded', () => {
   const app = new Vue({
