@@ -7,8 +7,11 @@
 
 import Vue from 'vue'
 import App from '../app.vue'
+import Header from '../components/Header.vue'
 import vuetify from '../vuetify/vuetify'
 import router from '../router/router'
+
+Vue.component('Header', Header)
 
 document.addEventListener('DOMContentLoaded', () => {
   const app = new Vue({
