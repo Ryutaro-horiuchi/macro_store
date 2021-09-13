@@ -7,9 +7,21 @@
 
 import Vue from 'vue'
 import App from '../app.vue'
+import Header from '../components/Header.vue'
+import NavigationBar from '../components/NavigationBar'
+import vuetify from '../vuetify/vuetify'
+import router from '../router/router'
+import store from '../store/store'
+
+Vue.component('Header', Header)
+Vue.component('NavigationBar', NavigationBar)
+
 
 document.addEventListener('DOMContentLoaded', () => {
   const app = new Vue({
+    vuetify,
+    router,
+    store,
     render: h => h(App)
   }).$mount()
   document.body.appendChild(app.$el)
