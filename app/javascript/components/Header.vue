@@ -6,10 +6,11 @@
     <v-btn icon>
         <v-icon>mdi-login</v-icon>
       </v-btn>
-
+    <router-link style="text-decoration: none;" to="/signup">
       <v-btn icon>
         <v-icon>mdi-account-plus</v-icon>
       </v-btn>
+    </router-link>
   </v-app-bar>
 </template>
 
