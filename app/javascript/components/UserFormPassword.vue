@@ -1,5 +1,6 @@
 <template>
   <v-text-field
+    v-model="setEmail"
     label="パスワード"
     outlined
     >
@@ -8,6 +9,17 @@
 
 <script>
 export default {
-
+  props:{
+    password:{
+      type: String,
+      default: ''
+    }
+  },
+  computed: {
+    setPassword: {
+      get() { return this.password },
+      set(newValue) { return this.$emit('update:password', newValue) }
+    }
+  }
 }
 </script>

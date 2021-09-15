@@ -4,7 +4,7 @@
     >
       <v-col cols="12" class="my-8 text-center">
         <h1 class="text-h5 font-weight-bold">
-          タイトル
+          会員登録
         </h1>
       </v-col>
 
