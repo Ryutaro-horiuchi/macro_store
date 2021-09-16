@@ -24,9 +24,6 @@
         </template>
       </LoginForm> 
     </v-card>
-      <v-card-text>
-        {{ params }}
-      </v-card-text>
   </v-app>
 </template>
 
