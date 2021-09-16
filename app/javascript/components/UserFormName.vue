@@ -1,6 +1,8 @@
 <template>
   <v-text-field
     v-model="setName"
+    :rules="rules"
+    :counter="max"
     label="ユーザー名"
     outlined>
   </v-text-field>
@@ -12,6 +14,16 @@ export default {
     name:{
       type: String,
       default: ''
+    }
+  },
+  data() {
+    const max = 30
+    return {
+      max,
+      rules: [
+        v => !!v || '',
+        v => (!!v && max >= v.length) || `${max}文字以内で記述してください`
+      ]
     }
   },
   computed: {
