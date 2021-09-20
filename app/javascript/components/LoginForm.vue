@@ -4,7 +4,7 @@
     >
       <v-col cols="12" class="my-8 text-center">
         <h1 class="text-h5 font-weight-bold">
-          会員登録
+          {{ title }}
         </h1>
       </v-col>
 
@@ -23,6 +23,6 @@
 
 <script>
 export default {
-  
+  props: ["title"]
 }
 </script>

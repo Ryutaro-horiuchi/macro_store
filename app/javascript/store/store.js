@@ -13,11 +13,17 @@ export default new Vuex.Store({
   mutations: {
     changeDrawer(state) {
       state.drawer = !state.drawer;
+    },
+    loggedIn(state, payload) {
+      state.loggedIn = payload
     }
   },
   actions: {
     changeDrawer(context) {
       context.commit('changeDrawer');
+    },
+    login(context) {
+      context.commit('loggedIn', true)
     }
   }
 })

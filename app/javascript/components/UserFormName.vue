@@ -4,10 +4,10 @@
     :rules="rules"
     :counter="max"
     label="ユーザー名"
+    prepend-inner-icon="mdi-account"
     outlined>
   </v-text-field>
 </template>
-
 <script>
 export default {
   props:{

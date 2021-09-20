@@ -4,7 +4,7 @@
     :rules="form.rules"
     :counter="!noValidation"
     :hint="form.hint"
-    label="パスワードを入力"
+    label="パスワード"
     :append-icon="toggle.icon"
     :type="toggle.type"
     outlined

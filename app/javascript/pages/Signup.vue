@@ -1,9 +1,9 @@
 <template>
-    <v-app>
+  <v-app>
     <v-card class="mx-auto overflow-hidden" height="100%" width="100%">
       <Header></Header>
       <NavigationBar></NavigationBar>   
-      <LoginForm>
+      <LoginForm title="会員登録">
         <template v-slot:form-card-content>
           <!-- 以下form-card-contentととして、LoginFormコンポーネントに渡している -->
           <v-form ref="form" v-model="isValid">
