@@ -1,7 +1,7 @@
 <template>
   <v-app-bar color="green" dark>
     <v-app-bar-nav-icon @click="changeDrawer"></v-app-bar-nav-icon>
-    <v-toolbar-title>Macro Store</v-toolbar-title>
+    <v-toolbar-title>MacroStore</v-toolbar-title>
     <v-spacer></v-spacer>
     <router-link style="text-decoration: none;" to="/login">
       <v-btn icon>
