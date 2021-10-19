@@ -9,12 +9,21 @@ import Vue from 'vue'
 import App from '../app.vue'
 import Header from '../components/Header.vue'
 import NavigationBar from '../components/NavigationBar'
+import LoginForm from '../components/LoginForm'
+import UserFormEmail from '../components/UserFormEmail'
+import UserFormName from '../components/UserFormName'
+import UserFormPassword from '../components/UserFormPassword'
 import vuetify from '../vuetify/vuetify'
 import router from '../router/router'
 import store from '../store/store'
 
 Vue.component('Header', Header)
 Vue.component('NavigationBar', NavigationBar)
+Vue.component('LoginForm', LoginForm)
+Vue.component('UserFormEmail', UserFormEmail)
+Vue.component('UserFormName', UserFormName)
+Vue.component('UserFormPassword', UserFormPassword)
+
 
 
 document.addEventListener('DOMContentLoaded', () => {
