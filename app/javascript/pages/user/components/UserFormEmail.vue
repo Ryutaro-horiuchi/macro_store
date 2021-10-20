@@ -20,7 +20,7 @@ export default {
     return {
       rules: [
         v => !!v || '',
-        v => /.+@.+\..+/.test(v) || ''
+        v => /[\w+\-.]+@[a-z\d\-.]+\.[a-z]+/.test(v) || ''
       ]
     }
   },

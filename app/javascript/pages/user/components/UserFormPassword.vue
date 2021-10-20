@@ -40,7 +40,7 @@ export default {
       const msg = `${min}。半角英数字•ﾊｲﾌﾝ•ｱﾝﾀﾞｰﾊﾞｰが使えます`
       const required = v => !!v || ''
       // ログイン時のバリデーション
-      const format = v => /^[\w-]{8,72}?$/.test(v) || msg
+      const format = v => /^[\w-]{8,72}$/.test(v) || msg
       // 会員登録時のバリデーション
       const rules = this.noValidation ? [required] : [format]
       const hint = this.noValidation ? undefined : msg

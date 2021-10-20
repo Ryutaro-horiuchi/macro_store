@@ -8,8 +8,12 @@
 import Vue from 'vue'
 import App from '../app.vue'
 import vuetify from '../plugins/vuetify'
+import axios from '../plugins/axios'
 import router from '../router'
 import store from '../store'
+
+
+Vue.prototype.$axios = axios
 
 document.addEventListener('DOMContentLoaded', () => {
   const app = new Vue({
