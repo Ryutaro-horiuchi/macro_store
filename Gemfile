@@ -40,6 +40,7 @@ group :development, :test do
   gem 'rails_best_practices'
   gem 'capybara'
   gem 'factory_bot_rails'
+  gem 'pry-byebug'
 end
 
 group :development do

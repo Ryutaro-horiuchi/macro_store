@@ -3,8 +3,8 @@
     <template v-slot:form-card-content>
       <!-- 以下form-card-contentととして、LoginFormコンポーネントに渡している -->
       <v-form ref="form" v-model="isValid">
-        <UserFormEmail :email.sync="params.user.email"></UserFormEmail>
-        <UserFormPassword :password.sync="params.user.password"></UserFormPassword>
+        <UserFormEmail :email.sync="params.email"></UserFormEmail>
+        <UserFormPassword noValidation :password.sync="params.password"></UserFormPassword>
         <v-card-actions>
           <router-link to="#">
             パスワードを忘れた場合
@@ -42,17 +42,16 @@ export default {
     return {
       isValid: false,
       loading: false,
-      params: { user: { email: '', password: '' }},
+      params: { email: '', password: '' },
     }
   },
   methods: {
     login() {
       this.loading = true
+      this.$store.dispatch('login', this.params)
       setTimeout(() => {
-        this.$store.dispatch('login')
-        this.$router.replace('/')
-      }
-      )
+        this.loading = false
+      }, 1500)
     }
   }
 }
