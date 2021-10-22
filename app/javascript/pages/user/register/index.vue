@@ -1,14 +1,18 @@
 <template>
   <UserForm :title="title">
-    <template v-slot:form-card-content>
+    <template #form-card-content>
       <!-- 以下form-card-contentととして、LoginFormコンポーネントに渡している -->
-      <v-form ref="form" v-model="isValid">
-        <UserFormName :name.sync="params.user.name"></UserFormName>
-        <UserFormEmail :email.sync="params.user.email"></UserFormEmail>
-        <UserFormPassword :password.sync="params.user.password"></UserFormPassword>
-        <UserFormPasswordConfirmation :password_confirmation.sync="params.user.password_confirmation"
-                                      :password="params.user.password">
-        </UserFormPasswordConfirmation>
+      <v-form
+        ref="form"
+        v-model="isValid"
+      >
+        <UserFormName :name.sync="params.user.name" />
+        <UserFormEmail :email.sync="params.user.email" />
+        <UserFormPassword :password.sync="params.user.password" />
+        <UserFormPasswordConfirmation
+          :password_confirmation.sync="params.user.password_confirmation"
+          :password="params.user.password"
+        />
       </v-form>
       <v-btn
         :disabled="!isValid || loading"
@@ -16,7 +20,8 @@
         block
         color="green" 
         class="white-text"
-        @click="signUp">
+        @click="signUp"
+      >
         <!-- disabledはtrueの場合にボタンを無効にする。この時はvalidが有効ではない時がtrueであり、無効になる。 -->
         <span>登録する</span>
       </v-btn>

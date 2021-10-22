@@ -1,20 +1,32 @@
 <template>
-  <v-app-bar color="green" dark>
-    <v-app-bar-nav-icon @click="changeDrawer"></v-app-bar-nav-icon>
+  <v-app-bar
+    color="green"
+    dark
+  >
+    <v-app-bar-nav-icon @click="changeDrawer" />
     <v-toolbar-title>MacroStore</v-toolbar-title>
-    <v-spacer></v-spacer>
+    <v-spacer />
     <template v-if="isAutheniticated">
-      <v-btn icon @click="logout">
+      <v-btn
+        icon
+        @click="logout"
+      >
         <v-icon>mdi-logout</v-icon>
       </v-btn>
     </template>
     <template v-if="!isAutheniticated">
-      <router-link style="text-decoration: none;" to="/login">
+      <router-link
+        style="text-decoration: none;"
+        to="/login"
+      >
         <v-btn icon>
           <v-icon>mdi-login</v-icon>
         </v-btn>
       </router-link>
-      <router-link style="text-decoration: none;" to="/signup">
+      <router-link
+        style="text-decoration: none;"
+        to="/signup"
+      >
         <v-btn icon>
           <v-icon>mdi-account-plus</v-icon>
         </v-btn>

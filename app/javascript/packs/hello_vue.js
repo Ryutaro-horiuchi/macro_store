@@ -15,6 +15,8 @@ import store from '../store'
 
 Vue.prototype.$axios = axios
 
+
+
 document.addEventListener('DOMContentLoaded', () => {
   const app = new Vue({
     vuetify,
@@ -25,6 +27,16 @@ document.addEventListener('DOMContentLoaded', () => {
   document.body.appendChild(app.$el)
 })
 
+router.beforeEach((to, from, next) => {
+  store.dispatch('fetchAuthUser').then((authUser) => {
+    if (to.matched.some(record => record.meta.requiredAuth) && !authUser) {
+      next(('/login'));
+    } else {
+      next();
+    }
+  })
+})
+// ページ遷移のたびに実行。fetchAuthUserを取得し、ログインが必要なページであれば、ログインページに遷移するようにする
 
 // The above code uses Vue without the compiler, which means you cannot
 // use Vue to target elements in your existing html templates. You would

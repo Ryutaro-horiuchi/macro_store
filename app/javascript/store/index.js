@@ -23,31 +23,49 @@ export default new Vuex.Store({
     },
   },
   actions: {
-    changeDrawer(context) {
-      context.commit('changeDrawer');
+    changeDrawer({ commit }) {
+      commit('changeDrawer');
     },
-    signUp(context, user) {
+    async fetchAuthUser({ commit , state }) {
+      if(!localStorage.idToken) return null
+      if(state.user) return state.user
+
+      const userResponse = await axios.get('users/me')
+      .catch((err) => {
+        return null
+      })
+      if (!userResponse) return null
+
+      const authUser = userResponse.data
+      if (authUser) {
+        commit('setUser', authUser)
+      } else {
+        commit('setUser', null)
+      }
+    },
+    signUp({ commit }, user ) {
       return axios.post('/users', user)
       .then(res => {
-        console.log(res)
+        router.push('/login')
       })
       .catch(err => {
         console.log(err)
       })
     },
-    login(context, user) {
+    login({ commit }, user ) {
       return axios.post('/login', user)
       .then(res => {
         localStorage.setItem('idToken', res.data.token);
-        context.commit('setUser', res.data.user)
+        commit('setUser', res.data.user)
+        router.push('/')
       })
       .catch(err => {
         console.log(err)
       })
     },
-    logout(context) {
+    logout({ commit }) {
       localStorage.removeItem('idToken')
-      context.commit('setUser', null)
+      commit('setUser', null)
     }
   }
 })

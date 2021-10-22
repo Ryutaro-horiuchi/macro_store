@@ -1,8 +1,12 @@
 <template>
   <v-app>
-    <v-card class="mx-auto overflow-hidden" height="100%" width="100%">
+    <v-card
+      class="mx-auto overflow-hidden"
+      height="100%"
+      width="100%"
+    >
       <TheHeader />
-        <router-view></router-view>
+      <router-view />
       <TheNavigationBar />
     </v-card>
   </v-app>

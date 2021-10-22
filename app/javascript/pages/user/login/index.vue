@@ -1,10 +1,16 @@
 <template>
   <UserForm title="ログイン">
-    <template v-slot:form-card-content>
+    <template #form-card-content>
       <!-- 以下form-card-contentととして、LoginFormコンポーネントに渡している -->
-      <v-form ref="form" v-model="isValid">
-        <UserFormEmail :email.sync="params.email"></UserFormEmail>
-        <UserFormPassword noValidation :password.sync="params.password"></UserFormPassword>
+      <v-form
+        ref="form"
+        v-model="isValid"
+      >
+        <UserFormEmail :email.sync="params.email" />
+        <UserFormPassword
+          no-validation
+          :password.sync="params.password"
+        />
         <v-card-actions>
           <router-link to="#">
             パスワードを忘れた場合
@@ -17,8 +23,9 @@
             block
             color="green"
             class="white-text"
-            @click="login">
-          <span>ログインする</span>
+            @click="login"
+          >
+            <span>ログインする</span>
           </v-btn> 
         </v-card-text>
       </v-form>

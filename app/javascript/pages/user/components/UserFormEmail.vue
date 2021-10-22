@@ -4,8 +4,8 @@
     :rules="rules"
     label="メールアドレス"
     prepend-inner-icon="mdi-email"
-    outlined>
-  </v-text-field>
+    outlined
+  />
 </template>
 
 <script>

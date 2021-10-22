@@ -5,8 +5,8 @@
     :counter="max"
     label="ユーザー名"
     prepend-inner-icon="mdi-account"
-    outlined>
-  </v-text-field>
+    outlined
+  />
 </template>
 <script>
 export default {

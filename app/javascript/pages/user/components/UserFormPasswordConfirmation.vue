@@ -15,7 +15,7 @@
 <script>
 export default {
   props: {
-    password_confirmation: {
+    passwordConfirmation: {
       type: String,
       default: ''
     },
@@ -31,7 +31,7 @@ export default {
   },
   computed: {
     setPassword: {
-      get () { return this.password_confirmation },
+      get () { return this.passwordConfirmation },
       set (newVal) { return this.$emit('update:password_confirmation', newVal) }
     },
     confirmPasswordRules() {
