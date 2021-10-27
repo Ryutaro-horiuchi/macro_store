@@ -7,14 +7,14 @@
 
 import Vue from 'vue'
 import App from '../app.vue'
-import Header from '../components/Header.vue'
-import NavigationBar from '../components/NavigationBar'
-import vuetify from '../vuetify/vuetify'
-import router from '../router/router'
-import store from '../store/store'
+import vuetify from '../plugins/vuetify'
+import axios from '../plugins/axios'
+import router from '../router'
+import store from '../store'
 
-Vue.component('Header', Header)
-Vue.component('NavigationBar', NavigationBar)
+
+Vue.prototype.$axios = axios
+
 
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -25,10 +25,18 @@ document.addEventListener('DOMContentLoaded', () => {
     render: h => h(App)
   }).$mount()
   document.body.appendChild(app.$el)
-
-  console.log(app)
 })
 
+router.beforeEach((to, from, next) => {
+  store.dispatch('fetchAuthUser').then((authUser) => {
+    if (to.matched.some(record => record.meta.requiredAuth) && !authUser) {
+      next(('/login'));
+    } else {
+      next();
+    }
+  })
+})
+// ページ遷移のたびに実行。fetchAuthUserを取得し、ログインが必要なページであれば、ログインページに遷移するようにする
 
 // The above code uses Vue without the compiler, which means you cannot
 // use Vue to target elements in your existing html templates. You would
