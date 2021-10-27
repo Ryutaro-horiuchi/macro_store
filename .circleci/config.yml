@@ -3,7 +3,7 @@ version: 2.1 # Use 2.1 to enable using orbs and other features.
 jobs:
   build:
     docker:
-      - image: circleci/ruby:2.6.4-node-browsers
+      - image: circleci/ruby:2.6.4-node
         environment:
           - BUNDLER_VERSION: 2.1.4
           - RAILS_ENV: "test"
@@ -17,16 +17,24 @@ jobs:
 
     steps:
       - checkout # ~/macro_storeディレクトリ内にgithubのコードをプルダウンする
+      - run:
+          name: "Node.js と npm の更新"
+          command: |
+            curl -sSL "https://nodejs.org/dist/v14.17.0/node-v14.17.0-linux-x64.tar.xz" | sudo tar --strip-components=2 -xJ -C /usr/local/bin/ node-v14.17.0-linux-x64/bin/node
+            curl https://www.npmjs.com/install.sh | sudo bash
+      - run:
+          name: 現行バージョンのノードのチェック
+          command: node -v
       - restore_cache: # 以下がキャッシュされていれば使用する
           keys:
             - v1-dependencies-{{ checksum "Gemfile.lock" }}
             - yarn-packages-{{ checksum "yarn.lock" }}
-
       - run:
           name: install dependencies
           command: |
             gem install bundler -v 2.1.4
             bundle install --jobs=4 --retry=3 --path vendor/bundle
+            yarn add node-sass
             yarn install --frozen-lockfile --cache-folder ~/.cache/yarn
       - save_cache: #ファイルをキャッシュする
           paths:
@@ -36,16 +44,21 @@ jobs:
           paths:
             - ~/.cache/yarn
           key: yarn-packages-{{ checksum "yarn.lock" }}
-
       - run:
           name: Database setup
           command: |
             bundle exec rake db:create
             bundle exec rake db:schema:load
-
       - run:
           name: Rubocop
           command: bundle exec rubocop
       - run:
-          name: rspec
-          command: bundle exec rspec
+          name: rails-best-practice
+          command: bundle exec rails_best_practices .
+      - run:
+          name: lint
+          command: |
+            yarn run lint
+      # - run:
+      #     name: rspec
+      #     command: bundle exec rspec
