@@ -29,13 +29,6 @@ ActiveRecord::Schema.define(version: 2021_10_29_013258) do
     t.index ["name", "calorie", "carbohydrate", "protein", "lipid"], name: "food_index"
   end
 
-  create_table "tasks", force: :cascade do |t|
-    t.string "name"
-    t.text "description"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-  end
-
   create_table "users", force: :cascade do |t|
     t.string "name", null: false
     t.string "email", null: false

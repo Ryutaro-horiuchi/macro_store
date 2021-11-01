@@ -4,7 +4,7 @@ class Scraping
   def self.seven_urls
     agent = Mechanize.new
     links = []
-    next_url = "products/a/cat/010010010000000"
+    next_url = "products/a/chukaman"
 
     while true
       current_page = agent.get('https://www.sej.co.jp/' + next_url)
@@ -20,7 +20,6 @@ class Scraping
       break unless next_link
       # なければ終了する
       next_url = next_link.get_attribute('href')
-      puts next_url
       # href属性からurlを取得し、next_urlに代入し、初めに戻る
     end
 
@@ -36,16 +35,16 @@ class Scraping
     page = agent.get(link)
 
     name = page.at('.item_ttl h1').inner_text if page.at('.item_ttl h1') #ok
+    url = page.at('.productWrap img')[:src] if page.at('.productWrap img')
+
     if page.at('.item_price p') #ok
       price_strings = page.at('.item_price p').inner_text
       letter = price_strings.split("円")
       price = letter.first.to_i
     end
     
-    # image = page.at('.productWrap img')[:src] if page.at('.productWrap img')
-    
     if page.at('.allergy td') #ok
-      array = page.at('.allergy tr:last-child td').inner_text
+      array = page.at('.allergy tr:nth-child(2) td').inner_text
       array = array.split(/[、（]/)
       array = array.first(4)
       array.map! { |arr| arr.gsub(/[^\d+\.\d+]/, "").to_f }
@@ -55,15 +54,19 @@ class Scraping
       carbohydrate = array[3]
     end
 
-    food = Food.where(name: name).first_or_initialize
-    food.price = price
-    # food.image = image
-    food.calorie = calorie
-    food.protein = protein
-    food.lipid = lipid
-    food.carbohydrate = carbohydrate
-    food.store = 0
-    food.save
-    puts food
+    food = Food.where(name: name)
+    if food.blank? && protein.present?
+      # もし該当しなければ、保存する
+      food = Food.new
+      food.name = name
+      food.remote_image_url = url
+      food.price = price
+      food.calorie = calorie
+      food.protein = protein
+      food.lipid = lipid
+      food.carbohydrate = carbohydrate
+      food.store = 0
+      food.save
+    end
   end
 end
