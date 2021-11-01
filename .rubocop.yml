@@ -28,7 +28,7 @@ Layout/LineLength:
 
 # メソッドのABCサイズが構成された25を超えていないことを確認。
 Metrics/AbcSize:
-  Max: 25
+  Max: 50
 
 # ブロックの長さが最大値を超えているかどうかをチェック
 Metrics/BlockLength:
@@ -51,7 +51,7 @@ Metrics/CyclomaticComplexity:
 # メソッドの長さをチェック
 Metrics/MethodLength:
   CountComments: false
-  Max: 30
+  Max: 35
 
 # 適切な名前が付けられていることを確認
 Naming/AccessorMethodName:
