@@ -8,11 +8,13 @@ Vue.use(Vuex);
 export default new Vuex.Store({
   state: {
     drawer: false,
-    user: null
+    user: null,
+    foods: null
   },
   getters: {
     drawer: state => state.drawer,
-    user: state => state.user
+    user: state => state.user,
+    foods: state => state.foods
   },
   mutations: {
     changeDrawer(state) {
@@ -21,6 +23,10 @@ export default new Vuex.Store({
     setUser(state, data) {
       state.user = data
     },
+    foodList(state, data) {
+      state.foods = data
+      router.push('foods')
+    }
   },
   actions: {
     changeDrawer({ commit }) {
@@ -66,6 +72,15 @@ export default new Vuex.Store({
     logout({ commit }) {
       localStorage.removeItem('idToken')
       commit('setUser', null)
+    },
+    nameSearch({ commit }, name) {
+      return axios.post('/search', name)
+      .then(res => {
+        commit('foodList', res.data)
+      })
+      .catch(err => {
+        console.log(err)
+      })
     }
   }
 })

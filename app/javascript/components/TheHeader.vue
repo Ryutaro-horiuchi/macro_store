@@ -4,7 +4,7 @@
     dark
   >
     <v-app-bar-nav-icon @click="changeDrawer" />
-    <v-toolbar-title>MacroStore</v-toolbar-title>
+    <v-toolbar-title style="cursor: pointer;" @click="toTop">MacroStore</v-toolbar-title>
     <v-spacer />
     <template v-if="isAutheniticated">
       <v-btn
@@ -49,6 +49,11 @@ export default {
     },
     logout() {
       this.$store.dispatch('logout')
+    },
+    toTop() {
+      if (this.$route.path !== '/') {
+        this.$router.push('/')
+      }
     }
   }
 }
