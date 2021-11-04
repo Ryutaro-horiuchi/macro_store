@@ -1,7 +1,7 @@
 <template>
   <v-container>
     <v-row>
-      <v-col cols="10" offset="1" v-for="food in foods">
+      <v-col cols="10" offset="1" v-for="food in foods" :key="food.id">
         <v-card class="my-5" outlined> 
           <v-row justify="center">
             <v-col cols="5">
@@ -10,9 +10,7 @@
               <v-card-subtitle>税抜{{ food.price }}円</v-card-subtitle>
             </v-col>
             <v-col cols="5">
-              <v-card-text class="">タンパク質 {{ food.protein }}g</v-card-text>
-              <v-card-text>炭水化物 {{ food.carbohydrate }}g</v-card-text>
-              <v-card-text>脂質 {{ food.lipid }}g</v-card-text>
+              <FoodBarChart :food="food"></FoodBarChart>
             </v-col>
           </v-row>
         </v-card>
@@ -23,10 +21,14 @@
 
 <script>
 import { mapGetters } from "vuex";
+import FoodBarChart from "./components/FoodBarChart.vue"
 
 export default {
+  components: {
+    FoodBarChart
+  },
   computed: {
     ...mapGetters(["foods"])
-  },
+  }
 }
 </script>
