@@ -3,6 +3,7 @@ Rails.application.routes.draw do
     post 'login', to: 'sessions#create'
     post 'users', to: 'users#create'
     post '/search', to: 'foods#search'
+    post '/search/nutrient', to: 'foods#search_nutrient'
     get 'users/me', to: 'users#me'
   end
   root to: 'home#index'

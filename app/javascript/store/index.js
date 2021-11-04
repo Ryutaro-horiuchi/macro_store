@@ -81,6 +81,18 @@ export default new Vuex.Store({
       .catch(err => {
         console.log(err)
       })
+    },
+    nutrientSearch({ commit }, proteinValue) {
+      if (proteinValue.minimum === null) {
+        proteinValue.minimum = 0
+      }
+      return axios.post('/search/nutrient', proteinValue)
+      .then(res => {
+        commit('foodList', res.data)
+      })
+      .catch(err => {
+        console.log(err)
+      })
     }
   }
 })
