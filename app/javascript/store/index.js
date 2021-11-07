@@ -82,11 +82,18 @@ export default new Vuex.Store({
         console.log(err)
       })
     },
-    nutrientSearch({ commit }, proteinValue) {
-      if (proteinValue.minimum === null) {
-        proteinValue.minimum = 0
+    nutrientsSearch({ commit },value) {
+    // 最小値がnullであれば、0を代入する。冗長なのでリファクタリングする
+      if (value.carboValue.minimum === null) {
+        value.carboValue.minimum = 0
       }
-      return axios.post('/search/nutrient', proteinValue)
+      if (value.proteinValue.minimum === null) {
+        value.proteinValue.minimum = 0
+      }
+      if (value.lipidValue.minimum === null) {
+        value.lipidValue.minimum = 0
+      }
+      return axios.post('/search/nutrient', value)
       .then(res => {
         commit('foodList', res.data)
       })

@@ -6,8 +6,10 @@
           <v-row justify="center">
             <v-col cols="4">
               <!-- <v-img :src="food.image.url"></v-img> -->
-              <v-card-title class="text-h6">{{ food.name }}</v-card-title>
-              <v-card-subtitle>税抜{{ food.price }}円</v-card-subtitle>
+              <v-card-title class="text-h5">{{ food.name }}</v-card-title>
+              <v-card-subtitle class="text-h6">税抜{{ food.price }}円</v-card-subtitle>
+              <!-- <v-card-subtitle class>/v-card-subtitle> -->
+              <v-card-subtitle class="text-h6">カロリー {{ food.calorie }}kcal</v-card-subtitle>
             </v-col>
             <v-col cols="6">
               <FoodBarChart :food="food"></FoodBarChart>

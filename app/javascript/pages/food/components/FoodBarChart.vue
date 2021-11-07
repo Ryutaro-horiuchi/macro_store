@@ -84,7 +84,7 @@ export default {
             {
               ticks: {
                 min: 0,
-                max: 160
+                max: 150
               }
             }
           ]

@@ -9,29 +9,54 @@
           <v-form> 
             <v-container>
               <v-row class="my-5" justify="center">
-                <v-col cols="3">
+                <v-col cols="5">
                   <v-text-field 
-                    v-model.number="proteinValue.minimum"
+                    v-model.number="nutrients.proteinValue.minimum"
                     label="たんぱく質"
                     dense
                     placeholder="0g"
                     outlined />
                 </v-col>
                 <h2 class="my-5 text-center">~</h2>
-                <v-col cols="3" class="ml-4">
+                <v-col cols="5" class="ml-4">
                   <v-text-field
-                    v-model.number="proteinValue.maximum"
+                    v-model.number="nutrients.proteinValue.maximum"
                     dense
                     placeholder="上限なし"
                     outlined />
                 </v-col>
-                  <!-- <v-col cols="12" class="my-5">
-                    <v-text-field
-                      label="Filled"
-                      filled
-                      dense>
-                    </v-text-field>
-                  </v-col> -->
+                <v-col cols="5">
+                  <v-text-field 
+                    v-model.number="nutrients.carboValue.minimum"
+                    label="炭水化物"
+                    dense
+                    placeholder="0g"
+                    outlined />
+                </v-col>
+                <h2 class="my-5 text-center">~</h2>
+                <v-col cols="5" class="ml-4">
+                  <v-text-field
+                    v-model.number="nutrients.carboValue.maximum"
+                    dense
+                    placeholder="上限なし"
+                    outlined />
+                </v-col>
+                <v-col cols="5">
+                  <v-text-field 
+                    v-model.number="nutrients.lipidValue.minimum"
+                    label="脂質"
+                    dense
+                    placeholder="0g"
+                    outlined />
+                </v-col>
+                <h2 class="my-5 text-center">~</h2>
+                <v-col cols="5" class="ml-4">
+                  <v-text-field
+                    v-model.number="nutrients.lipidValue.maximum"
+                    dense
+                    placeholder="上限なし"
+                    outlined />
+                </v-col>
               </v-row>
             </v-container>
           </v-form>        
@@ -59,7 +84,7 @@
               x-large
               outlined
               elevation="3"
-              @click="nutrientSearch">
+              @click="nutrientsSearch">
             この条件で検索
             </v-btn>
           </v-col>
@@ -76,7 +101,11 @@ export default {
   data() {
     return {
       params: { name: '' },
-      proteinValue: { minimum: null, maximum: null }
+      nutrients: {
+        proteinValue: { minimum: null, maximum: null },
+        carboValue: { minimum: null, maximum: null },
+        lipidValue: { minimum: null, maximum: null },
+      } 
     }
   },
   components: {
@@ -86,8 +115,8 @@ export default {
     nameSearch() {
       this.$store.dispatch("nameSearch", this.params)
     },
-    nutrientSearch() {
-      this.$store.dispatch("nutrientSearch", this.proteinValue)
+    nutrientsSearch() {
+      this.$store.dispatch("nutrientsSearch", this.nutrients)
     }
   }
 }
