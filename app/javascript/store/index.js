@@ -25,6 +25,7 @@ export default new Vuex.Store({
     },
     foodList(state, data) {
       state.foods = data
+      console.log(state.foods)
       router.push('foods')
     }
   },
@@ -100,6 +101,11 @@ export default new Vuex.Store({
       .catch(err => {
         console.log(err)
       })
-    }
+    },
+    // async fetchFoods({ commit, state}, loadState) {
+    //   const data = await axios.get
+    // }
+
+    // }
   }
 })

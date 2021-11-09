@@ -1,7 +1,7 @@
 <template>
   <v-container>
     <v-row>
-      <v-col cols="10" offset="1" v-for="food in foods" :key="food.id">
+      <v-col cols="10" offset="1" v-for="food in getFoods" :key="food.id">
         <v-card class="my-5" outlined> 
           <v-row justify="center">
             <v-col cols="4">
@@ -18,19 +18,99 @@
         </v-card>
       </v-col>
     </v-row>
+    <InfiniteLoading v-if="hasNext" @infinite="infiniteHandler" spinner="spiral">
+      <!--  direction="bottom" -->
+      <div slot="no-more">全件取得しました</div>
+      <div slot="no-results">データがありません</div>
+    </InfiniteLoading>
   </v-container>
 </template>
 
 <script>
-import { mapGetters } from "vuex";
+import { mapGetters, mapActions } from "vuex";
 import FoodBarChart from "./components/FoodBarChart.vue"
+import InfiniteLoading from 'vue-infinite-loading';
 
 export default {
   components: {
-    FoodBarChart
+    FoodBarChart,
+    InfiniteLoading, 
+  },
+  data() {
+    return {
+      getFoods: [],
+      start: 0,
+      end: 0,
+      totalPages: 0,  // 総ページ数
+      pageSize: 20, // １ページに表示するデータ件数
+      initialized: false, //初回データアクセスが完了した後にtrueを設定するフラグ
+    }
   },
   computed: {
-    ...mapGetters(["foods"])
+    ...mapGetters(["foods"]),
+    hasNext() {
+      return this.initialized && this.totalPages > this.end
+    }
+  },
+  mounted() {
+    // 現在表示中のページ番号をURLに設定する為に、スクロールイベントを監視
+    window.addEventListener("scroll", ()=> this.scroll())
+
+    // 現在のページ番号を取得する。
+    const urlParams = new URLSearchParams(window.location.search);
+    const page = urlParams.get('page');
+
+    if(page) {
+      // URLパラメータでページ番号が指定された場合、指定ページから表示
+      this.start = parseInt(page, 10) // 取得した文字列を10進数で数字へ変換
+      this.end = parseInt(page, 10)
+    } else {
+      // ページ番号を取得できない場合は1ページ目を表示
+      this.start = 1
+      this.end = 1
+    }
+    // getItemsメソッドにより、表示するデータを取得
+    this.fetchFoods(null, this.start, false)
+  },
+  methods: {
+    infiniteHandler($state) {
+      if (this.end >= this.totalPages) {
+      // 全てのページが読まれたことをプラグインに伝える
+        $state.complete()
+      } else {
+        // 表示するページがまだある場合、次ページのデータを取得する
+        this.fetchFoods($state, this.end + 1, true)
+      }
+    },
+    fetchFoods($state, page, next) {
+      setTimeout(() => {
+        let data = []
+        if (this.foods.length >= page * 20) {
+          this.data = this.foods.slice(page * 20 - 20, page * 20)
+        } else {
+          this.data = this.foods.slice(page * 20 - 20, this.foods.length)
+        }
+        this.totalPages = Math.ceil(this.foods.length / 20)
+
+        this.getFoods = this.getFoods.concat(this.data)
+        this.end = page
+
+        if ($state) $state.loaded()
+
+        this.$nextTick(() => {
+          this.initialized = true
+        }, 1000)
+      })
+    },
+    scroll() {
+      // 現在のスクロールY座標から、画面に表示されているページ番号を計算する
+      let scroll_position = window.pageYOffset || document.documentElement.scrollTop
+      // ブラウザウインドウの高さを取得
+      let window_height = window.outerHeight
+      let page = Math.ceil((scroll_position / 7234))
+      // replaceStateでurlを書き換え（urlパラメータにページ番号を設定)
+      window.history.replaceState(null, null, "/?page=" + page)
+    }
   }
 }
 </script>

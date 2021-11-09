@@ -1,27 +1,20 @@
 class Api::FoodsController < ApplicationController
-  def search_name
+  def name_search
     @foods = Food.where('name like ?', "%#{params[:name]}%")
     render_foods
   end
 
-  def search_nutrient
-      @foods = protein_search
-      @foods = carbo_search(@foods)
-      @foods = lipid_search(@foods)
-    # @foods = Food.where(protein: protein_params[:minimum]..protein_params[:maximum])
-    #              .where(carbo: carbo_params[:minimum]..carbo_params[:maximum])
-    # if params[:maximum] != nil
-    #   @foods = Food.where(protein: params[:minimum]..params[:maximum])
-    # else
-    #   @foods = Food.where(protein: params[:minimum]..)
-    # end
+  def nutrient_search
+    # pluckメソッドでリファクタリングができるかもしれない　
+    @foods = protein_search
+    @foods = carbo_search(@foods)
+    @foods = lipid_search(@foods)
     render_foods
   end
 
   private
 
   def render_foods
-    binding.pry
     if @foods.present?
       render json: @foods
     else
@@ -38,7 +31,6 @@ class Api::FoodsController < ApplicationController
   end
 
   def carbo_search(foods)
-    binding.pry
     if carbo_params[:maximum] != nil
       foods.where(carbohydrate: carbo_params[:minimum]..carbo_params[:maximum])
     else
