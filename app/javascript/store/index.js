@@ -8,11 +8,13 @@ Vue.use(Vuex);
 export default new Vuex.Store({
   state: {
     drawer: false,
-    user: null
+    user: null,
+    foods: null
   },
   getters: {
     drawer: state => state.drawer,
-    user: state => state.user
+    user: state => state.user,
+    foods: state => state.foods
   },
   mutations: {
     changeDrawer(state) {
@@ -21,6 +23,11 @@ export default new Vuex.Store({
     setUser(state, data) {
       state.user = data
     },
+    foodList(state, data) {
+      state.foods = data
+      console.log(state.foods)
+      router.push('foods')
+    }
   },
   actions: {
     changeDrawer({ commit }) {
@@ -66,6 +73,39 @@ export default new Vuex.Store({
     logout({ commit }) {
       localStorage.removeItem('idToken')
       commit('setUser', null)
-    }
+    },
+    nameSearch({ commit }, name) {
+      return axios.post('/search', name)
+      .then(res => {
+        commit('foodList', res.data)
+      })
+      .catch(err => {
+        console.log(err)
+      })
+    },
+    nutrientsSearch({ commit },value) {
+    // 最小値がnullであれば、0を代入する。冗長なのでリファクタリングする
+      if (value.carboValue.minimum === null) {
+        value.carboValue.minimum = 0
+      }
+      if (value.proteinValue.minimum === null) {
+        value.proteinValue.minimum = 0
+      }
+      if (value.lipidValue.minimum === null) {
+        value.lipidValue.minimum = 0
+      }
+      return axios.post('/search/nutrient', value)
+      .then(res => {
+        commit('foodList', res.data)
+      })
+      .catch(err => {
+        console.log(err)
+      })
+    },
+    // async fetchFoods({ commit, state}, loadState) {
+    //   const data = await axios.get
+    // }
+
+    // }
   }
 })

@@ -19,7 +19,7 @@ import TheNavigationBar from "./components/TheNavigationBar.vue"
 export default {
   components: {
     TheHeader,
-    TheNavigationBar
+    TheNavigationBar,
   }
 }
 </script>

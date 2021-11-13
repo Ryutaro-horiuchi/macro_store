@@ -15,8 +15,6 @@ import store from '../store'
 
 Vue.prototype.$axios = axios
 
-
-
 document.addEventListener('DOMContentLoaded', () => {
   const app = new Vue({
     vuetify,
