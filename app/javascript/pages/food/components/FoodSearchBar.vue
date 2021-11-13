@@ -1,16 +1,16 @@
 <template>
   <v-row justify="center">
-    <v-col cols=6>
+    <v-col cols="6">
       <v-toolbar
         dense
       >
         <v-text-field
+          v-model="setSearchFood"
           hide-details
           background-color="#EEEEEE"
-          v-model="setSearchFood"
           placeholder="名前検索"
           @click="toSearch"
-        ></v-text-field>
+        />
         <!-- フォームボタンを押すと、searchページへ遷移 -->
 
         <v-icon 
@@ -18,7 +18,7 @@
           style="cursor: pointer"
           @click="nameSearch"
         >
-        <!-- iconに検索のメソッドを追加する -->
+          <!-- iconに検索のメソッドを追加する -->
           large
           mdi-magnify
         </v-icon>

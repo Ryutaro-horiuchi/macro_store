@@ -1,33 +1,54 @@
 <template>
   <v-container>
     <v-row>
-      <v-col cols="10" offset="1" v-for="food in getFoods" :key="food.id">
-        <v-card class="my-5" outlined> 
+      <v-col
+        v-for="food in getFoods"
+        :key="food.id"
+        cols="10"
+        offset="1"
+      >
+        <v-card
+          class="my-5"
+          outlined
+        > 
           <v-row justify="center">
             <v-col cols="4">
               <!-- <v-img :src="food.image.url"></v-img> -->
-              <v-card-title class="text-h5">{{ food.name }}</v-card-title>
-              <v-card-subtitle class="text-h6">税抜{{ food.price }}円</v-card-subtitle>
-              <!-- <v-card-subtitle class>/v-card-subtitle> -->
-              <v-card-subtitle class="text-h6">カロリー {{ food.calorie }}kcal</v-card-subtitle>
+              <v-card-title class="text-h5">
+                {{ food.name }}
+              </v-card-title>
+              <v-card-subtitle class="text-h6">
+                税抜{{ food.price }}円
+              </v-card-subtitle>
+              <v-card-subtitle class="text-h6">
+                カロリー {{ food.calorie }}kcal
+              </v-card-subtitle>
             </v-col>
             <v-col cols="6">
-              <FoodBarChart :food="food"></FoodBarChart>
+              <FoodBarChart :food="food" />
             </v-col>
           </v-row>
         </v-card>
       </v-col>
     </v-row>
-    <InfiniteLoading v-if="hasNext" @infinite="infiniteHandler" spinner="spiral">
-      <!--  direction="bottom" -->
-      <div slot="no-more">全件取得しました</div>
-      <div slot="no-results">データがありません</div>
-    </InfiniteLoading>
+    <infinite-loading
+      v-if="hasNext"
+      spinner="spiral"
+      class="mt-10"
+      @infinite="infiniteHandler"
+    >
+      <div slot="no-more">
+        全件取得しました
+      </div>
+      <div slot="no-results">
+        条件に合致するデータがありません
+      </div>
+    </infinite-loading>
   </v-container>
 </template>
 
 <script>
-import { mapGetters, mapActions } from "vuex";
+import { mapGetters } from "vuex";
 import FoodBarChart from "./components/FoodBarChart.vue"
 import InfiniteLoading from 'vue-infinite-loading';
 
@@ -49,7 +70,7 @@ export default {
   computed: {
     ...mapGetters(["foods"]),
     hasNext() {
-      return this.initialized && this.totalPages > this.end
+      return this.initialized
     }
   },
   mounted() {
@@ -76,7 +97,7 @@ export default {
     infiniteHandler($state) {
       if (this.end >= this.totalPages) {
       // 全てのページが読まれたことをプラグインに伝える
-        $state.complete()
+        $state.complete();
       } else {
         // 表示するページがまだある場合、次ページのデータを取得する
         this.fetchFoods($state, this.end + 1, true)
@@ -86,28 +107,25 @@ export default {
       setTimeout(() => {
         let data = []
         if (this.foods.length >= page * 20) {
-          this.data = this.foods.slice(page * 20 - 20, page * 20)
+          data = this.foods.slice(page * 20 - 20, page * 20)
         } else {
-          this.data = this.foods.slice(page * 20 - 20, this.foods.length)
+          data = this.foods.slice(page * 20 - 20, this.foods.length)
         }
         this.totalPages = Math.ceil(this.foods.length / 20)
 
-        this.getFoods = this.getFoods.concat(this.data)
+        this.getFoods = this.getFoods.concat(data)
         this.end = page
 
-        if ($state) $state.loaded()
-
+        if ($state) $state.loaded();
         this.$nextTick(() => {
           this.initialized = true
-        }, 1000)
-      })
+        })
+      }, 1000)
     },
     scroll() {
       // 現在のスクロールY座標から、画面に表示されているページ番号を計算する
       let scroll_position = window.pageYOffset || document.documentElement.scrollTop
-      // ブラウザウインドウの高さを取得
-      let window_height = window.outerHeight
-      let page = Math.ceil((scroll_position / 7234))
+      let page = Math.ceil(((scroll_position + 0.5) / 7234))
       // replaceStateでurlを書き換え（urlパラメータにページ番号を設定)
       window.history.replaceState(null, null, "/?page=" + page)
     }

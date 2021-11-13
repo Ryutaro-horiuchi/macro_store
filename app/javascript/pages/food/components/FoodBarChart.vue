@@ -47,8 +47,8 @@ Chart.plugins.register({
 })
 
 export default {
+  name: 'Chart',
   extends: HorizontalBar,
-  name: 'chart',
   props: {
     food: {
       type: Object,

@@ -15,15 +15,11 @@ class Api::FoodsController < ApplicationController
   private
 
   def render_foods
-    if @foods.present?
-      render json: @foods
-    else
-      render json: @foods, status: :not_found
-    end
+    render json: @foods
   end
 
   def protein_search
-   if protein_params[:maximum] != nil
+    if !protein_params[:maximum].nil?
       Food.where(protein: protein_params[:minimum]..protein_params[:maximum])
     else
       Food.where(protein: protein_params[:minimum]..)
@@ -31,7 +27,7 @@ class Api::FoodsController < ApplicationController
   end
 
   def carbo_search(foods)
-    if carbo_params[:maximum] != nil
+    if !carbo_params[:maximum].nil?
       foods.where(carbohydrate: carbo_params[:minimum]..carbo_params[:maximum])
     else
       foods.where(carbohydrate: carbo_params[:minimum]..)
@@ -39,13 +35,12 @@ class Api::FoodsController < ApplicationController
   end
 
   def lipid_search(foods)
-    if lipid_params[:maximum] != nil
+    if !lipid_params[:maximum].nil?
       foods.where(lipid: lipid_params[:minimum]..lipid_params[:maximum])
     else
       foods.where(lipid: lipid_params[:minimum]..)
     end
   end
-
 
   def protein_params
     params.require(:proteinValue).permit(:minimum, :maximum)

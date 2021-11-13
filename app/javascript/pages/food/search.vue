@@ -1,29 +1,44 @@
 <template>
   <div>
-    <FoodSearchBar :name.sync="params.name"
-                   @nameSearch="nameSearch"></FoodSearchBar>
+    <FoodSearchBar
+      :name.sync="params.name"
+      @nameSearch="nameSearch"
+    />
     <v-container>
       <v-row justify="center">
-        <v-col cols="10" class="text-left my-10">
+        <v-col
+          cols="10"
+          class="text-left my-10"
+        >
           <h2>栄養素量から探す</h2>
           <v-form> 
             <v-container>
-              <v-row class="my-5" justify="center">
+              <v-row
+                class="my-5"
+                justify="center"
+              >
                 <v-col cols="5">
                   <v-text-field 
                     v-model.number="nutrients.proteinValue.minimum"
                     label="たんぱく質"
                     dense
                     placeholder="0g"
-                    outlined />
+                    outlined
+                  />
                 </v-col>
-                <h2 class="my-5 text-center">~</h2>
-                <v-col cols="5" class="ml-4">
+                <h2 class="my-5 text-center">
+                  ~
+                </h2>
+                <v-col
+                  cols="5"
+                  class="ml-4"
+                >
                   <v-text-field
                     v-model.number="nutrients.proteinValue.maximum"
                     dense
                     placeholder="上限なし"
-                    outlined />
+                    outlined
+                  />
                 </v-col>
                 <v-col cols="5">
                   <v-text-field 
@@ -31,15 +46,22 @@
                     label="炭水化物"
                     dense
                     placeholder="0g"
-                    outlined />
+                    outlined
+                  />
                 </v-col>
-                <h2 class="my-5 text-center">~</h2>
-                <v-col cols="5" class="ml-4">
+                <h2 class="my-5 text-center">
+                  ~
+                </h2>
+                <v-col
+                  cols="5"
+                  class="ml-4"
+                >
                   <v-text-field
                     v-model.number="nutrients.carboValue.maximum"
                     dense
                     placeholder="上限なし"
-                    outlined />
+                    outlined
+                  />
                 </v-col>
                 <v-col cols="5">
                   <v-text-field 
@@ -47,15 +69,22 @@
                     label="脂質"
                     dense
                     placeholder="0g"
-                    outlined />
+                    outlined
+                  />
                 </v-col>
-                <h2 class="my-5 text-center">~</h2>
-                <v-col cols="5" class="ml-4">
+                <h2 class="my-5 text-center">
+                  ~
+                </h2>
+                <v-col
+                  cols="5"
+                  class="ml-4"
+                >
                   <v-text-field
                     v-model.number="nutrients.lipidValue.maximum"
                     dense
                     placeholder="上限なし"
-                    outlined />
+                    outlined
+                  />
                 </v-col>
               </v-row>
             </v-container>
@@ -63,31 +92,40 @@
         </v-col>
       </v-row>
       <v-row>
-        <v-col col="10" offset="1" class="text-left my-10"> 
+        <v-col
+          col="10"
+          offset="1"
+          class="text-left my-10"
+        > 
           <h2>登録した数値から探す</h2>
         </v-col>
       </v-row>
       <v-row justify="center">
         <!-- <v-col cols="10"> -->
-          <v-col cols="3" offset="1">
-            <v-btn
-              class="mx-auto"
-              x-large
-              outlined
-              elevation="3">
+        <v-col
+          cols="3"
+          offset="1"
+        >
+          <v-btn
+            class="mx-auto"
+            x-large
+            outlined
+            elevation="3"
+          >
             クリア
-            </v-btn>
-          </v-col>
-          <v-col cols="3">
-            <v-btn
-              class="mx-auto"
-              x-large
-              outlined
-              elevation="3"
-              @click="nutrientsSearch">
+          </v-btn>
+        </v-col>
+        <v-col cols="3">
+          <v-btn
+            class="mx-auto"
+            x-large
+            outlined
+            elevation="3"
+            @click="nutrientsSearch"
+          >
             この条件で検索
-            </v-btn>
-          </v-col>
+          </v-btn>
+        </v-col>
         <!-- </v-col> -->
       </v-row>
     </v-container>
@@ -98,6 +136,9 @@
 import FoodSearchBar from "./components/FoodSearchBar.vue"
 
 export default {
+  components: {
+    FoodSearchBar
+  },
   data() {
     return {
       params: { name: '' },
@@ -107,9 +148,6 @@ export default {
         lipidValue: { minimum: null, maximum: null },
       } 
     }
-  },
-  components: {
-    FoodSearchBar
   },
   methods: {
     nameSearch() {
