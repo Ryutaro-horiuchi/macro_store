@@ -52,8 +52,8 @@ export default {
   props: {
     food: {
       type: Object,
-      default: null
-    }
+      required: true
+    },
   },
   mounted() {
     this.renderChart(

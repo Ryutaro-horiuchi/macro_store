@@ -8,13 +8,17 @@ Vue.use(Vuex);
 export default new Vuex.Store({
   state: {
     drawer: false,
+    food_dialog: false,
     user: null,
-    foods: null
+    foods: null,
+    food: null
   },
   getters: {
     drawer: state => state.drawer,
+    food_dialog: state => state.food_dialog,
     user: state => state.user,
-    foods: state => state.foods
+    foods: state => state.foods,
+    food: state => state.food
   },
   mutations: {
     changeDrawer(state) {
@@ -25,8 +29,14 @@ export default new Vuex.Store({
     },
     foodList(state, data) {
       state.foods = data
-      console.log(state.foods)
       router.push('foods')
+    },
+    openDialog(state, food_data) {
+      state.food = food_data
+      state.food_dialog = true
+    },
+    closeDialog(state) {
+      state.food_dialog = false
     }
   },
   actions: {
@@ -102,10 +112,11 @@ export default new Vuex.Store({
         console.log(err)
       })
     },
-    // async fetchFoods({ commit, state}, loadState) {
-    //   const data = await axios.get
-    // }
-
-    // }
+    openDialog({ commit }, food_data) {
+      commit('openDialog', food_data)
+    },
+    closeDialog({ commit }) {
+      commit('closeDialog')
+    }
   }
 })

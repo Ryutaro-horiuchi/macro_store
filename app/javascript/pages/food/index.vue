@@ -10,6 +10,7 @@
         <v-card
           class="my-5"
           outlined
+          @click="openDialog(food)"
         > 
           <v-row justify="center">
             <v-col cols="4">
@@ -21,7 +22,7 @@
                 税抜{{ food.price }}円
               </v-card-subtitle>
               <v-card-subtitle class="text-h6">
-                カロリー {{ food.calorie }}kcal
+                {{ food.calorie }}kcal
               </v-card-subtitle>
             </v-col>
             <v-col cols="6">
@@ -31,6 +32,15 @@
         </v-card>
       </v-col>
     </v-row>
+    <v-dialog
+      v-model="food_dialog"
+      width="600"
+      max-height="300"
+      persistent
+      @click:outside="closeDialog"
+    >
+      <Dialog />
+    </v-dialog>
     <infinite-loading
       v-if="hasNext"
       spinner="spiral"
@@ -48,14 +58,16 @@
 </template>
 
 <script>
-import { mapGetters } from "vuex";
+import { mapGetters, mapActions } from "vuex";
 import FoodBarChart from "./components/FoodBarChart.vue"
 import InfiniteLoading from 'vue-infinite-loading';
+import Dialog from './dialog.vue'
 
 export default {
   components: {
     FoodBarChart,
-    InfiniteLoading, 
+    InfiniteLoading,
+    Dialog
   },
   data() {
     return {
@@ -68,7 +80,7 @@ export default {
     }
   },
   computed: {
-    ...mapGetters(["foods"]),
+    ...mapGetters(["foods", "food_dialog"]),
     hasNext() {
       return this.initialized
     }
@@ -94,6 +106,7 @@ export default {
     this.fetchFoods(null, this.start, false)
   },
   methods: {
+    ...mapActions(["openDialog", "closeDialog"]),
     infiniteHandler($state) {
       if (this.end >= this.totalPages) {
       // 全てのページが読まれたことをプラグインに伝える
