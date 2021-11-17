@@ -1,5 +1,24 @@
 <template>
   <v-container>
+    <FoodSearchBar />
+    <template v-if="currentNutrientsExist">
+      <v-row justify="center">
+        <v-col cols="9">
+          選択した栄養素の合計　{{ current_nutrients.calorie }}Kcal<br>
+          <v-row justify="center">
+            <v-col cols="3">
+              <p>タンパク質{{ current_nutrients.protein }}g</p>
+            </v-col>
+            <v-col cols="3">
+              <p>炭水化物{{ current_nutrients.carbohydrate }}g</p>
+            </v-col>
+            <v-col cols="3">
+              <p>脂質{{ current_nutrients.lipid }}g</p>
+            </v-col>
+          </v-row>
+        </v-col>
+      </v-row>
+    </template>
     <v-row>
       <v-col
         v-for="food in getFoods"
@@ -62,12 +81,15 @@ import { mapGetters, mapActions } from "vuex";
 import FoodBarChart from "./components/FoodBarChart.vue"
 import InfiniteLoading from 'vue-infinite-loading';
 import Dialog from './dialog.vue'
+import FoodSearchBar from "../food/components/FoodSearchBar.vue"
 
 export default {
   components: {
     FoodBarChart,
     InfiniteLoading,
-    Dialog
+    Dialog,
+    FoodSearchBar,
+
   },
   data() {
     return {
@@ -79,12 +101,26 @@ export default {
       initialized: false, //初回データアクセスが完了した後にtrueを設定するフラグ
     }
   },
-  computed: {
-    ...mapGetters(["foods", "food_dialog"]),
-    hasNext() {
-      return this.initialized
+  watch: {
+    current_nutrients: function (newVal, oldVal) {
+      console.log(`新しい値${newVal}`)
+      console.log(`古い値${oldVal}`)
     }
   },
+  computed: {
+    ...mapGetters(["foods", "food_dialog", "current_nutrients"]),
+    hasNext() {
+      return this.initialized
+    },
+    currentNutrientsExist() {
+      return this.current_nutrients !== null;
+    }
+  },
+  // updated: {
+  //   function() {
+  //     console.log(this.current_nutrients)
+  //   }
+  // },
   mounted() {
     // 現在表示中のページ番号をURLに設定する為に、スクロールイベントを監視
     window.addEventListener("scroll", ()=> this.scroll())

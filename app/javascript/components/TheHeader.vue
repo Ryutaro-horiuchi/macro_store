@@ -42,6 +42,7 @@
 
 
 <script>
+import { mapActions } from "vuex";
 export default {
   computed: {
     isAutheniticated() {
@@ -49,15 +50,10 @@ export default {
     }
   },
   methods: {
-    changeDrawer() {
-      this.$store.dispatch('changeDrawer');
-    },
-    logout() {
-      this.$store.dispatch('logout')
-    },
+    ...mapActions(["changeDrawer", "logout"]),
     toTop() {
-      if (this.$route.path !== '/') {
-        this.$router.push('/')
+      if (this.$route.path !== "/") {
+        this.$router.push("/")
       }
     }
   }

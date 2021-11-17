@@ -11,14 +11,16 @@ export default new Vuex.Store({
     food_dialog: false,
     user: null,
     foods: null,
-    food: null
+    food: null,
+    current_nutrients: { calorie: 0, carbohydrate: 0, protein: 0, lipid: 0 }
   },
   getters: {
     drawer: state => state.drawer,
     food_dialog: state => state.food_dialog,
     user: state => state.user,
     foods: state => state.foods,
-    food: state => state.food
+    food: state => state.food,
+    current_nutrients: state => state.current_nutrients
   },
   mutations: {
     changeDrawer(state) {
@@ -37,6 +39,16 @@ export default new Vuex.Store({
     },
     closeDialog(state) {
       state.food_dialog = false
+    },
+    addNutrients(state, nutrients) {
+      state.current_nutrients["calorie"] += nutrients.calorie
+      state.current_nutrients["carbohydrate"] += nutrients.carbohydrate
+      state.current_nutrients["protein"] += nutrients.protein
+      state.current_nutrients["lipid"] += nutrients.lipid
+      // キーの配列を取得し、それらをforEachで要素ごとに四捨五入を実行する
+      Object.keys(state.current_nutrients).forEach(function (key) {
+        state.current_nutrients[key] =  Math.round(state.current_nutrients[key] * 100) / 100;
+      })
     }
   },
   actions: {
@@ -116,6 +128,10 @@ export default new Vuex.Store({
       commit('openDialog', food_data)
     },
     closeDialog({ commit }) {
+      commit('closeDialog')
+    },
+    addNutrients({ commit }, nutrients) {
+      commit('addNutrients', nutrients)
       commit('closeDialog')
     }
   }

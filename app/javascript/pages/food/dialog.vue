@@ -27,6 +27,7 @@
           x-large
           outlined
           elevation="3"
+          @click="addNutrients"
         >
           選択する
         </v-btn>
@@ -54,16 +55,25 @@ import { mapActions, mapGetters } from "vuex";
 import FoodBarChart from './components/FoodBarChart.vue'
 
 export default {
+  data() {
+    return {
+      selected_nutrients: { calorie: 0, carbohydrate: 0, protein: 0, lipid: 0 }
+    }
+  },
   components: {
     FoodBarChart
   },
   computed: {
-    ...mapGetters(["food_dialog", "food"])
+    ...mapGetters(["food_dialog", "food", "current_nutrients"])
   },
   methods: {
     ...mapActions(["closeDialog"]),
-    close(e) {
-      console.log('close', e)
+    addNutrients(){
+      this.selected_nutrients["calorie"] = this.food.calorie
+      this.selected_nutrients["carbohydrate"] = this.food.carbohydrate
+      this.selected_nutrients["protein"] = this.food.protein
+      this.selected_nutrients["lipid"] = this.food.lipid
+      this.$store.dispatch("addNutrients", this.selected_nutrients)
     }
   }
 }
