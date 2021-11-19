@@ -10,7 +10,7 @@
     </v-card-subtitle>
     <v-row justify="center">
       <v-col cols="10">
-        <v-img :src="food.image.url" />
+        <!-- <v-img :src="food.image.url" /> -->
       </v-col>
       <v-col cols="10">
         <FoodBarChart
@@ -18,20 +18,22 @@
           :food="food"
         />
       </v-col>
-      <v-col
-        cols="4"
-        offset="1"
-      >
-        <v-btn
-          class="mx-auto"
-          x-large
-          outlined
-          elevation="3"
-          @click="addNutrients"
+      <template v-if="isNotSelected">
+        <v-col
+          cols="4"
+          offset="1"
         >
-          選択する
-        </v-btn>
-      </v-col>
+          <v-btn
+            class="mx-auto"
+            x-large
+            outlined
+            elevation="3"
+            @click="addNutrients(); selectFood(food)"
+          >
+            選択する
+          </v-btn>
+        </v-col>
+      </template>
       <v-col
         cols="4"
         offset="1"
@@ -57,24 +59,27 @@ import FoodBarChart from './components/FoodBarChart.vue'
 export default {
   data() {
     return {
-      selected_nutrients: { calorie: 0, carbohydrate: 0, protein: 0, lipid: 0 }
+      add_nutrients: { calorie: 0, carbohydrate: 0, protein: 0, lipid: 0 }
     }
   },
   components: {
     FoodBarChart
   },
   computed: {
-    ...mapGetters(["food_dialog", "food", "current_nutrients"])
+    ...mapGetters(["food_dialog", "food", "selectFoods"]),
+    isNotSelected() {
+      return !this.selectFoods.includes(this.food)
+    }
   },
   methods: {
-    ...mapActions(["closeDialog"]),
-    addNutrients(){
-      this.selected_nutrients["calorie"] = this.food.calorie
-      this.selected_nutrients["carbohydrate"] = this.food.carbohydrate
-      this.selected_nutrients["protein"] = this.food.protein
-      this.selected_nutrients["lipid"] = this.food.lipid
-      this.$store.dispatch("addNutrients", this.selected_nutrients)
-    }
+    ...mapActions(["closeDialog", "selectFood"]),
+    addNutrients() {
+      // this.add_nutrients["calorie"] = this.food.calorie
+      // this.add_nutrients["carbohydrate"] = this.food.carbohydrate
+      // this.add_nutrients["protein"] = this.food.protein
+      // this.add_nutrients["lipid"] = this.food.lipid
+      this.$store.dispatch("addNutrients", this.food)
+    },
   }
 }
 </script>

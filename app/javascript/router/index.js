@@ -5,6 +5,7 @@ import register from '../pages/user/register/index.vue';
 import login from '../pages/user/login/index.vue';
 import search from '../pages/food/search.vue';
 import food from '../pages/food/index.vue'
+import confirmation from '../pages/food/confirmation.vue';
 
 Vue.use(Router);
 
@@ -14,6 +15,7 @@ export default new Router({
            {path: '/signup', component: register},
            {path: '/login', component: login},
            {path: '/search', component: search},
-           {path: '/foods', component: food}
+           {path: '/foods', component: food},
+           {path: '/confirmation', component: confirmation}
   ]       
 })

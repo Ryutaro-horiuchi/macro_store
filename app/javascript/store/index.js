@@ -12,6 +12,7 @@ export default new Vuex.Store({
     user: null,
     foods: null,
     food: null,
+    selectFoods: [],
     current_nutrients: { calorie: 0, carbohydrate: 0, protein: 0, lipid: 0 }
   },
   getters: {
@@ -20,7 +21,8 @@ export default new Vuex.Store({
     user: state => state.user,
     foods: state => state.foods,
     food: state => state.food,
-    current_nutrients: state => state.current_nutrients
+    current_nutrients: state => state.current_nutrients,
+    selectFoods: state => state.selectFoods
   },
   mutations: {
     changeDrawer(state) {
@@ -40,14 +42,45 @@ export default new Vuex.Store({
     closeDialog(state) {
       state.food_dialog = false
     },
-    addNutrients(state, nutrients) {
-      state.current_nutrients["calorie"] += nutrients.calorie
-      state.current_nutrients["carbohydrate"] += nutrients.carbohydrate
-      state.current_nutrients["protein"] += nutrients.protein
-      state.current_nutrients["lipid"] += nutrients.lipid
+    roundOff(state) {
       // キーの配列を取得し、それらをforEachで要素ごとに四捨五入を実行する
       Object.keys(state.current_nutrients).forEach(function (key) {
         state.current_nutrients[key] =  Math.round(state.current_nutrients[key] * 100) / 100;
+      })
+    },
+    addNutrients(state, food) {
+      state.current_nutrients["calorie"] += food.calorie
+      state.current_nutrients["carbohydrate"] += food.carbohydrate
+      state.current_nutrients["protein"] += food.protein
+      state.current_nutrients["lipid"] += food.lipid
+      // キーの配列を取得し、それらをforEachで要素ごとに四捨五入を実行する
+    },
+    removeNutrients(state, food) {
+     state.current_nutrients["calorie"] -= food.calorie * food.quantity
+      state.current_nutrients["carbohydrate"] -= food.carbohydrate * food.quantity
+      state.current_nutrients["protein"] -= food.protein * food.quantity
+      state.current_nutrients["lipid"] -= food.lipid * food.quantity
+    },
+    multiplyNutrient(state, multiplyData) {
+      // multiplyData[0]には前回の数量との差の値が入っている。[1]はfoodのオブジェクト。[2]は新しく指定した数量の値
+      state.current_nutrients["calorie"] += multiplyData[1].calorie * multiplyData[0]
+      state.current_nutrients["carbohydrate"] += multiplyData[1].carbohydrate * multiplyData[0]
+      state.current_nutrients["protein"] += multiplyData[1].protein * multiplyData[0]
+      state.current_nutrients["lipid"] += multiplyData[1].lipid * multiplyData[0]
+      // multiplyData[2には新しい数値が入っている]
+      state.selectFoods.find((food) => {
+        if (food.id === multiplyData[1].id) {
+          food.quantity = multiplyData[2]
+        }
+      })
+    },
+    selectFood(state, food) {
+      food["quantity"] = 1
+      state.selectFoods.push(food)
+    },
+    deleteFood(state, deleteFood) {
+      state.selectFoods = state.selectFoods.filter((food) => {
+        return food.id !== deleteFood.id
       })
     }
   },
@@ -130,9 +163,24 @@ export default new Vuex.Store({
     closeDialog({ commit }) {
       commit('closeDialog')
     },
-    addNutrients({ commit }, nutrients) {
-      commit('addNutrients', nutrients)
+    async addNutrients({ commit }, food) {
+      await commit('addNutrients', food)
+      commit('roundOff')
       commit('closeDialog')
-    }
+    },
+    async removeNutrients({ commit }, food) {
+      await commit('removeNutrients', food)
+      commit('roundOff')
+    },
+    async multiplyNutrient({ commit }, multiplyData) {
+      await commit('multiplyNutrient', multiplyData)
+      commit('roundOff')
+    },
+    selectFood({ commit }, food) {
+      commit('selectFood', food)
+    },
+    deleteFood({ commit }, deleteFood) {
+      commit('deleteFood', deleteFood)
+    },
   }
 })
