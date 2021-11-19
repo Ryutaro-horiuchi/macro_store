@@ -75,9 +75,9 @@
           elevation="3"
           cols="4"
           offset="1"
-          @click="toFoodResultPage"
+          @click="openEndDialog"
         >
-          戻る
+          決定
         </v-btn>
         <v-btn
           class="mx-15"
@@ -86,9 +86,9 @@
           elevation="3"
           cols="4"
           offset="1"
+          @click="toFoodResultPage"
         >
-          <!-- v-model="endDialog" -->
-          決定
+          戻る
         </v-btn>
       </v-row>
     </v-container>
@@ -96,10 +96,10 @@
         width="600"
         max-height="300"
         persistent
+        v-model="endDialog"
+        @click:outside="closeEndDialog"
       >
-        <!-- v-model="endDialog" -->
-
-        <!-- <EndDialog /> -->
+        <EndDialog />
       </v-dialog>
     <v-container v-if="!isSelected">
       <v-row justify="center">
@@ -127,6 +127,7 @@ import { mapGetters, mapActions } from "vuex";
 import FoodCurrentNutrient from './components/FoodCurrentNutrient.vue';
 import FoodBarChart from './components/FoodBarChart.vue';
 import Dialog from './dialog.vue';
+import EndDialog from './endDialog.vue';
 
 export default {
   data() {
@@ -135,16 +136,16 @@ export default {
     }
   },
   components: {
-    FoodCurrentNutrient, FoodBarChart, Dialog
+    FoodCurrentNutrient, FoodBarChart, Dialog, EndDialog
   },
   computed: {
-    ...mapGetters(["foods", "selectFoods", "foodDialog"]),
+    ...mapGetters(["foods", "selectFoods", "foodDialog", "endDialog"]),
     isSelected() {
       return this.selectFoods.length !== 0
     }
   },
   methods: {
-    ...mapActions(["openDialog", "closeDialog", "deleteFood"]),
+    ...mapActions(["openDialog", "closeDialog", "deleteFood", "openEndDialog", "closeEndDialog"]),
     toFoodResultPage() {
       this.$router.push('/foods')
     },

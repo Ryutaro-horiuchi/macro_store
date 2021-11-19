@@ -9,6 +9,7 @@ export default new Vuex.Store({
   state: {
     drawer: false,
     foodDialog: false,
+    endDialog: false,
     user: null,
     foods: null,
     food: null,
@@ -18,6 +19,7 @@ export default new Vuex.Store({
   getters: {
     drawer: state => state.drawer,
     foodDialog: state => state.foodDialog,
+    endDialog: state => state.endDialog,
     user: state => state.user,
     foods: state => state.foods,
     food: state => state.food,
@@ -41,6 +43,12 @@ export default new Vuex.Store({
     },
     closeDialog(state) {
       state.foodDialog = false
+    },
+    openEndDialog(state) {
+      state.endDialog = true
+    },
+    closeEndDialog(state) {
+      state.endDialog = false
     },
     roundOff(state) {
       // キーの配列を取得し、それらをforEachで要素ごとに四捨五入を実行する
@@ -82,6 +90,10 @@ export default new Vuex.Store({
       state.selectFoods = state.selectFoods.filter((food) => {
         return food.id !== deleteFood.id
       })
+    },
+    removeAllSelectedFood(state) {
+      state.selectFoods = null
+      state.current_nutrients = null
     }
   },
   actions: {
@@ -163,6 +175,12 @@ export default new Vuex.Store({
     closeDialog({ commit }) {
       commit('closeDialog')
     },
+    openEndDialog({ commit }) {
+      commit('openEndDialog')
+    },
+    closeEndDialog({ commit }) {
+      commit('closeEndDialog')
+    },
     async addNutrients({ commit }, food) {
       await commit('addNutrients', food)
       commit('roundOff')
@@ -182,5 +200,8 @@ export default new Vuex.Store({
     deleteFood({ commit }, deleteFood) {
       commit('deleteFood', deleteFood)
     },
+    removeAllSelectedFood({ commit }) {
+      commit('removeAllSelectedFood')
+    }
   }
 })

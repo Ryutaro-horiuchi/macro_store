@@ -18,6 +18,20 @@
           :food="food"
         />
       </v-col>
+      <v-col
+        cols="4"
+        offset="1"
+      >
+        <v-btn
+          class="mx-auto"
+          x-large
+          outlined
+          elevation="3"
+          @click="closeDialog"
+        >
+          閉じる
+        </v-btn>
+      </v-col>
       <template v-if="isNotSelected">
         <v-col
           cols="4"
@@ -34,20 +48,6 @@
           </v-btn>
         </v-col>
       </template>
-      <v-col
-        cols="4"
-        offset="1"
-      >
-        <v-btn
-          class="mx-auto"
-          x-large
-          outlined
-          elevation="3"
-          @click="closeDialog"
-        >
-          閉じる
-        </v-btn>
-      </v-col>
     </v-row>
   </v-card>
 </template>
@@ -74,10 +74,6 @@ export default {
   methods: {
     ...mapActions(["closeDialog", "selectFood"]),
     addNutrients() {
-      // this.add_nutrients["calorie"] = this.food.calorie
-      // this.add_nutrients["carbohydrate"] = this.food.carbohydrate
-      // this.add_nutrients["protein"] = this.food.protein
-      // this.add_nutrients["lipid"] = this.food.lipid
       this.$store.dispatch("addNutrients", this.food)
     },
   }
