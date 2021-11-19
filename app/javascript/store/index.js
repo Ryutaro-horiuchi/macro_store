@@ -8,7 +8,7 @@ Vue.use(Vuex);
 export default new Vuex.Store({
   state: {
     drawer: false,
-    food_dialog: false,
+    foodDialog: false,
     user: null,
     foods: null,
     food: null,
@@ -17,7 +17,7 @@ export default new Vuex.Store({
   },
   getters: {
     drawer: state => state.drawer,
-    food_dialog: state => state.food_dialog,
+    foodDialog: state => state.foodDialog,
     user: state => state.user,
     foods: state => state.foods,
     food: state => state.food,
@@ -37,10 +37,10 @@ export default new Vuex.Store({
     },
     openDialog(state, food_data) {
       state.food = food_data
-      state.food_dialog = true
+      state.foodDialog = true
     },
     closeDialog(state) {
-      state.food_dialog = false
+      state.foodDialog = false
     },
     roundOff(state) {
       // キーの配列を取得し、それらをforEachで要素ごとに四捨五入を実行する

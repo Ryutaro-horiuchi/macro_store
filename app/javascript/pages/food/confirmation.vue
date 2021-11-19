@@ -28,13 +28,17 @@
                   <v-card-subtitle class="text-h6">
                     {{ food.calorie }}kcal
                   </v-card-subtitle>
-                  <v-select
-                    :items="items"
-                    :value="food.quantity"
-                    label="数量"
-                    @click.stop
-                    @change="multiplyNutrient(food, $event)"
-                  ></v-select>                
+                  <v-row justify="center">
+                    <v-col cols="6">
+                      <v-select
+                        :items="items"
+                        :value="food.quantity"
+                        label="数量"
+                        @click.stop
+                        @change="multiplyNutrient(food, $event)"
+                      ></v-select>                        
+                    </v-col>
+                  </v-row>             
                 </v-col>
                 <v-col cols="6">
                   <FoodBarChart :food="food"
@@ -55,7 +59,7 @@
         </v-col>
       </v-row>
       <v-dialog
-        v-model="food_dialog"
+        v-model="foodDialog"
         width="600"
         max-height="300"
         persistent
@@ -63,7 +67,40 @@
       >
         <Dialog />
       </v-dialog>
+      <v-row justify="center">
+        <v-btn
+          class="mx-15"
+          x-large
+          outlined
+          elevation="3"
+          cols="4"
+          offset="1"
+          @click="toFoodResultPage"
+        >
+          戻る
+        </v-btn>
+        <v-btn
+          class="mx-15"
+          x-large
+          outlined
+          elevation="3"
+          cols="4"
+          offset="1"
+        >
+          <!-- v-model="endDialog" -->
+          決定
+        </v-btn>
+      </v-row>
     </v-container>
+    <v-dialog
+        width="600"
+        max-height="300"
+        persistent
+      >
+        <!-- v-model="endDialog" -->
+
+        <!-- <EndDialog /> -->
+      </v-dialog>
     <v-container v-if="!isSelected">
       <v-row justify="center">
         <v-col cols="12">
@@ -85,12 +122,6 @@
   </div>
 </template>
 
-
-
-
-
-
-
 <script>
 import { mapGetters, mapActions } from "vuex";
 import FoodCurrentNutrient from './components/FoodCurrentNutrient.vue';
@@ -107,13 +138,16 @@ export default {
     FoodCurrentNutrient, FoodBarChart, Dialog
   },
   computed: {
-    ...mapGetters(["foods", "selectFoods", "food_dialog"]),
+    ...mapGetters(["foods", "selectFoods", "foodDialog"]),
     isSelected() {
       return this.selectFoods.length !== 0
     }
   },
   methods: {
     ...mapActions(["openDialog", "closeDialog", "deleteFood"]),
+    toFoodResultPage() {
+      this.$router.push('/foods')
+    },
     toSearchPage() {
       this.$router.push('/search')
     },

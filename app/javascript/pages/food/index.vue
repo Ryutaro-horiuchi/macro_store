@@ -37,7 +37,7 @@
       </v-col>
     </v-row>
     <v-dialog
-      v-model="food_dialog"
+      v-model="foodDialog"
       width="600"
       max-height="300"
       persistent
@@ -88,7 +88,7 @@ export default {
     }
   },
   computed: {
-    ...mapGetters(["foods", "food_dialog", "current_nutrients"]),
+    ...mapGetters(["foods", "foodDialog", "current_nutrients"]),
     hasNext() {
       return this.initialized
     },

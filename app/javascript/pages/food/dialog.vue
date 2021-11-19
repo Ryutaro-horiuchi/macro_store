@@ -66,7 +66,7 @@ export default {
     FoodBarChart
   },
   computed: {
-    ...mapGetters(["food_dialog", "food", "selectFoods"]),
+    ...mapGetters(["foodDialog", "food", "selectFoods"]),
     isNotSelected() {
       return !this.selectFoods.includes(this.food)
     }
