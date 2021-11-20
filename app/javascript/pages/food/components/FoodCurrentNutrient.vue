@@ -17,7 +17,7 @@
             <v-col cols="3">
               <v-btn
                 outlined
-                Large
+                large
                 elevation="3"
                 @click="toConfirmationPage"
               >

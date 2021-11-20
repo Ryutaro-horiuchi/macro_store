@@ -57,13 +57,13 @@ import { mapActions, mapGetters } from "vuex";
 import FoodBarChart from './components/FoodBarChart.vue'
 
 export default {
+  components: {
+    FoodBarChart
+  },
   data() {
     return {
       add_nutrients: { calorie: 0, carbohydrate: 0, protein: 0, lipid: 0 }
     }
-  },
-  components: {
-    FoodBarChart
   },
   computed: {
     ...mapGetters(["foodDialog", "food", "selectFoods"]),

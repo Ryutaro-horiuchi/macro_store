@@ -6,8 +6,8 @@
       </v-card-title>
       <v-col cols="10">
         <v-card-subtitle class="text-h6 mt-15">
-            <p>[豆知識]</p>
-            {{ message }}
+          <p>[豆知識]</p>
+          {{ message }}
         </v-card-subtitle> 
       </v-col> 
       <v-col
@@ -21,7 +21,7 @@
           elevation="3"
           @click="toTopPage"
         >
-        <!-- @click="" -->
+          <!-- @click="" -->
           終了する
         </v-btn>
       </v-col>
