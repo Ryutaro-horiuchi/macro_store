@@ -1,5 +1,9 @@
 <template>
   <v-container>
+    <FoodSearchBar />
+    <template v-if="currentNutrientsExist">
+      <FoodCurrentNutrinet />
+    </template>
     <v-row>
       <v-col
         v-for="food in getFoods"
@@ -33,7 +37,7 @@
       </v-col>
     </v-row>
     <v-dialog
-      v-model="food_dialog"
+      v-model="foodDialog"
       width="600"
       max-height="300"
       persistent
@@ -59,15 +63,19 @@
 
 <script>
 import { mapGetters, mapActions } from "vuex";
-import FoodBarChart from "./components/FoodBarChart.vue"
-import InfiniteLoading from 'vue-infinite-loading';
 import Dialog from './dialog.vue'
+import FoodCurrentNutrinet from './components/FoodCurrentNutrient.vue'
+import InfiniteLoading from 'vue-infinite-loading';
+import FoodBarChart from "./components/FoodBarChart.vue"
+import FoodSearchBar from "../food/components/FoodSearchBar.vue"
 
 export default {
   components: {
-    FoodBarChart,
+    Dialog,
+    FoodCurrentNutrinet,
     InfiniteLoading,
-    Dialog
+    FoodBarChart,
+    FoodSearchBar,
   },
   data() {
     return {
@@ -80,9 +88,12 @@ export default {
     }
   },
   computed: {
-    ...mapGetters(["foods", "food_dialog"]),
+    ...mapGetters(["foods", "foodDialog", "current_nutrients"]),
     hasNext() {
       return this.initialized
+    },
+    currentNutrientsExist() {
+      return this.current_nutrients["calorie"] !== 0;
     }
   },
   mounted() {
