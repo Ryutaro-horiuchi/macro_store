@@ -13,7 +13,7 @@
             x-large
             outlined
             elevation="3"
-            @click="toCaloriePage"
+            @click="toCalculationPage"
           >
             摂取カロリー量を計算する
           </v-btn>
@@ -34,7 +34,6 @@
         </v-col>
       </v-row>
     </v-container>
-
   </div>
 </template>
 
@@ -49,8 +48,8 @@ export default {
     toSearchPage() {
       this.$router.push('/search')
     },
-    toCaloriePage() {
-      this.$router.push('/calorie')
+    toCalculationPage() {
+      this.$router.push('/calculation')
     }
   }
 }

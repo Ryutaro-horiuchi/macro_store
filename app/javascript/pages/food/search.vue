@@ -24,6 +24,7 @@
                     dense
                     placeholder="0g"
                     outlined
+                    :rules="rules"
                   />
                 </v-col>
                 <h2 class="my-5 text-center">
@@ -38,6 +39,7 @@
                     dense
                     placeholder="上限なし"
                     outlined
+                    :rules="rules"
                   />
                 </v-col>
                 <v-col cols="5">
@@ -47,6 +49,7 @@
                     dense
                     placeholder="0g"
                     outlined
+                    :rules="rules"
                   />
                 </v-col>
                 <h2 class="my-5 text-center">
@@ -61,6 +64,7 @@
                     dense
                     placeholder="上限なし"
                     outlined
+                    :rules="rules"
                   />
                 </v-col>
                 <v-col cols="5">
@@ -70,6 +74,7 @@
                     dense
                     placeholder="0g"
                     outlined
+                    :rules="rules"
                   />
                 </v-col>
                 <h2 class="my-5 text-center">
@@ -84,6 +89,7 @@
                     dense
                     placeholder="上限なし"
                     outlined
+                    :rules="rules"
                   />
                 </v-col>
               </v-row>
@@ -142,6 +148,10 @@ export default {
   data() {
     return {
       params: { name: '' },
+      rules: [
+        v => /^[\d]+$/.test(v) || '',
+        v => /^[\d]{1,3}$/.test(v) || '1桁〜3桁の間で入力してください'
+      ],
       nutrients: {
         proteinValue: { minimum: null, maximum: null },
         carboValue: { minimum: null, maximum: null },
