@@ -13,6 +13,7 @@ export default new Vuex.Store({
     user: null,
     foods: null,
     food: null,
+    ingestionCal: {},
     selectFoods: [],
     current_nutrients: { calorie: 0, carbohydrate: 0, protein: 0, lipid: 0 }
   },
@@ -23,6 +24,7 @@ export default new Vuex.Store({
     user: state => state.user,
     foods: state => state.foods,
     food: state => state.food,
+    ingestionCal: state => state.ingestionCal,
     current_nutrients: state => state.current_nutrients,
     selectFoods: state => state.selectFoods
   },
@@ -94,6 +96,12 @@ export default new Vuex.Store({
     removeAllSelectedFood(state) {
       state.selectFoods = null
       state.current_nutrients = null
+    },
+    saveIngestionCal(state, calorie ) {
+      state.ingestionCal = calorie
+      Object.keys(state.ingestionCal).forEach(function (key) {
+        state.ingestionCal[key] =  Math.round(state.ingestionCal[key])
+      })
     }
   },
   actions: {
@@ -202,6 +210,10 @@ export default new Vuex.Store({
     },
     removeAllSelectedFood({ commit }) {
       commit('removeAllSelectedFood')
+    },
+    saveIngestionCal({ commit }, calorie) {
+      console.log(calorie)
+      commit('saveIngestionCal', calorie)
     }
   }
 })
