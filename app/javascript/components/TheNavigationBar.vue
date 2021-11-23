@@ -3,8 +3,7 @@
     v-model="$store.state.drawer"
     absolute
     temporary
-    class="green"
-    dark
+    class="white"
   >
     <v-list
       nav

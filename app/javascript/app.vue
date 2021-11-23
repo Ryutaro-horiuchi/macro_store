@@ -2,6 +2,7 @@
   <v-app>
     <v-card
       class="mx-auto overflow-hidden"
+      color="#f9f9f9"
       height="100%"
       width="100%"
     >
@@ -25,7 +26,12 @@ export default {
 </script>
 
 <style>
+#app {
+  font-family: serif;
+}
+
 h1, h2, h3, h4 {
   font-weight: normal;
 }
+
 </style>

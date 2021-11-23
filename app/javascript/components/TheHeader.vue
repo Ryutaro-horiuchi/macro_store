@@ -1,7 +1,6 @@
 <template>
   <v-app-bar
-    color="green"
-    dark
+    color="white"
   >
     <v-app-bar-nav-icon @click="changeDrawer" />
     <v-toolbar-title
