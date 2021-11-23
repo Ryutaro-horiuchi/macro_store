@@ -1,30 +1,34 @@
 <template>
-  <v-row justify="center">
-    <v-col cols="6">
-      <v-toolbar
-        dense
+  <v-container pt-0>
+    <v-row justify="center">
+      <v-col
+        cols="10"
+        sm="10"
+        md="6"
+        lg="4"
       >
-        <v-text-field
-          v-model="setSearchFood"
-          hide-details
-          background-color="#EEEEEE"
-          placeholder="名前検索"
-          @click="toSearch"
-        />
-        <!-- フォームボタンを押すと、searchページへ遷移 -->
-
-        <v-icon 
-          class="ml-3"
-          style="cursor: pointer"
-          @click="nameSearch"
+        <v-toolbar
+          dense
         >
-          <!-- iconに検索のメソッドを追加する -->
-          large
-          mdi-magnify
-        </v-icon>
-      </v-toolbar>
-    </v-col>
-  </v-row>
+          <v-text-field
+            v-model="setSearchFood"
+            hide-details
+            background-color="#EEEEEE"
+            placeholder="名前検索"
+            @click="toSearch"
+          />
+          <v-icon 
+            class="ml-3"
+            style="cursor: pointer"
+            @click="nameSearch"
+          >
+            large
+            mdi-magnify
+          </v-icon>
+        </v-toolbar>
+      </v-col>
+    </v-row>
+  </v-container>
 </template>
 
 <script>
