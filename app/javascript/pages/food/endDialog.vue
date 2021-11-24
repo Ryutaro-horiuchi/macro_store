@@ -1,44 +1,51 @@
 <template>
-  <v-card height="500">
+  <v-card>
     <v-row justify="center">
-      <v-card-title class="text-h5 mt-5">
-        <p>ナイスチョイス！！お疲れ様でした！</p>
-      </v-card-title>
       <v-col cols="10">
-        <v-card-subtitle class="text-h6 mt-15">
+        <v-card-title class="text-xs-subtitle-1 text-md-h5 mt-5">
+          <p>ナイスチョイス！！<br>
+              お疲れ様でした！
+          </p>
+        </v-card-title>
+        <v-img :src="flyImg"></v-img>
+        <v-card-subtitle class="text-xs-subtitle-1 text-md-h6 mt-5">
           <p>[豆知識]</p>
           {{ message }}
         </v-card-subtitle> 
       </v-col> 
-      <v-col
-        cols="4"
-        offset="1"
-      >
-        <v-btn
-          class="mx-auto"
-          x-large
-          outlined
-          elevation="3"
-          @click="toTopPage"
+      <v-row justify="center" class="my-8">
+        <v-col
+          cols="2"
+          md="4"
         >
-          <!-- @click="" -->
-          終了する
-        </v-btn>
-      </v-col>
-      <v-col
-        cols="4"
-        offset="1"
-      >
-        <v-btn
-          class="mx-auto"
-          x-large
-          outlined
-          elevation="3"
-          @click="closeEndDialog"
+          <v-row justify="center">
+            <v-btn
+              x-large
+              outlined
+              elevation="3"
+              @click="closeEndDialog"
+            >
+              戻る
+            </v-btn>
+          </v-row>
+        </v-col>
+        <v-col
+          cols="2"
+          offset="4"
+          md="4"
         >
-          戻る
-        </v-btn>
-      </v-col>
+          <v-row justify="center">
+            <v-btn
+              x-large
+              outlined
+              elevation="3"
+              @click="toTopPage"
+            >
+              終了する
+            </v-btn>
+          </v-row>
+        </v-col>
+      </v-row>
     </v-row>
   </v-card>
 </template>
@@ -49,6 +56,7 @@ import { mapActions } from "vuex";
 export default {
   data() {
     return {
+      flyImg: require("../../../assets/images/undraw_i_can_fly_7egl.png"),
       message: null,
       messages: ["炭水化物とたんぱく質は1gあたり4kcalですが、脂質は1gあたり9kcalと多いので取りすぎに注意です！",
                  "朝食の前に有酸素運動をすると、脂肪を燃やしやすいのでおすすめです！",

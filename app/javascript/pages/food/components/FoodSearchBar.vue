@@ -3,9 +3,8 @@
     <v-row justify="center">
       <v-col
         cols="10"
-        sm="10"
-        md="6"
-        lg="4"
+        md="8"
+        lg="6"
       >
         <v-toolbar
           dense

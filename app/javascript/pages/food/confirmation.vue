@@ -9,8 +9,7 @@
         <v-col
           v-for="food in selectFoods"
           :key="food.id"
-          cols="10"
-          offset="1"
+          cols="11"
         >
           <v-card
             class="my-5"
@@ -18,37 +17,37 @@
             @click="openDialog(food)"
           >
             <v-row justify="center">
-              <v-col cols="4">
-                <!-- <v-img :src="food.image.url"></v-img> -->
-                <v-card-title class="text-h5">
+              <v-col cols="4" md="5">
+                <v-img :src="food.image.url"></v-img>
+                <v-card-subtitle class="text-xs-body-1 text-md-h5">
                   {{ food.name }}
-                </v-card-title>
-                <v-card-subtitle class="text-h6">
-                  税抜{{ food.price }}円
                 </v-card-subtitle>
-                <v-card-subtitle class="text-h6">
+                <v-card-subtitle class="text-xs-body-1 text-md-h6">
+                  税抜{{ food.price }}円<br>
                   {{ food.calorie }}kcal
-                </v-card-subtitle>
-                <v-row justify="center">
-                  <v-col cols="6">
-                    <v-select
-                      :items="items"
-                      :value="food.quantity"
-                      label="数量"
-                      @click.stop
-                      @change="multiplyNutrient(food, $event)"
-                    />                        
-                  </v-col>
-                </v-row>             
+                </v-card-subtitle>             
               </v-col>
-              <v-col cols="6">
+              <v-col cols="8" md="5">
                 <FoodBarChart
                   :key="food.id"
                   :food="food" 
                 />
               </v-col>
+            </v-row>
+            <v-row justify="center">
+              <v-col cols="3" md="2">
+                <v-select
+                  :items="items"
+                  :value="food.quantity"
+                  label="数量"
+                  @click.stop
+                  @change="multiplyNutrient(food, $event)"
+                />                        
+              </v-col>
               <v-col
-                cols="2"
+                cols="3"
+                md="2"
+                offset="2"
                 class="my-auto"
               >
                 <v-btn
@@ -67,44 +66,47 @@
           </v-card>
         </v-col>
       </v-row>
+      <!-- width="600" -->
       <v-dialog
         v-model="foodDialog"
-        width="600"
-        max-height="300"
         persistent
         @click:outside="closeDialog"
       >
         <Dialog />
       </v-dialog>
-      <v-row justify="center">
-        <v-btn
-          class="mx-15"
-          x-large
-          outlined
-          elevation="3"
+      <v-row justify="center" class="mb-2">
+        <v-col
           cols="4"
-          offset="1"
-          @click="openEndDialog"
         >
-          決定
-        </v-btn>
-        <v-btn
-          class="mx-15"
-          x-large
-          outlined
-          elevation="3"
-          cols="4"
-          offset="1"
-          @click="toFoodResultPage"
+          <v-row justify="center">
+            <v-btn
+              x-large
+              outlined
+              elevation="3"
+              @click="toFoodResultPage"
+            >
+              戻る
+            </v-btn> 
+          </v-row>
+        </v-col>
+        <v-col
+            cols="4"
         >
-          戻る
-        </v-btn>
+          <v-row justify="center">  
+            <v-btn
+              x-large
+              outlined
+              elevation="3"
+              @click="openEndDialog"
+            >
+              決定
+            </v-btn>
+          </v-row>
+        </v-col>
       </v-row>
     </v-container>
     <v-dialog
       v-model="endDialog"
-      width="600"
-      max-height="300"
       persistent
       @click:outside="closeEndDialog"
     >

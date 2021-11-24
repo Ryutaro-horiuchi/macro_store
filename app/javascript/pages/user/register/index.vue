@@ -18,8 +18,6 @@
         :disabled="!isValid || loading"
         :loading="loading"
         block
-        color="green" 
-        class="white-text"
         @click="signUp"
       >
         <!-- disabledはtrueの場合にボタンを無効にする。この時はvalidが有効ではない時がtrueであり、無効になる。 -->
