@@ -1,26 +1,48 @@
 <template>
   <v-container fluid>
     <v-row justify="center">
-      <v-col cols="12" md="9" class="text-md-h6">
+      <v-col
+        cols="12"
+        md="9"
+        class="text-md-h6"
+      >
         選択した栄養素の合計　{{ current_nutrients.calorie }}Kcal<br>
-        <v-row justify="center" class="text-md-subtitle-1">
-          <v-col cols="4" md="3">
-            <p>タンパク質<br>
+        <v-row
+          justify="center"
+          class="text-md-subtitle-1"
+        >
+          <v-col
+            cols="4"
+            md="3"
+          >
+            <p>
+              タンパク質<br>
               {{ current_nutrients.protein }}g
             </p>
           </v-col>
-          <v-col cols="4" md="3">
-            <p>炭水化物<br>
+          <v-col
+            cols="4"
+            md="3"
+          >
+            <p>
+              炭水化物<br>
               {{ current_nutrients.carbohydrate }}g
             </p>
           </v-col>
-          <v-col cols="4" md="3">
-            <p>脂質<br>
+          <v-col
+            cols="4"
+            md="3"
+          >
+            <p>
+              脂質<br>
               {{ current_nutrients.lipid }}g
             </p>
           </v-col>
           <template v-if="notConfirmationPage">
-            <v-col cols="7" md="3">
+            <v-col
+              cols="7"
+              md="3"
+            >
               <v-row justify="center">
                 <v-btn
                   outlined

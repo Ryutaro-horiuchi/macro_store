@@ -21,7 +21,10 @@
       <v-col
         cols="6"
       >
-        <v-row justify="center" class="mb-5">
+        <v-row
+          justify="center"
+          class="mb-5"
+        >
           <v-btn
             x-large
             outlined
@@ -36,7 +39,10 @@
         <v-col
           cols="6"
         >
-          <v-row justify="center" class="mb-5">
+          <v-row
+            justify="center"
+            class="mb-5"
+          >
             <v-btn
               x-large
               outlined

@@ -1,9 +1,12 @@
 <template>
-  <v-container fluid pt-0>
-  <FoodSearchBar
-    :name.sync="params.name"
-    @nameSearch="nameSearch"
-  />
+  <v-container
+    fluid
+    pt-0
+  >
+    <FoodSearchBar
+      :name.sync="params.name"
+      @nameSearch="nameSearch"
+    />
     <v-row justify="center">
       <v-col
         cols="10"
@@ -11,7 +14,7 @@
       >
         <h2>栄養素量から探す</h2>
         <v-form
-            ref="form"
+          ref="form"
         > 
           <v-container>
             <v-row

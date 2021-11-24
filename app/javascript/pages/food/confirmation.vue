@@ -17,8 +17,11 @@
             @click="openDialog(food)"
           >
             <v-row justify="center">
-              <v-col cols="4" md="5">
-                <v-img :src="food.image.url"></v-img>
+              <v-col
+                cols="4"
+                md="5"
+              >
+                <v-img :src="food.image.url" />
                 <v-card-subtitle class="text-xs-body-1 text-md-h5">
                   {{ food.name }}
                 </v-card-subtitle>
@@ -27,7 +30,10 @@
                   {{ food.calorie }}kcal
                 </v-card-subtitle>             
               </v-col>
-              <v-col cols="8" md="5">
+              <v-col
+                cols="8"
+                md="5"
+              >
                 <FoodBarChart
                   :key="food.id"
                   :food="food" 
@@ -35,7 +41,10 @@
               </v-col>
             </v-row>
             <v-row justify="center">
-              <v-col cols="3" md="2">
+              <v-col
+                cols="3"
+                md="2"
+              >
                 <v-select
                   :items="items"
                   :value="food.quantity"
@@ -74,7 +83,10 @@
       >
         <Dialog />
       </v-dialog>
-      <v-row justify="center" class="mb-2">
+      <v-row
+        justify="center"
+        class="mb-2"
+      >
         <v-col
           cols="4"
         >
@@ -90,7 +102,7 @@
           </v-row>
         </v-col>
         <v-col
-            cols="4"
+          cols="4"
         >
           <v-row justify="center">  
             <v-btn
