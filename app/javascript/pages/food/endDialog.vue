@@ -3,17 +3,21 @@
     <v-row justify="center">
       <v-col cols="10">
         <v-card-title class="text-xs-subtitle-1 text-md-h5 mt-5">
-          <p>ナイスチョイス！！<br>
-              お疲れ様でした！
+          <p>
+            ナイスチョイス！！<br>
+            お疲れ様でした！
           </p>
         </v-card-title>
-        <v-img :src="flyImg"></v-img>
+        <v-img :src="flyImg" />
         <v-card-subtitle class="text-xs-subtitle-1 text-md-h6 mt-5">
           <p>[豆知識]</p>
           {{ message }}
         </v-card-subtitle> 
       </v-col> 
-      <v-row justify="center" class="my-8">
+      <v-row
+        justify="center"
+        class="my-8"
+      >
         <v-col
           cols="2"
           md="4"

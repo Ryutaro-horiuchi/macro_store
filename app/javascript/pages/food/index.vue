@@ -1,5 +1,8 @@
 <template>
-  <v-container fluid pt-0>
+  <v-container
+    fluid
+    pt-0
+  >
     <FoodSearchBar />
     <v-container>
       <template v-if="currentNutrientsExist">
@@ -17,9 +20,15 @@
             outlined
             @click="openDialog(food)"
           > 
-            <v-row justify="center" align-content="center">
-              <v-col cols="4" md="6">
-                <v-img :src="food.image.url"></v-img>
+            <v-row
+              justify="center"
+              align-content="center"
+            >
+              <v-col
+                cols="4"
+                md="6"
+              >
+                <v-img :src="food.image.url" />
                 <v-card-subtitle class="text-xs-body-1 text-md-h5">
                   {{ food.name }}
                 </v-card-subtitle>
@@ -30,7 +39,11 @@
                   {{ food.calorie }}kcal
                 </v-card-subtitle>
               </v-col>
-              <v-col cols="8" md="6"  align-content="center">
+              <v-col
+                cols="8"
+                md="6"
+                align-content="center"
+              >
                 <FoodBarChart :food="food" />
               </v-col>
             </v-row>
