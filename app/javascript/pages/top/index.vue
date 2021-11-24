@@ -13,10 +13,12 @@
           </v-col>
         </v-row>
         <v-row>
-          <h1>
-            コンビニ食品から<br>
-            理想の体作りをサポート
-          </h1>
+          <v-col>
+            <h2>
+              コンビニ食品から<br>
+              理想の体作りをサポート
+            </h2>
+          </v-col>
         </v-row>
       </v-container>
     </v-container>
@@ -32,10 +34,11 @@
       <v-row
         class="my-10"
         align-content="center"
+        justify="center"
       >
         <v-col cols="6">
           <h4 class="text-left">
-            コンビニ食品を名前や、炭水化物、たんぱく質、脂質別に検索できます。
+            コンビニ食品を名前で検索したり、摂取したい栄養素量（炭水化物、たんぱく質、脂質別)に検索できます。
           </h4>
           <br>
         </v-col>
@@ -63,7 +66,7 @@
         </v-col>
         <v-col cols="6">
           <h4 class="text-left">
-            １日の適切な摂取カロリーの目安を知ることができます。
+            4つの質問に答えることで、１日の適切な摂取カロリーの目安を知ることができます。
           </h4>
           <br>
         </v-col>
@@ -75,7 +78,7 @@
       >
         <v-col cols="6">
           <h4 class="text-left">
-            会員登録をすると食品のお気に入り保存や、自身の摂取カロリー量を保存して、検索できるようになります。
+            会員登録をすると食品のお気に入り保存や、自分の摂取カロリー量を保存して、検索できるようになります。
           </h4>
           <br>
         </v-col>
@@ -107,7 +110,7 @@
               elevation="3"
               @click="toCalculationPage"
             >
-              摂取カロリー目安量を計算する
+              摂取カロリーを知る
             </v-btn>
           </v-row>
         </v-col>
@@ -170,7 +173,7 @@ export default {
   height: 100vh;
 }
 
-.top-page h1 {
+.top-page h1, h2 {
   color: #fff;
 }
 </style>

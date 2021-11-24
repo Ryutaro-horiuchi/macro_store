@@ -1,5 +1,5 @@
 <template>
-  <UserForm title="ログイン">
+  <UserForm :title="title">
     <template #form-card-content>
       <!-- 以下form-card-contentととして、LoginFormコンポーネントに渡している -->
       <v-form
@@ -11,18 +11,17 @@
           no-validation
           :password.sync="params.password"
         />
-        <v-card-actions>
+        <!-- <v-card-actions>
           <router-link to="#">
             パスワードを忘れた場合
           </router-link>
-        </v-card-actions>
+        </v-card-actions> -->
         <v-card-text class="px-0">
           <v-btn
             :disabled="!isValid || loading"
             :loading="loading"
             block
-            color="green"
-            class="white-text"
+            outlined
             @click="login"
           >
             <span>ログインする</span>
@@ -47,6 +46,7 @@ export default {
   },
   data() {
     return {
+      title: "ログイン",
       isValid: false,
       loading: false,
       params: { email: '', password: '' },

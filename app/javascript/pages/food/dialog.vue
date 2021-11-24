@@ -1,51 +1,51 @@
 <template>
   <v-card>
-    <v-card-title class="text-h5 white">
-      <p>{{ food.name }}</p>
+    <v-card-title>
+      {{ food.name }}
       <v-spacer />
-      <p>税抜{{ food.price }}円</p>
+      税抜{{ food.price }}円
     </v-card-title>
-    <v-card-subtitle class="text-h6 text-right">
+    <v-card-subtitle class="text-right text-h6">
       <p>{{ food.calorie }}kcal</p>
     </v-card-subtitle>
     <v-row justify="center">
-      <v-col cols="10">
-        <!-- <v-img :src="food.image.url" /> -->
+      <v-col cols="9">
+        <v-img :src="food.image.url" />
       </v-col>
-      <v-col cols="10">
+      <v-col cols="9">
         <FoodBarChart
           :key="food.id"
           :food="food"
         />
       </v-col>
       <v-col
-        cols="4"
-        offset="1"
+        cols="6"
       >
-        <v-btn
-          class="mx-auto"
-          x-large
-          outlined
-          elevation="3"
-          @click="closeDialog"
-        >
-          閉じる
-        </v-btn>
-      </v-col>
-      <template v-if="isNotSelected">
-        <v-col
-          cols="4"
-          offset="1"
-        >
+        <v-row justify="center" class="mb-5">
           <v-btn
-            class="mx-auto"
             x-large
             outlined
             elevation="3"
-            @click="addNutrients(); selectFood(food)"
+            @click="closeDialog"
           >
-            選択する
+            閉じる
           </v-btn>
+        </v-row>
+      </v-col>
+      <template v-if="isNotSelected">
+        <v-col
+          cols="6"
+        >
+          <v-row justify="center" class="mb-5">
+            <v-btn
+              x-large
+              outlined
+              elevation="3"
+              @click="addNutrients(); selectFood(food)"
+            >
+              選択する
+            </v-btn>        
+          </v-row>
         </v-col>
       </template>
     </v-row>

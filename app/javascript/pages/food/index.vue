@@ -1,63 +1,65 @@
 <template>
-  <v-container>
+  <v-container fluid pt-0>
     <FoodSearchBar />
-    <template v-if="currentNutrientsExist">
-      <FoodCurrentNutrinet />
-    </template>
-    <v-row>
-      <v-col
-        v-for="food in getFoods"
-        :key="food.id"
-        cols="10"
-        offset="1"
+    <v-container>
+      <template v-if="currentNutrientsExist">
+        <FoodCurrentNutrinet />
+      </template>
+      <v-row>
+        <v-col
+          v-for="food in getFoods"
+          :key="food.id"
+          cols="12"
+          md="6"
+        >
+          <v-card
+            class="my-5"
+            outlined
+            @click="openDialog(food)"
+          > 
+            <v-row justify="center" align-content="center">
+              <v-col cols="4" md="6">
+                <v-img :src="food.image.url"></v-img>
+                <v-card-subtitle class="text-xs-body-1 text-md-h5">
+                  {{ food.name }}
+                </v-card-subtitle>
+                <v-card-subtitle class="text-md-h6">
+                  税抜{{ food.price }}円
+                </v-card-subtitle>
+                <v-card-subtitle class="text-md-h6">
+                  {{ food.calorie }}kcal
+                </v-card-subtitle>
+              </v-col>
+              <v-col cols="8" md="6"  align-content="center">
+                <FoodBarChart :food="food" />
+              </v-col>
+            </v-row>
+          </v-card>
+        </v-col>
+      </v-row>
+      <v-dialog
+        v-model="foodDialog"
+        width="600"
+        max-height="600"
+        persistent
+        @click:outside="closeDialog"
       >
-        <v-card
-          class="my-5"
-          outlined
-          @click="openDialog(food)"
-        > 
-          <v-row justify="center">
-            <v-col cols="4">
-              <!-- <v-img :src="food.image.url"></v-img> -->
-              <v-card-title class="text-h5">
-                {{ food.name }}
-              </v-card-title>
-              <v-card-subtitle class="text-h6">
-                税抜{{ food.price }}円
-              </v-card-subtitle>
-              <v-card-subtitle class="text-h6">
-                {{ food.calorie }}kcal
-              </v-card-subtitle>
-            </v-col>
-            <v-col cols="6">
-              <FoodBarChart :food="food" />
-            </v-col>
-          </v-row>
-        </v-card>
-      </v-col>
-    </v-row>
-    <v-dialog
-      v-model="foodDialog"
-      width="600"
-      max-height="300"
-      persistent
-      @click:outside="closeDialog"
-    >
-      <Dialog />
-    </v-dialog>
-    <infinite-loading
-      v-if="hasNext"
-      spinner="spiral"
-      class="mt-10"
-      @infinite="infiniteHandler"
-    >
-      <div slot="no-more">
-        全件取得しました
-      </div>
-      <div slot="no-results">
-        条件に合致するデータがありません
-      </div>
-    </infinite-loading>
+        <Dialog />
+      </v-dialog>
+      <infinite-loading
+        v-if="hasNext"
+        spinner="spiral"
+        class="mt-10"
+        @infinite="infiniteHandler"
+      >
+        <div slot="no-more">
+          全件取得しました
+        </div>
+        <div slot="no-results">
+          条件に合致するデータがありません
+        </div>
+      </infinite-loading>
+    </v-container>
   </v-container>
 </template>
 
@@ -128,7 +130,7 @@ export default {
       }
     },
     fetchFoods($state, page, next) {
-      setTimeout(() => {
+      // setTimeout(() => {
         let data = []
         if (this.foods.length >= page * 20) {
           data = this.foods.slice(page * 20 - 20, page * 20)
@@ -144,7 +146,7 @@ export default {
         this.$nextTick(() => {
           this.initialized = true
         })
-      }, 1000)
+      // }, 1000)
     },
     scroll() {
       // 現在のスクロールY座標から、画面に表示されているページ番号を計算する
