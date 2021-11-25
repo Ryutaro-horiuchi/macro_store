@@ -1,28 +1,38 @@
 <template>
   <v-card>
-    <v-row justify="center">
-      <v-col cols="10">
-        <v-card-title class="text-xs-subtitle-1 text-md-h5 mt-5">
-          <p>
-            ナイスチョイス！！<br>
-            お疲れ様でした！
-          </p>
-        </v-card-title>
-        <v-img :src="flyImg" />
-        <v-card-subtitle class="text-xs-subtitle-1 text-md-h6 mt-5">
-          <p>[豆知識]</p>
-          {{ message }}
-        </v-card-subtitle> 
-      </v-col> 
+    <v-container>
+      <v-row justify="center">
+        <v-col cols="10">
+          <v-card-title class="text-xs-subtitle-1 text-md-h4 mt-5">
+            <v-row justify="center">
+              <p>
+                ナイスチョイス！！
+                お疲れ様でした！
+              </p>
+            </v-row>
+          </v-card-title>
+        </v-col>
+      </v-row>
+      <v-row justify="center">
+        <v-col cols="7" md="4">
+          <v-img :src="flyImg" max-height="300" max-width="400"/>
+        </v-col>
+        <v-col cols="7" md="4">
+          <v-card-subtitle class="text-xs-subtitle-1 text-md-h6 mt-5">
+            <p>[豆知識]</p>
+            {{ message }}
+          </v-card-subtitle> 
+        </v-col>
+      </v-row>
       <v-row
-        justify="center"
         class="my-8"
       >
         <v-col
           cols="2"
+          offset="2"
           md="4"
         >
-          <v-row justify="center">
+          <v-row justify="left">
             <v-btn
               x-large
               outlined
@@ -35,10 +45,10 @@
         </v-col>
         <v-col
           cols="2"
-          offset="4"
+          offset="2"
           md="4"
         >
-          <v-row justify="center">
+          <v-row justify="right">
             <v-btn
               x-large
               outlined
@@ -50,7 +60,7 @@
           </v-row>
         </v-col>
       </v-row>
-    </v-row>
+    </v-container>
   </v-card>
 </template>
 
