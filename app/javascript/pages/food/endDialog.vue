@@ -14,10 +14,20 @@
         </v-col>
       </v-row>
       <v-row justify="center">
-        <v-col cols="7" md="4">
-          <v-img :src="flyImg" max-height="300" max-width="400"/>
+        <v-col
+          cols="7"
+          md="4"
+        >
+          <v-img
+            :src="flyImg"
+            max-height="300"
+            max-width="400"
+          />
         </v-col>
-        <v-col cols="7" md="4">
+        <v-col
+          cols="7"
+          md="4"
+        >
           <v-card-subtitle class="text-xs-subtitle-1 text-md-h6 mt-5">
             <p>[豆知識]</p>
             {{ message }}
