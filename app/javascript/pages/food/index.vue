@@ -112,7 +112,7 @@ export default {
     }
   },
   mounted() {
-    // 現在表示中のページ番号をURLに設定する為に、スクロールイベントを監視
+    // 現在表示中のページ番号をURLに設定する為に、スクロールするたびにイベントを発火
     window.addEventListener("scroll", ()=> this.scroll())
 
     // 現在のページ番号を取得する。
