@@ -1,11 +1,23 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
+import createPersistedState from 'vuex-persistedstate'
 import axios from '../plugins/axios'
 import router from '../router/index'
 
 Vue.use(Vuex);
 
 export default new Vuex.Store({
+  plugins: [createPersistedState(
+    {
+      key: 'MacroStore',
+      paths: [
+        'foods',
+        'selectFoods',
+        'current_nutrients'
+      ]
+    }
+  )
+  ],
   state: {
     drawer: false,
     foodDialog: false,
@@ -94,8 +106,12 @@ export default new Vuex.Store({
       })
     },
     removeAllSelectedFood(state) {
-      state.selectFoods = null
-      state.current_nutrients = null
+      state.selectFoods = []
+      Object.keys(state.current_nutrients).forEach(function (key) {
+        state.current_nutrients[key] = 0
+      })
+      state.foods = null
+      localStorage.removeItem('MacroStore')
     },
     saveIngestionCal(state, calorie ) {
       state.ingestionCal = calorie

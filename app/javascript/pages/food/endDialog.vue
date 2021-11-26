@@ -63,7 +63,7 @@
               x-large
               outlined
               elevation="3"
-              @click="toTopPage"
+              @click="toTopPage(); closeEndDialog()"
             >
               終了する
             </v-btn>
@@ -93,10 +93,10 @@ export default {
     this.message = this.messages[Math.floor(Math.random() * this.messages.length)]
   },
   methods: {
-    ...mapActions(["closeEndDialog", "removeAllSelectedFood"]),
+    ...mapActions(["closeEndDialog"]),
     toTopPage() {
       this.$router.push('/')
-      this.$store.dispatch("removeAllselectedFood")
+      this.$store.dispatch("removeAllSelectedFood")
     },
   }
 }
