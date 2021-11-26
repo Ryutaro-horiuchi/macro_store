@@ -78,5 +78,4 @@ test:
 production:
   <<: *default
   database: macro_store_production
-  username: macro_store
   password: <%= ENV['MACRO_STORE_DATABASE_PASSWORD'] %>
