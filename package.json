@@ -1,6 +1,10 @@
 {
   "name": "macro_store",
   "private": true,
+  "version": "0.1.0",
+  "engines": {
+    "node": "14.17.0"
+  },
   "dependencies": {
     "@mdi/font": "^6.1.95",
     "@rails/actioncable": "^6.0.0",
@@ -20,14 +24,10 @@
     "vuex": "^3.6.2",
     "vuex-persistedstate": "^4.1.0"
   },
-  "version": "0.1.0",
   "devDependencies": {
     "eslint": "^8.0.1",
     "eslint-plugin-vue": "^7.20.0",
     "webpack-dev-server": "^3.10.2"
-  },
-  "engines": {
-    "node": "14.17.0"
   },
   "scripts": {
     "lint": "eslint --ext .js,.vue app/javascript",
