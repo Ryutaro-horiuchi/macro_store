@@ -3,7 +3,7 @@ version: 2.1 # Use 2.1 to enable using orbs and other features.
 jobs:
   build:
     docker:
-      - image: circleci/ruby:2.7.5-node
+      - image: circleci/ruby:2.6.4-node
         environment:
           - BUNDLER_VERSION: 2.1.4
           - RAILS_ENV: "test"
