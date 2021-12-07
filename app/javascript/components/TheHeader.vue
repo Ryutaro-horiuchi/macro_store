@@ -55,11 +55,10 @@
 <script>
 import { mapActions } from "vuex";
 export default {
-  data() {
-    return {
-      logoImg: require("../../assets/images/logo.png")
-    }
-  },
+  // data() {
+  //   return {
+  //     logoImg: require("../../assets/images/logo.png")
+  //   }
   computed: {
     isAutheniticated() {
       return this.$store.getters.user !== null;
