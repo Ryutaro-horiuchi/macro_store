@@ -26,8 +26,9 @@
           class="mb-5"
         >
           <v-btn
+            color="#00ADB5"
+            dark
             x-large
-            outlined
             elevation="3"
             @click="closeDialog"
           >
@@ -44,12 +45,13 @@
             class="mb-5"
           >
             <v-btn
+              color="#00ADB5"
+              dark
               x-large
-              outlined
               elevation="3"
               @click="addNutrients(); selectFood(food)"
             >
-              選択する
+              カートへ
             </v-btn>        
           </v-row>
         </v-col>

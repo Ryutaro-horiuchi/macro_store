@@ -66,7 +66,7 @@
         </v-col>
         <v-col cols="6">
           <h4 class="text-left">
-            4つの質問に答えることで、１日の適切な摂取カロリーの目安を知ることができます。
+            4つの質問に答えることで、ダイエットに有効な１日の摂取カロリーの目安を知ることができます。
           </h4>
           <br>
         </v-col>
@@ -78,7 +78,7 @@
       >
         <v-col cols="6">
           <h4 class="text-left">
-            会員登録をすると食品のお気に入り保存や、自分の摂取カロリー量を保存して、検索できるようになります。
+            会員登録をすると食品のお気に入り保存や、自分の摂取カロリー量を保存して、検索できるようになります。(仮リリース版では未実装)
           </h4>
           <br>
         </v-col>
@@ -105,8 +105,9 @@
           >
             <v-btn
               class="mx-auto"
+              color="#00ADB5"
+              dark
               x-large
-              outlined
               elevation="3"
               @click="toCalculationPage"
             >
@@ -124,8 +125,9 @@
           >
             <v-btn
               class="mx-auto"
+              color="#00ADB5"
+              dark
               x-large
-              outlined
               elevation="3"
               @click="toSearchPage"
             >
@@ -147,9 +149,9 @@ export default {
   },
   data() {
     return {
-      foodImg: require("../../../assets/images/undraw_online_groceries_a02y.png"),
-      dataImg: require("../../../assets/images/undraw_app_data_re_vg5c.png"),
-      swipeImg: require("../../../assets/images/undraw_swipe_options_2e4v.png")
+      foodImg: require("../../../assets/images/undraw_online_groceries_a02y (2).png"),
+      dataImg: require("../../../assets/images/undraw_app_data_re_vg5c (1).png"),
+      swipeImg: require("../../../assets/images/undraw_swipe_options_2e4v (1).png")
     }
   },
   methods: {
@@ -170,7 +172,7 @@ export default {
   background-size: cover;
   background-position: center;
   width: 100%;
-  height: 100vh;
+  height: 65vh;
 }
 
 .top-page h1, h2 {

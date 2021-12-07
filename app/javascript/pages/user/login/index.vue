@@ -20,8 +20,9 @@
           <v-btn
             :disabled="!isValid || loading"
             :loading="loading"
+            color="#00ADB5"
+            dark
             block
-            outlined
             @click="login"
           >
             <span>ログインする</span>

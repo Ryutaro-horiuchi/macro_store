@@ -13,6 +13,7 @@
         class="text-left my-10"
       >
         <h2>栄養素量から探す</h2>
+        <p>※数値を入力してください</p>
         <v-form
           ref="form"
         > 
@@ -22,16 +23,16 @@
               justify="center"
             >
               <v-col cols="5">
+                <label>タンパク質</label>
                 <v-text-field 
                   v-model.number="nutrients.proteinValue.minimum"
-                  label="たんぱく質"
                   dense
-                  placeholder="0g"
+                  placeholder="0"
                   outlined
                   :rules="rules"
                 />
               </v-col>
-              <h2 class="my-5 text-center">
+              <h2 class="my-10 text-center">
                 &sim;
               </h2>
               <v-col
@@ -43,19 +44,20 @@
                   placeholder="上限なし"
                   outlined
                   :rules="rules"
+                  class="my-6"
                 />
               </v-col>
               <v-col cols="5">
+                <label>炭水化物</label>
                 <v-text-field 
                   v-model.number="nutrients.carboValue.minimum"
-                  label="炭水化物"
                   dense
-                  placeholder="0g"
+                  placeholder="0"
                   outlined
                   :rules="rules"
                 />
               </v-col>
-              <h2 class="my-5 text-center">
+              <h2 class="my-10 text-center">
                 &sim;
               </h2>
               <v-col
@@ -67,19 +69,20 @@
                   placeholder="上限なし"
                   outlined
                   :rules="rules"
+                  class="my-6"
                 />
               </v-col>
               <v-col cols="5">
+                <label>脂質</label>
                 <v-text-field 
                   v-model.number="nutrients.lipidValue.minimum"
-                  label="脂質"
                   dense
-                  placeholder="0g"
+                  placeholder="0"
                   outlined
                   :rules="rules"
                 />
               </v-col>
-              <h2 class="my-5 text-center">
+              <h2 class="my-10 text-center">
                 &sim;
               </h2>
               <v-col
@@ -91,6 +94,7 @@
                   placeholder="上限なし"
                   outlined
                   :rules="rules"
+                  class="mt-6"
                 />
               </v-col>
             </v-row>
@@ -109,8 +113,9 @@
         >
           <v-btn
             class="mx-auto"
+            color="#00ADB5"
+            dark
             x-large
-            outlined
             elevation="3"
             @click="reset"
           >
@@ -127,8 +132,9 @@
         >
           <v-btn
             class="mx-auto"
+            color="#00ADB5"
+            dark
             x-large
-            outlined
             elevation="3"
             @click="nutrientsSearch"
           >

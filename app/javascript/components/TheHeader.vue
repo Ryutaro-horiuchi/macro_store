@@ -1,15 +1,17 @@
 <template>
   <v-app-bar
-    color="#3B3B3B"
-    dark
+    color="#393E46"
     outlined
+    dark
+    fixed
   >
     <v-app-bar-nav-icon @click="changeDrawer" />
     <v-toolbar-title
       style="cursor: pointer;"
       @click="toTop"
     >
-      MacroStore
+      Macro Store
+      <!-- <v-img :src="logoImg" max-height="54" max-width="110" /> -->
     </v-toolbar-title>
     <v-spacer />
     <template v-if="isAutheniticated">
@@ -21,7 +23,7 @@
       </v-btn>
     </template>
     <template v-if="!isAutheniticated">
-      <router-link
+      <!-- <router-link
         style="text-decoration: none;"
         to="/login"
       >
@@ -36,6 +38,14 @@
         <v-btn icon>
           <v-icon>mdi-account-plus</v-icon>
         </v-btn>
+      </router-link> -->
+      <router-link
+        style="text-decoration: none;"
+        to="/confirmation"
+      >
+        <v-btn icon>
+          <v-icon>mdi-cart</v-icon>
+        </v-btn>
       </router-link>
     </template>
   </v-app-bar>
@@ -45,6 +55,11 @@
 <script>
 import { mapActions } from "vuex";
 export default {
+  data() {
+    return {
+      logoImg: require("../../assets/images/logo.png")
+    }
+  },
   computed: {
     isAutheniticated() {
       return this.$store.getters.user !== null;

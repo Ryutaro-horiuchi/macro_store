@@ -1,5 +1,5 @@
 <template>
-  <v-container>
+  <v-container class="mt-14">
     <v-form v-model="isValid">
       <v-row class="text-left">
         <v-col
@@ -137,8 +137,9 @@
         >
           <v-row justify="center">
             <v-btn
+              color="#00ADB5"
+              dark
               x-large
-              outlined
               elevation="3"
               @click="toTopPage"
             >
@@ -152,8 +153,9 @@
           <v-row justify="center">
             <v-btn
               :disabled="!isValid"
+              color="#00ADB5"
+              dark
               x-large
-              outlined
               elevation="3"
               @click="calculateCalorie"
             >
@@ -209,7 +211,7 @@ export default {
   },
   methods: {
     calculateCalorie() {
-      this.consumedCalorie["calorie"]　= this.selectedAge * this.weight * this.selectedExercise - 500;
+      this.consumedCalorie["calorie"]　= this.selectedAge * this.weight * this.selectedExercise - 300;
       this.consumedCalorie["carbohydrate"] = this.consumedCalorie["calorie"] * 0.55 / 4
       this.consumedCalorie["protein"] = this.consumedCalorie["calorie"] * 0.25 / 4
       this.consumedCalorie["lipid"] = this.consumedCalorie["calorie"] * 0.2 / 9

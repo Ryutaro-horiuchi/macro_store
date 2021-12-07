@@ -1,6 +1,9 @@
 <template>
   <div>
-    <v-container v-if="isSelected">
+    <v-container
+      v-if="isSelected"
+      class="mt-14"
+    >
       <h2 class="text-left mt-10">
         以下の食品を選択しています
       </h2>
@@ -92,8 +95,9 @@
         >
           <v-row justify="center">
             <v-btn
+              color="#00ADB5"
+              dark
               x-large
-              outlined
               elevation="3"
               @click="toFoodResultPage"
             >
@@ -106,8 +110,9 @@
         >
           <v-row justify="center">  
             <v-btn
+              color="#00ADB5"
+              dark
               x-large
-              outlined
               elevation="3"
               @click="openEndDialog"
             >
@@ -124,7 +129,10 @@
     >
       <EndDialog />
     </v-dialog>
-    <v-container v-if="!isSelected">
+    <v-container
+      v-if="!isSelected"
+      class="mt-14"
+    >
       <v-row justify="center">
         <v-col cols="12">
           <h2 class="text-center mt-10">
@@ -136,9 +144,10 @@
           class="mt-10"
         >
           <v-btn
+            color="#00ADB5"
             class="mx-auto"
+            dark
             x-large
-            outlined
             elevation="3"
             @click="toSearchPage"
           >
