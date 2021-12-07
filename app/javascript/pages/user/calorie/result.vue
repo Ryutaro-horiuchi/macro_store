@@ -1,12 +1,12 @@
 <template>
-  <v-container>
+  <v-container class="mt-14">
     <v-row justify="center">
       <v-col
         cols="10"
         offset="1"
         class="mt-10"
       >
-        <h4>あなたの1日の摂取カロリーの目安量は・・・？</h4>
+        <h4>ダイエットに有効な1日の摂取カロリーの目安は・・・？</h4>
       </v-col>
       <v-col
         cols="10"
@@ -21,7 +21,7 @@
         offset="1"
         class="mt-10"
       >
-        <h4>あなたの1日の各栄養素の目安量は・・・？</h4>
+        <h4>あなたの1日の各栄養素の目安は・・・？</h4>
       </v-col>
       <v-col
         cols="10"
@@ -52,8 +52,8 @@
         class="mt-15"
       >
         <p class="text-left">
-          ※上記の数値はあくまで目安量です。<br>
-          目安量を参考にして体重が増えるようであれば、摂取量を減らしてみるなど、
+          ※上記の数値はあくまで目安です。<br>
+          参考にして体重が増えるようであれば、摂取量を減らしてみるなど、
           調整してみましょう。
         </p>
       </v-col>
@@ -63,8 +63,9 @@
       >
         <v-row justify="center">
           <v-btn
+            color="#00ADB5"
+            dark
             large
-            outlined
             elevation="3"
             @click="toSearchPage"
           >

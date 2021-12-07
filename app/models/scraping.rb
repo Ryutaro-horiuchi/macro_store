@@ -4,7 +4,7 @@ class Scraping
   def self.seven_urls
     agent = Mechanize.new
     links = []
-    next_url = 'products/a/chukaman'
+    next_url = 'products/a/chukaman/'
 
     loop do
       current_page = agent.get("https://www.sej.co.jp/#{next_url}")
@@ -20,6 +20,7 @@ class Scraping
       break unless next_link
 
       # なければ終了する
+
       next_url = next_link.get_attribute('href')
       # href属性からurlを取得し、next_urlに代入し、初めに戻る
     end
@@ -27,11 +28,11 @@ class Scraping
     links.each do |link|
       get_food("https://www.sej.co.jp#{link}")
     end
+    # 下記のget_foodメソッドから商品情報を取得する
   end
 
   # 全ての商品詳細urlを取得することができたら
   def self.get_food(link)
-    # puts link リンクは取得できている
     agent = Mechanize.new
     page = agent.get(link)
 
@@ -44,7 +45,7 @@ class Scraping
       price = letter.first.to_i
     end
 
-    if page.at('.allergy td') # ok
+    if page.at('.allergy tr:nth-child(2) td') # ok
       array = page.at('.allergy tr:nth-child(2) td').inner_text
       array = array.split(/[、（]/).first(4)
       array.map! { |arr| arr.gsub(/[^\d+.\d+]/, '').to_f }

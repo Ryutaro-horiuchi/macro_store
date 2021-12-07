@@ -1,9 +1,10 @@
 <template>
   <v-navigation-drawer
     v-model="$store.state.drawer"
+    color="#1687A7"
+    dark
     absolute
     temporary
-    class="white"
   >
     <v-list
       nav

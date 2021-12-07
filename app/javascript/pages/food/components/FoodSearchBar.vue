@@ -1,5 +1,8 @@
 <template>
-  <v-container pt-0>
+  <v-container
+    pt-0
+    class="mt-14"
+  >
     <v-row justify="center">
       <v-col
         cols="10"

@@ -2,7 +2,7 @@
   <v-app>
     <v-card
       class="mx-auto overflow-hidden"
-      color="#f9f9f9"
+      color="#F6F5F5"
       height="100%"
       width="100%"
     >

@@ -45,7 +45,8 @@
             >
               <v-row justify="center">
                 <v-btn
-                  outlined
+                  color="#00ADB5"
+                  dark
                   large
                   elevation="3"
                   @click="toConfirmationPage"
