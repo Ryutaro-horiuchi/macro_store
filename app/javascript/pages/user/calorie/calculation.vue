@@ -211,10 +211,10 @@ export default {
   },
   methods: {
     calculateCalorie() {
-      this.consumedCalorie["calorie"]　= this.selectedAge * this.weight * this.selectedExercise - 300;
-      this.consumedCalorie["carbohydrate"] = this.consumedCalorie["calorie"] * 0.55 / 4
-      this.consumedCalorie["protein"] = this.consumedCalorie["calorie"] * 0.25 / 4
-      this.consumedCalorie["lipid"] = this.consumedCalorie["calorie"] * 0.2 / 9
+      this.consumedCalorie["calorie"]　= (this.selectedAge * this.weight * this.selectedExercise - 300) / 3;
+      this.consumedCalorie["carbohydrate"] = this.consumedCalorie["calorie"] * 0.55 / 4 
+      this.consumedCalorie["protein"] = this.consumedCalorie["calorie"] * 0.25 / 4 
+      this.consumedCalorie["lipid"] = this.consumedCalorie["calorie"] * 0.2 / 9 
       this.$store.dispatch("saveIngestionCal", this.consumedCalorie)
       this.$router.push('/result')
     },
