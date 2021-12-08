@@ -1,21 +1,23 @@
 class Api::FoodsController < ApplicationController
   def name_search
-    @foods = Food.where('name like ?', "%#{params[:name]}%")
-    render_foods
+    foods = Food.where('name like ?', "%#{params[:name]}%")
+    render_foods(foods)
   end
 
   def nutrient_search
-    # pluckメソッドでリファクタリングができるかもしれない　
-    @foods = protein_search
-    @foods = carbo_search(@foods)
-    @foods = lipid_search(@foods)
-    render_foods
+    # pluckメソッドでリファクタリングができるかもしれない
+    foods = protein_search
+    if foods.present?
+      foods = carbo_search(foods)
+      foods = lipid_search(foods)
+    end
+    render_foods(foods)
   end
 
   private
 
-  def render_foods
-    render json: @foods
+  def render_foods(foods)
+    render json: foods
   end
 
   def protein_search
