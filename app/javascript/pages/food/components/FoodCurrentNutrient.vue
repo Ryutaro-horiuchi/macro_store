@@ -16,7 +16,7 @@
             md="3"
           >
             <p>
-              タンパク質<br>
+              たんぱく質<br>
               {{ current_nutrients.protein }}g
             </p>
           </v-col>

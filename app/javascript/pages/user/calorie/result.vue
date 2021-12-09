@@ -28,7 +28,7 @@
         class="mt-15"
       >
         <h2 class="text-center">
-          炭水化物{{ ingestionCal["carbohydrate"] }}g
+          たんぱく質{{ ingestionCal["protein"] }}g
         </h2>
       </v-col>
       <v-col
@@ -36,7 +36,7 @@
         class="mt-15"
       >
         <h2 class="text-center">
-          タンパク質{{ ingestionCal["protein"] }}g
+          炭水化物{{ ingestionCal["carbohydrate"] }}g
         </h2>
       </v-col>
       <v-col

@@ -23,7 +23,7 @@
               justify="center"
             >
               <v-col cols="5">
-                <label>タンパク質</label>
+                <label>たんぱく質</label>
                 <v-text-field 
                   v-model.number="nutrients.proteinValue.minimum"
                   dense
