@@ -4,8 +4,9 @@ jobs:
   build:
     docker:
       - image: circleci/ruby:2.6.4-node
+        # Dockerに2.7.5のイメージがまだないため、出来次第image指定
         environment:
-          - BUNDLER_VERSION: 2.1.4
+          - BUNDLER_VERSION: 2.2.26
           - RAILS_ENV: "test"
           - PGHOST: 127.0.0.1
       - image: circleci/postgres:13.4
@@ -32,7 +33,7 @@ jobs:
       - run:
           name: install dependencies
           command: |
-            gem install bundler -v 2.1.4
+            gem install bundler -v 2.2.26
             bundle install --jobs=4 --retry=3 --path vendor/bundle
             yarn add node-sass
             yarn install --frozen-lockfile --cache-folder ~/.cache/yarn
