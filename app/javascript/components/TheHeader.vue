@@ -44,7 +44,16 @@
         to="/confirmation"
       >
         <v-btn icon>
-          <v-icon>mdi-cart</v-icon>
+          <v-badge
+            :content="selectedFoodNumber"
+            :value="selectedFoodNumber"
+            color="red"
+            overlap
+          >          
+            <v-icon large>
+              mdi-cart
+            </v-icon>
+          </v-badge>
         </v-btn>
       </router-link>
     </template>
@@ -53,15 +62,15 @@
 
 
 <script>
-import { mapActions } from "vuex";
+import { mapGetters, mapActions } from "vuex";
 export default {
-  // data() {
-  //   return {
-  //     logoImg: require("../../assets/images/logo.png")
-  //   }
   computed: {
+    ...mapGetters(["selectFoods"]),
     isAutheniticated() {
       return this.$store.getters.user !== null;
+    },
+    selectedFoodNumber() {
+      return this.selectFoods.length
     }
   },
   methods: {
@@ -71,6 +80,6 @@ export default {
         this.$router.push("/")
       }
     }
-  }
+  },
 }
 </script>
