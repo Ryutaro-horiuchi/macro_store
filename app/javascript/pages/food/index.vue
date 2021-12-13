@@ -100,7 +100,7 @@ export default {
       data: [], // 新しく取得したデータ。getFoodsと結合する
       page: 0,
       pageSize: 20, // １ページに表示するデータ件数
-      initialized: false, //初回データアクセスが完了した後にtrueを設定するフラグ
+      initialized: false, //データアクセスが完了した後にtrueを設定するフラグ
     }
   },
   computed: {
@@ -144,7 +144,7 @@ export default {
         this.fetchFoods($state, this.page + 1)
       }
     },
-    //                 1, 
+    //                 
     fetchFoods($state, page) {
       // setTimeout(() => {
         this.data = this.foods.slice(page * this.pageSize - this.pageSize, page * this.pageSize)
