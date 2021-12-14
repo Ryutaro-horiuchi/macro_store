@@ -50,7 +50,7 @@
             color="red"
             overlap
           >          
-            <v-icon large>
+            <v-icon>
               mdi-cart
             </v-icon>
           </v-badge>

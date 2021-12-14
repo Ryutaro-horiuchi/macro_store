@@ -11,8 +11,10 @@ import vuetify from '../plugins/vuetify'
 import axios from '../plugins/axios'
 import router from '../router'
 import store from '../store'
+import VueLoaders from 'vue-loaders';
+import 'vue-loaders/dist/vue-loaders.css';
 
-
+Vue.use(VueLoaders)
 Vue.prototype.$axios = axios
 
 document.addEventListener('DOMContentLoaded', () => {

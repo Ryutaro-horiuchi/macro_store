@@ -166,13 +166,15 @@ export default new Vuex.Store({
       commit('setUser', null)
     },
     nameSearch({ commit }, name) {
-      return axios.post('/search', name)
-      .then(res => {
-        commit('foodList', res.data)
-      })
-      .catch(err => {
-        console.log(err)
-      })
+      setTimeout(() => {
+        return axios.post('/search', name)
+        .then(res => {
+          commit('foodList', res.data)
+        })
+        .catch(err => {
+          console.log(err)
+        })
+      }, 1000);
     },
     nutrientsSearch({ commit },value) {
     // 最小値がnullであれば、0を代入する。冗長なのでリファクタリングする
@@ -228,7 +230,6 @@ export default new Vuex.Store({
       commit('removeAllSelectedFood')
     },
     saveIngestionCal({ commit }, calorie) {
-      console.log(calorie)
       commit('saveIngestionCal', calorie)
     }
   }
