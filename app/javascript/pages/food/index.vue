@@ -60,7 +60,7 @@
         <Dialog />
       </v-dialog>
       <!-- 下スクロールした時に、次のページを取得するコンポーネント
-          @infiniteで画面最下部までスクロールした際に発火 -->
+            @infiniteで画面最下部までスクロールした際に発火 -->
       <infinite-loading
         v-if="hasNext"
         spinner="bubbles"
