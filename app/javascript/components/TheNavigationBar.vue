@@ -2,15 +2,15 @@
   <v-navigation-drawer
     v-model="$store.state.drawer"
     color="#1687A7"
+    fixed
     dark
-    absolute
     temporary
   >
     <v-list
       nav
       dense
     >
-      <v-list-item-group
+      <v-list-item-group 
         v-model="group"
         active-class="deep-purple--text text--accent-4"
       >
@@ -85,3 +85,6 @@ export default {
   }
 }
 </script>
+
+<style scoped>
+</style>
