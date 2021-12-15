@@ -25,9 +25,12 @@
           class="text-left my-10"
         >
           <h2>栄養素量から探す</h2>
-          <template v-show="nullValidation">
+          <template v-if="nullValidation">
             <v-container>
-              <v-row justify="center" class="error_message">
+              <v-row
+                justify="center"
+                class="error_message"
+              >
                 {{ errorMessage }}
               </v-row>
             </v-container>
