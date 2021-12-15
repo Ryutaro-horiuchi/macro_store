@@ -2,8 +2,8 @@ Rails.application.routes.draw do
   namespace :api do
     post 'login', to: 'sessions#create'
     post 'users', to: 'users#create'
-    post '/search', to: 'foods#name_search'
-    post '/search/nutrient', to: 'foods#nutrient_search'
+    post '/search/name', to: 'foods#search_name'
+    post '/search/nutrient', to: 'foods#search_nutrient'
     get 'users/me', to: 'users#me'
   end
   root to: 'home#index'
