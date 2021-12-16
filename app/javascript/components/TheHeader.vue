@@ -1,6 +1,6 @@
 <template>
   <v-app-bar
-    color="#393E46"
+    color="#D63D17"
     outlined
     dark
     fixed
@@ -47,7 +47,7 @@
           <v-badge
             :content="selectedFoodNumber"
             :value="selectedFoodNumber"
-            color="red"
+            color="#1c65ac"
             overlap
           >          
             <v-icon>

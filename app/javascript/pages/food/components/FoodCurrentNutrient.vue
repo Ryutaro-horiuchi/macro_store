@@ -45,7 +45,7 @@
             >
               <v-row justify="center">
                 <v-btn
-                  color="#00ADB5"
+                  color="#1c65ac"
                   dark
                   large
                   elevation="3"

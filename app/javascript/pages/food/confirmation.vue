@@ -95,7 +95,7 @@
         >
           <v-row justify="center">
             <v-btn
-              color="#00ADB5"
+              color="#1c65ac"
               dark
               x-large
               elevation="3"
@@ -110,7 +110,7 @@
         >
           <v-row justify="center">  
             <v-btn
-              color="#00ADB5"
+              color="#1c65ac"
               dark
               x-large
               elevation="3"
@@ -144,7 +144,7 @@
           class="mt-10"
         >
           <v-btn
-            color="#00ADB5"
+            color="#1c65ac"
             class="mx-auto"
             dark
             x-large

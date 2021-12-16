@@ -20,7 +20,7 @@
           <v-btn
             :disabled="!isValid || loading"
             :loading="loading"
-            color="#00ADB5"
+            color="#1c65ac"
             dark
             block
             @click="login"

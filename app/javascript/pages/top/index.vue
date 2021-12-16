@@ -6,18 +6,20 @@
       class="top-page"
     >
       <FoodSearchBar />
-      <v-container>
+      <v-container class="title">
         <v-row>
-          <v-col class="my-10">
-            <h1>Macro Store</h1>
+          <v-col class="my-10"> 
+            <div class="text-h4 text-md-h3">
+              Macro Store
+            </div>
           </v-col>
         </v-row>
         <v-row>
           <v-col>
-            <h2>
+            <div class="text-h5 text-md-h4">
               コンビニ食品から<br>
               理想の体作りをサポート
-            </h2>
+            </div>
           </v-col>
         </v-row>
       </v-container>
@@ -25,22 +27,28 @@
     <v-container mt-15>
       <v-row>
         <v-col>
-          <h1 class="text-center">
-            what can I do ?
-          </h1>
+          <div class="text-center text-h4 text-md-h3">
+            What can I do?
+          </div>
         </v-col>
       </v-row>
       <v-divider />
       <v-row
         class="my-10"
         align-content="center"
-        justify="center"
       >
-        <v-col cols="6">
-          <h4 class="text-left">
-            コンビニ食品を名前で検索したり、摂取したい栄養素量（炭水化物、たんぱく質、脂質別)に検索できます。
-          </h4>
+        <v-col
+          cols="6"
+          md="5"
+          offset-md="1"
+        >
+          <div class="text-left text-h6 text-md-h5 font-weight-bold">
+            検索機能
+          </div>
           <br>
+          <div class="text-left text-body-2 text-md-h6">
+            コンビニ食品を名前で検索したり、摂取したい栄養素量（炭水化物、たんぱく質、脂質別)に検索できます。
+          </div>
         </v-col>
         <v-col cols="6">
           <v-img
@@ -55,20 +63,30 @@
       <v-row
         class="my-10"
         align-content="center"
+        justify="center"
       >
-        <v-col cols="6">
+        <v-col
+          cols="6"
+          md="5"
+          offset-md="1"
+        >
           <v-img
             :src="dataImg"
             max-height="300"
             max-width="400"
-            contain
           />
         </v-col>
-        <v-col cols="6">
-          <h4 class="text-left">
-            4つの質問に答えることで、ダイエットに有効な１食分の摂取カロリーの目安を知ることができます。
-          </h4>
+        <v-col
+          cols="6"
+          md="5"
+        >
+          <div class="text-left text-h6 text-md-h5 font-weight-bold">
+            カロリー計算機能
+          </div>
           <br>
+          <div class="text-left text-body-2 text-md-h6">
+            4つの質問に答えることで、ダイエットに有効な１食分の摂取カロリーの目安を知ることができます。
+          </div>
         </v-col>
       </v-row>
       <v-divider />
@@ -76,11 +94,18 @@
         class="my-10"
         align-content="center"
       >
-        <v-col cols="6">
-          <h4 class="text-left">
-            会員登録をすると食品のお気に入り保存や、自分の摂取カロリー量を保存して、検索できるようになります。(仮リリース版では未実装)
-          </h4>
+        <v-col
+          cols="6"
+          md="5"
+          offset-md="1"
+        >
+          <div class="text-left text-h6 text-md-h5 font-weight-bold">
+            その他にも...
+          </div>
           <br>
+          <div class="text-left text-body-2 text-md-h6">
+            会員登録をすると食品のお気に入り保存や、自分の摂取カロリー量を保存して、検索できるようになります。(仮リリース版では未実装)
+          </div>
         </v-col>
         <v-col cols="6">
           <v-img
@@ -93,6 +118,11 @@
       </v-row>
       <v-divider />
     </v-container>
+    <v-col>
+      <div class="text-center text-h4 text-md-h3">
+        Let's get started！
+      </div>
+    </v-col>
     <v-container>
       <v-row>
         <v-col
@@ -105,7 +135,7 @@
           >
             <v-btn
               class="mx-auto"
-              color="#00ADB5"
+              color="#1c65ac"
               dark
               x-large
               elevation="3"
@@ -125,7 +155,7 @@
           >
             <v-btn
               class="mx-auto"
-              color="#00ADB5"
+              color="#1c65ac"
               dark
               x-large
               elevation="3"
@@ -149,9 +179,9 @@ export default {
   },
   data() {
     return {
-      foodImg: require("../../../assets/images/undraw_online_groceries_a02y (2).png"),
-      dataImg: require("../../../assets/images/undraw_app_data_re_vg5c (1).png"),
-      swipeImg: require("../../../assets/images/undraw_swipe_options_2e4v (1).png")
+      foodImg: require("../../../assets/images/undraw_online_groceries_a02y (1).png"),
+      dataImg: require("../../../assets/images/undraw_app_data_re_vg5c (2).png"),
+      swipeImg: require("../../../assets/images/undraw_swipe_options_2e4v (2).png")
     }
   },
   methods: {
@@ -168,14 +198,36 @@ export default {
 
 <style scoped>
 .top-page {
-  background: url("../../../assets/images/eggy-breakfast.jpg");
+  background: url("../../../assets/images/shellfish-pasta-pizza-and-italian-food.jpg");
   background-size: cover;
   background-position: center;
+  position: relative;
   width: 100%;
   height: 65vh;
 }
 
-.top-page h1, h2 {
+.top-page::before {
+  background-color: rgba(0,0,0,0.4);
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  content: '';
+}
+
+.title {
+  position: absolute;
+  left: 30px;
   color: #fff;
+  filter: none;
+}
+
+.text-center {
+  color: #D63D17;
+}
+
+.text-left {
+  line-height: 200%;
 }
 </style>
