@@ -9,7 +9,7 @@
         class="loader"
       >
         <vue-loaders-line-spin-fade-loader
-          color="#00ADB5" 
+          color="#D63D17" 
           scale="2"
         />
       </v-row>
@@ -48,6 +48,7 @@
                   <v-text-field 
                     v-model.number="nutrients.proteinValue.minimum"
                     dense
+                    background-color="white"
                     placeholder="0"
                     outlined
                     :rules="rules"
@@ -62,6 +63,7 @@
                   <v-text-field
                     v-model.number="nutrients.proteinValue.maximum"
                     dense
+                    background-color="white"      
                     placeholder="上限なし"
                     outlined
                     :rules="rules"
@@ -73,6 +75,7 @@
                   <v-text-field 
                     v-model.number="nutrients.carbohydrateValue.minimum"
                     dense
+                    background-color="white"
                     placeholder="0"
                     outlined
                     :rules="rules"
@@ -87,6 +90,7 @@
                   <v-text-field
                     v-model.number="nutrients.carbohydrateValue.maximum"
                     dense
+                    background-color="white"
                     placeholder="上限なし"
                     outlined
                     :rules="rules"
@@ -98,6 +102,7 @@
                   <v-text-field 
                     v-model.number="nutrients.lipidValue.minimum"
                     dense
+                    background-color="white"
                     placeholder="0"
                     outlined
                     :rules="rules"
@@ -112,6 +117,7 @@
                   <v-text-field
                     v-model.number="nutrients.lipidValue.maximum"
                     dense
+                    background-color="white"
                     placeholder="上限なし"
                     outlined
                     :rules="rules"
@@ -124,7 +130,6 @@
         </v-col>
       </v-row>
       <v-row justify="center">
-        <!-- <v-col cols="10"> -->
         <v-col
           cols="6"
         >
@@ -134,7 +139,7 @@
           >
             <v-btn
               class="mx-auto"
-              color="#00ADB5"
+              color="#1c65ac"
               dark
               x-large
               elevation="3"
@@ -153,7 +158,7 @@
           >
             <v-btn
               class="mx-auto"
-              color="#00ADB5"
+              color="#1c65ac"
               dark
               x-large
               elevation="3"

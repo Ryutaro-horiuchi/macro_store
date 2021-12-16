@@ -46,6 +46,7 @@
                   v-model="selectedAge"
                   :items="maleAge"
                   outlined
+                  background-color="white"
                   suffix="歳"
                   item-text="showLabel"
                   item-value="selectedValue"
@@ -57,6 +58,7 @@
                   v-model="selectedAge"
                   :items="femaleAge"
                   outlined
+                  background-color="white"
                   suffix="歳"
                   item-text="showLabel"
                   item-value="selectedValue"
@@ -84,6 +86,7 @@
                 <v-text-field
                   v-model="weight"
                   outlined
+                  background-color="white"
                   suffix="kg"
                   :rules="weightRules"
                 />
@@ -137,7 +140,7 @@
         >
           <v-row justify="center">
             <v-btn
-              color="#00ADB5"
+              color="#1c65ac"
               dark
               x-large
               elevation="3"
@@ -153,7 +156,7 @@
           <v-row justify="center">
             <v-btn
               :disabled="!isValid"
-              color="#00ADB5"
+              color="#1c65ac"
               dark
               x-large
               elevation="3"
@@ -224,3 +227,6 @@ export default {
   }
 }
 </script>
+
+<style scoped>
+</style>

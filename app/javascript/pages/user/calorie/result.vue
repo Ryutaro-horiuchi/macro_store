@@ -6,8 +6,11 @@
         offset="1"
         class="mt-10"
       >
-        <h4>ダイエットに有効な1食の摂取カロリーの目安は・・・？</h4>
+        <div class="text-h6 text-md-h5">
+          ダイエットに有効な1食の摂取カロリーの目安は・・・？
+        </div>
       </v-col>
+      <v-divier />
       <v-col
         cols="10"
         class="mt-15"
@@ -21,7 +24,9 @@
         offset="1"
         class="mt-10"
       >
-        <h4>あなたの1食の各栄養素の目安は・・・？</h4>
+        <div class="text-h6 text-md-h5">
+          あなたの1食の各栄養素の目安は・・・？
+        </div>
       </v-col>
       <v-col
         cols="10"
@@ -63,7 +68,7 @@
       >
         <v-row justify="center">
           <v-btn
-            color="#00ADB5"
+            color="#1c65ac"
             dark
             large
             elevation="3"
@@ -91,3 +96,9 @@ export default {
   }
 }
 </script>
+
+<style scoped>
+.text-center {
+  color: #D63D17;
+}
+</style>

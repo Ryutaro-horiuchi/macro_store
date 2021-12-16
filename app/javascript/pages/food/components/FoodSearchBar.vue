@@ -10,7 +10,9 @@
         lg="6"
       >
         <v-toolbar
+          class="toolbar"
           dense
+          color="#FFFFFF"
         >
           <v-text-field
             v-model="setSearchFood"
@@ -21,7 +23,9 @@
           />
           <v-icon 
             class="ml-3"
+            color="#D63D17"
             style="cursor: pointer"
+            large
             @click="searchName"
           >
             large
@@ -59,3 +63,6 @@ export default {
   }
 }
 </script>
+
+<style>
+</style>

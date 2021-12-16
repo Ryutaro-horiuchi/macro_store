@@ -44,7 +44,7 @@
         >
           <v-row justify="left">
             <v-btn
-              color="#00ADB5"
+              color="#1c65ac"
               dark
               x-large
               elevation="3"
@@ -61,7 +61,7 @@
         >
           <v-row justify="right">
             <v-btn
-              color="#00ADB5"
+              color="#1c65ac"
               dark
               x-large
               elevation="3"
@@ -82,7 +82,7 @@ import { mapActions } from "vuex";
 export default {
   data() {
     return {
-      flyImg: require("../../../assets/images/undraw_i_can_fly_7egl (1).png"),
+      flyImg: require("../../../assets/images/undraw_i_can_fly_7egl (2).png"),
       message: null,
       messages: ["炭水化物とたんぱく質は1gあたり4kcalですが、脂質は1gあたり9kcalと多いので取りすぎに注意です！",
                  "朝食の前に有酸素運動をすると、脂肪を燃やしやすいのでおすすめです！",

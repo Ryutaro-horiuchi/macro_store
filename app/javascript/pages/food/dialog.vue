@@ -26,7 +26,7 @@
           class="mb-5"
         >
           <v-btn
-            color="#00ADB5"
+            color="#1c65ac"
             dark
             x-large
             elevation="3"
@@ -45,7 +45,7 @@
             class="mb-5"
           >
             <v-btn
-              color="#00ADB5"
+              color="#1c65ac"
               dark
               x-large
               elevation="3"

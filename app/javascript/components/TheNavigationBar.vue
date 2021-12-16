@@ -1,7 +1,7 @@
 <template>
   <v-navigation-drawer
     v-model="$store.state.drawer"
-    color="#1687A7"
+    color="#D63D17"
     fixed
     dark
     temporary
