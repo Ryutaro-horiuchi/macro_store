@@ -22,7 +22,7 @@
           <v-icon 
             class="ml-3"
             style="cursor: pointer"
-            @click="nameSearch"
+            @click="searchName"
           >
             large
             mdi-magnify
@@ -53,8 +53,8 @@ export default {
         this.$router.push('search')
       }
     },
-    nameSearch() {
-      this.$emit('nameSearch')
+    searchName() {
+      this.$emit('searchName')
     }
   }
 }

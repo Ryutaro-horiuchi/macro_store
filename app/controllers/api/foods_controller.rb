@@ -1,15 +1,15 @@
 class Api::FoodsController < ApplicationController
-  def name_search
+  def search_name
     foods = Food.where('name like ?', "%#{params[:name]}%")
     render_foods(foods)
   end
 
-  def nutrient_search
+  def search_nutrient
     # pluckメソッドでリファクタリングができるかもしれない
-    foods = protein_search
+    foods = search_protein
     if foods.present?
-      foods = carbo_search(foods)
-      foods = lipid_search(foods)
+      foods = search_carbohydrate(foods)
+      foods = search_lipid(foods)
     end
     render_foods(foods)
   end
@@ -20,7 +20,7 @@ class Api::FoodsController < ApplicationController
     render json: foods
   end
 
-  def protein_search
+  def search_protein
     if !protein_params[:maximum].nil?
       Food.where(protein: protein_params[:minimum]..protein_params[:maximum])
     else
@@ -28,15 +28,15 @@ class Api::FoodsController < ApplicationController
     end
   end
 
-  def carbo_search(foods)
-    if !carbo_params[:maximum].nil?
-      foods.where(carbohydrate: carbo_params[:minimum]..carbo_params[:maximum])
+  def search_carbohydrate(foods)
+    if !carbohydrate_params[:maximum].nil?
+      foods.where(carbohydrate: carbohydrate_params[:minimum]..carbohydrate_params[:maximum])
     else
-      foods.where(carbohydrate: carbo_params[:minimum]..)
+      foods.where(carbohydrate: carbohydrate_params[:minimum]..)
     end
   end
 
-  def lipid_search(foods)
+  def search_lipid(foods)
     if !lipid_params[:maximum].nil?
       foods.where(lipid: lipid_params[:minimum]..lipid_params[:maximum])
     else
@@ -48,8 +48,8 @@ class Api::FoodsController < ApplicationController
     params.require(:proteinValue).permit(:minimum, :maximum)
   end
 
-  def carbo_params
-    params.require(:carboValue).permit(:minimum, :maximum)
+  def carbohydrate_params
+    params.require(:carbohydrateValue).permit(:minimum, :maximum)
   end
 
   def lipid_params

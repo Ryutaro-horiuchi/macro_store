@@ -17,7 +17,7 @@
     <template v-if="!loading">
       <FoodSearchBar
         :name.sync="params.name"
-        @nameSearch="nameSearch"
+        @searchName="searchName"
       />
       <v-row justify="center">
         <v-col
@@ -25,7 +25,16 @@
           class="text-left my-10"
         >
           <h2>栄養素量から探す</h2>
-          <p>※数値を入力してください</p>
+          <template v-if="nullValidation">
+            <v-container>
+              <v-row
+                justify="center"
+                class="error_message"
+              >
+                {{ errorMessage }}
+              </v-row>
+            </v-container>
+          </template>
           <v-form
             ref="form"
           > 
@@ -62,7 +71,7 @@
                 <v-col cols="5">
                   <label>炭水化物</label>
                   <v-text-field 
-                    v-model.number="nutrients.carboValue.minimum"
+                    v-model.number="nutrients.carbohydrateValue.minimum"
                     dense
                     placeholder="0"
                     outlined
@@ -76,7 +85,7 @@
                   cols="5"
                 >
                   <v-text-field
-                    v-model.number="nutrients.carboValue.maximum"
+                    v-model.number="nutrients.carbohydrateValue.maximum"
                     dense
                     placeholder="上限なし"
                     outlined
@@ -148,7 +157,7 @@
               dark
               x-large
               elevation="3"
-              @click="nutrientsSearch"
+              @click="searchNutrient"
             >
               この条件で検索
             </v-btn>
@@ -161,7 +170,6 @@
 
 <script>
 import FoodSearchBar from "./components/FoodSearchBar.vue"
-import { mapGetters } from 'vuex';
 
 export default {
   components: {
@@ -170,32 +178,59 @@ export default {
   data() {
     return {
       loading: false,
-      params: { name: '' },
-      rules: [
-        v => /^[\d]+$/.test(v) || '',
-        v => /^[\d]{1,3}$/.test(v) || '1桁〜3桁の間で入力してください'
-      ],
+      errorMessage: null,
+      nullValidation: false,
+      params: { name: null },
       nutrients: {
         proteinValue: { minimum: null, maximum: null },
-        carboValue: { minimum: null, maximum: null },
+        carbohydrateValue: { minimum: null, maximum: null },
         lipidValue: { minimum: null, maximum: null },
-      } 
+      },
+      rules: [
+        v => /^[\d]{1,3}$/.test(v) || '1桁〜3桁の半角英数字で入力してください'
+      ],
     }
-  },
-  computed: {
   },
   methods: {
     reset() {
       this.$refs.form.reset()
     },
-    nameSearch() {
-      this.loading = true
-      this.$store.dispatch("nameSearch", this.params)
-      
+    // 名前フォームのnullチェック。
+    checkStringNull() {
+      return this.params.name?  true : false
     },
-    nutrientsSearch() {
-      this.loading = true
-      this.$store.dispatch("nutrientsSearch", this.nutrients)
+    // 栄養素フォームのnullチェック。全てnullだった場合falseを返す
+    checkNumericNull() {
+      let array = []
+      Object.values(this.nutrients.proteinValue).forEach(function (values) {
+        array.push(values)
+      })
+      Object.values(this.nutrients.carbohydrateValue).forEach(function (values) {
+        array.push(values)
+      })
+      Object.values(this.nutrients.lipidValue).forEach(function (values) {
+        array.push(values)
+      })
+      array = array.filter(v => v)
+      return array.length ? true : false
+    },
+    searchName() {
+      if (this.checkStringNull()) {
+        this.loading = true
+        this.$store.dispatch("searchName", this.params)
+      } else {
+        this.nullValidation = true
+        this.errorMessage = "文字を入力してください"
+      }
+    },
+    searchNutrient() {
+      if (this.checkNumericNull()) {
+        this.loading = true
+        this.$store.dispatch("searchNutrient", this.nutrients) 
+      } else {
+        this.nullValidation = true
+        this.errorMessage = "数値を入力してください"
+      }
     }
   }
 }
@@ -207,5 +242,8 @@ h2 {
 }
 .loader {
   margin-top: 300px;
+}
+.error_message {
+  color: red;
 }
 </style>

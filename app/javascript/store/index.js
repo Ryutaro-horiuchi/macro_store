@@ -165,9 +165,9 @@ export default new Vuex.Store({
       localStorage.removeItem('idToken')
       commit('setUser', null)
     },
-    nameSearch({ commit }, name) {
+    searchName({ commit }, name) {
       setTimeout(() => {
-        return axios.post('/search', name)
+        return axios.post('/search/name', name)
         .then(res => {
           commit('foodList', res.data)
         })
@@ -176,10 +176,10 @@ export default new Vuex.Store({
         })
       }, 1000);
     },
-    nutrientsSearch({ commit },value) {
+    searchNutrient({ commit },value) {
     // 最小値がnullであれば、0を代入する。冗長なのでリファクタリングする
-      if (value.carboValue.minimum === null) {
-        value.carboValue.minimum = 0
+      if (value.carbohydrateValue.minimum === null) {
+        value.carbohydrateValue.minimum = 0
       }
       if (value.proteinValue.minimum === null) {
         value.proteinValue.minimum = 0
