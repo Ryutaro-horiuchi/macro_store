@@ -1,14 +1,30 @@
 require 'mechanize'
 
-class Scraping
-  def self.seven_urls
+class ScrapingNewProduct
+  # 新商品トップの一覧から、各地方の一覧ページ情報を取得する
+  def self.new_seven_urls
+    top_links = []
     agent = Mechanize.new
-    links = []
-    next_url = 'products/a/chukaman/'
+    page = agent.get('https://www.sej.co.jp/products/a/thisweek/')
+    elements = page.search('.pbBlock.pbBlockBase a')
+    elements.each do |ele|
+      break if ele.get_attribute('href') == '/products/area.html'
 
-    # 商品詳細情報のリンクのタグを指定し、全てelementsに格納する
-    # elementsの一つ一つからhref属性を指定してurlを抜き出し、linksに保存
+      top_links << ele.get_attribute('href')
+    end
+
+    top_links.each do |link|
+      seven_urls(link)
+    end
+  end
+
+  # 商品詳細のページ情報を取得する
+  def self.seven_urls(next_url)
+    links = []
+    # 商品詳細情報のリンクのタグを指定して、要素を全てelementsに格納する
+    # elementsの一つ一つからhref属性を指定して属性値であるurlを抜き出し、linksに保存
     loop do
+      agent = Mechanize.new
       current_page = agent.get("https://www.sej.co.jp/#{next_url}")
       elements = current_page.search('.item_ttl p a')
       elements.each do |ele|
