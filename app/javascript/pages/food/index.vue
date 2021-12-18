@@ -134,8 +134,6 @@ export default {
   methods: {
     ...mapActions(["openDialog", "closeDialog"]),
     infiniteHandler($state) {
-      console.log(`取得した全商品の数${this.foods.length}`)
-      console.log(`追加している商品の数${this.foodList.length}`)
       // 商品がそもそもなければ、completeでno-resultを呼ぶ
       if (!this.foods.length) {
         $state.complete();
