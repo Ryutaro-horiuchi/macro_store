@@ -96,8 +96,8 @@ export default {
   },
   data() {
     return {
-      getFoods: [],　//foodsから切り取ったデータを格納。この配列データが表示される
-      data: [], // 新しく取得したデータ。getFoodsと結合する
+      getFoods: [],　//foodListから切り取ったデータを格納。この配列データがブラウザに表示される
+      foodList: [], // 新しく取得した全データ。
       page: 0,
       pageSize: 20, // １ページに表示するデータ件数
       initialized: false, //データアクセスが完了した後にtrueを設定するフラグ
@@ -134,25 +134,32 @@ export default {
   methods: {
     ...mapActions(["openDialog", "closeDialog"]),
     infiniteHandler($state) {
-      if (!this.data.length) {
+      console.log(`取得した全商品の数${this.foods.length}`)
+      console.log(`追加している商品の数${this.foodList.length}`)
+      // 商品がそもそもなければ、completeでno-resultを呼ぶ
+      if (!this.foods.length) {
         $state.complete();
-      } else if (this.data.length <= 20) {
+      } 
+      // 取得できた全食品一覧が20件以下の場合は、終了する
+        else if (this.foods.length <= 20) {
         $state.loaded();
         $state.complete();
+      // リロード後取得したデータが19件以下の場合は、終了する
+      } else if (this.foodList.length <= 19) {
+        $state.complete();
       } else {
-        // 表示するページがまだある場合、次ページのデータを取得する
+        // 新しく取得するデータがある場合、次ページのデータを取得する
         this.fetchFoods($state, this.page + 1)
       }
     },
-    //                 
     fetchFoods($state, page) {
       // setTimeout(() => {
-        this.data = this.foods.slice(page * this.pageSize - this.pageSize, page * this.pageSize)
-        this.getFoods = this.getFoods.concat(this.data)
+        this.foodList = this.foods.slice(page * this.pageSize - this.pageSize, page * this.pageSize)
+        this.getFoods = this.getFoods.concat(this.foodList)
         this.page = page
 
         // $state.loaded()でデータの読込完了を通知する
-        if ($state) $state.loaded();
+        if($state) $state.loaded();
         this.$nextTick(() => {
           this.initialized = true
         })
