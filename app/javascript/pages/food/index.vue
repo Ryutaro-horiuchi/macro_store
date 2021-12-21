@@ -3,9 +3,10 @@
     fluid
     style="margin-top: 100px;"
   >
-    <v-container >
+    <v-container>
       <template 
-        v-if="currentNutrientsExist">
+        v-if="currentNutrientsExist"
+      >
         <FoodCurrentNutrinet />
       </template>
       <v-row>
