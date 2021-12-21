@@ -8,10 +8,10 @@
     <v-app-bar-nav-icon @click="changeDrawer" />
     <v-toolbar-title
       style="cursor: pointer;"
+      class="title_logo"
       @click="toTop"
     >
       Macro Store
-      <!-- <v-img :src="logoImg" max-height="54" max-width="110" /> -->
     </v-toolbar-title>
     <v-spacer />
     <template v-if="isAutheniticated">
@@ -83,3 +83,10 @@ export default {
   },
 }
 </script>
+
+<style scoped>
+.title_logo {
+  font-family: 'Playfair Display', serif;
+  font-size: large;
+}
+</style>
