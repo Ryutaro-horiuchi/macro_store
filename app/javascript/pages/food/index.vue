@@ -1,11 +1,11 @@
 <template>
   <v-container
     fluid
-    pt-0
+    style="margin-top: 100px;"
   >
-    <FoodSearchBar />
-    <v-container>
-      <template v-if="currentNutrientsExist">
+    <v-container >
+      <template 
+        v-if="currentNutrientsExist">
         <FoodCurrentNutrinet />
       </template>
       <v-row>
@@ -84,7 +84,6 @@ import Dialog from './dialog.vue'
 import FoodCurrentNutrinet from './components/FoodCurrentNutrient.vue'
 import InfiniteLoading from 'vue-infinite-loading';
 import FoodBarChart from "./components/FoodBarChart.vue"
-import FoodSearchBar from "../food/components/FoodSearchBar.vue"
 
 export default {
   components: {
@@ -92,7 +91,6 @@ export default {
     FoodCurrentNutrinet,
     InfiniteLoading,
     FoodBarChart,
-    FoodSearchBar,
   },
   data() {
     return {
