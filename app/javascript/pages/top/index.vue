@@ -5,11 +5,11 @@
       fluid
       class="top-page"
     >
-      <FoodSearchBar />
       <v-row>
         <v-col
           cols="10"
           md="12"
+          class="logo"
         > 
           <v-img
             :src="logoImg"
@@ -166,12 +166,7 @@
 </template>
 
 <script>
-import FoodSearchBar from "../food/components/FoodSearchBar.vue"
-
 export default {
-  components: {
-    FoodSearchBar,
-  },
   data() {
     return {
       foodImg: require("../../../assets/images/undraw_online_groceries_a02y (1).png"),
@@ -199,7 +194,7 @@ export default {
   background-position: center;
   position: relative;
   width: 100%;
-  height: 65vh;
+  height: 70vh;
 }
 
 .top-page::before {
@@ -212,11 +207,10 @@ export default {
   content: '';
 }
 
-.title {
+.logo {
   position: absolute;
-  left: 30px;
-  color: #fff;
-  filter: none;
+  left: 20px;
+  top: 90px
 }
 
 .text-center {

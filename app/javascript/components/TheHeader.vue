@@ -14,6 +14,12 @@
       Macro Store
     </v-toolbar-title>
     <v-spacer />
+    <v-btn
+      icon
+      @click="toSearch"
+    >
+      <v-icon>mdi-magnify</v-icon>
+    </v-btn>
     <template v-if="isAutheniticated">
       <v-btn
         icon
@@ -78,6 +84,11 @@ export default {
     toTop() {
       if (this.$route.path !== "/") {
         this.$router.push("/")
+      }
+    },
+    toSearch() {
+      if (this.$route.path !== "/search") {
+        this.$router.push("/search")
       }
     }
   },
