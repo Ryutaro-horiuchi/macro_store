@@ -1,7 +1,8 @@
 <template>
   <v-container
     fluid
-    style="margin-top: 100px;"
+    style="margin-top: 100px;
+           margin-bottom: 150px;"
   >
     <v-container>
       <template 
@@ -95,7 +96,7 @@ export default {
   },
   data() {
     return {
-      getFoods: [],　//foodListから切り取ったデータを格納。この配列データがブラウザに表示される
+      getFoods: [], //foodListから切り取ったデータを格納。この配列データがブラウザに表示される
       foodList: [], // 新しく取得した全データ。
       page: 0,
       pageSize: 20, // １ページに表示するデータ件数

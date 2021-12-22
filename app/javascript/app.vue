@@ -9,6 +9,7 @@
       <TheHeader />
       <router-view />
       <TheNavigationBar />
+      <TheFooter />
     </v-card>
   </v-app>
 </template>
@@ -16,11 +17,13 @@
 <script>
 import TheHeader from "./components/TheHeader.vue"
 import TheNavigationBar from "./components/TheNavigationBar.vue"
+import TheFooter from "./components/TheFooter.vue"
 
 export default {
   components: {
     TheHeader,
     TheNavigationBar,
+    TheFooter
   }
 }
 </script>
@@ -33,5 +36,4 @@ export default {
 h1, h2, h3, h4 {
   font-weight: normal;
 }
-
 </style>

@@ -1,10 +1,9 @@
 <template>
-  <div>
+  <div style="margin-top: 100px; margin-bottom: 150px;">
     <v-container
       v-if="isSelected"
-      class="mt-14"
     >
-      <h2 class="text-left mt-10">
+      <h2 class="text-left">
         以下の食品を選択しています
       </h2>
       <FoodCurrentNutrient />
@@ -99,7 +98,6 @@
               dark
               x-large
               elevation="3"
-              @click="toFoodResultPage"
             >
               戻る
             </v-btn> 
@@ -131,11 +129,10 @@
     </v-dialog>
     <v-container
       v-if="!isSelected"
-      class="mt-14"
     >
       <v-row justify="center">
         <v-col cols="12">
-          <h2 class="text-center mt-10">
+          <h2 class="text-center">
             選択した食品がありません
           </h2>
         </v-col>
