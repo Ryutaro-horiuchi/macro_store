@@ -6,20 +6,21 @@
     fixed
   >
     <v-app-bar-nav-icon @click="changeDrawer" />
-    <v-toolbar-title
-      style="cursor: pointer;"
-      class="title_logo"
-      @click="toTop"
-    >
-      Macro Store
+    <v-toolbar-title>
+      <router-link
+        to="/"
+        class="title_logo"
+      >
+        Macro Store
+      </router-link>
     </v-toolbar-title>
     <v-spacer />
-    <v-btn
-      icon
-      @click="toSearch"
+    <router-link
+      to="/search"
+      class="button"
     >
       <v-icon>mdi-magnify</v-icon>
-    </v-btn>
+    </router-link>
     <template v-if="isAutheniticated">
       <v-btn
         icon
@@ -46,8 +47,8 @@
         </v-btn>
       </router-link> -->
       <router-link
-        style="text-decoration: none;"
         to="/confirmation"
+        class="button"
       >
         <v-btn icon>
           <v-badge
@@ -81,16 +82,6 @@ export default {
   },
   methods: {
     ...mapActions(["changeDrawer", "logout"]),
-    toTop() {
-      if (this.$route.path !== "/") {
-        this.$router.push("/")
-      }
-    },
-    toSearch() {
-      if (this.$route.path !== "/search") {
-        this.$router.push("/search")
-      }
-    }
   },
 }
 </script>
@@ -99,5 +90,14 @@ export default {
 .title_logo {
   font-family: 'Playfair Display', serif;
   font-size: large;
+  text-decoration: none;
+  color: white;
+  cursor: pointer;
+}
+
+.button {
+  text-decoration: none;
+  color: white;
+  cursor: pointer;
 }
 </style>

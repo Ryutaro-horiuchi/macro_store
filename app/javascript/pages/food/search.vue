@@ -2,6 +2,7 @@
   <v-container
     fluid
     pt-0
+    style="margin-bottom: 150px;"
   >
     <template v-if="loading">
       <v-row

@@ -19,7 +19,6 @@
             hide-details
             background-color="#EEEEEE"
             placeholder="名前検索"
-            @click="toSearch"
           />
           <v-icon 
             class="ml-3"
@@ -52,11 +51,6 @@ export default {
     }
   },
   methods: {
-    toSearch() {
-      if (this.$route.path !== '/search') {
-        this.$router.push('search')
-      }
-    },
     searchName() {
       this.$emit('searchName')
     }

@@ -118,7 +118,7 @@
         Let's get started！
       </div>
     </v-col>
-    <v-container>
+    <v-container style="margin-bottom: 150px;">
       <v-row>
         <v-col
           cols="12"

@@ -14,34 +14,45 @@
         v-model="group"
         active-class="deep-purple--text text--accent-4"
       >
-        <v-list-item
-          class="my-8"
-          @click="toLoginPage"
+        <router-link
+          to="/login"
+          class="button"
         >
-          <v-list-item-icon>
-            <v-icon>mdi-login</v-icon>
-          </v-list-item-icon>
-          <v-list-item-title>ログイン</v-list-item-title>
-        </v-list-item>
-        <v-list-item
-          class="my-8"
-          @click="toSignUpPage"
+          <v-list-item
+            class="my-8"
+          >
+            <v-list-item-icon>
+              <v-icon>mdi-login</v-icon>
+            </v-list-item-icon>
+            <v-list-item-title>ログイン</v-list-item-title>
+          </v-list-item>
+        </router-link>
+        <router-link
+          to="/signup"
+          class="button"
         >
-          <v-list-item-icon>
-            <v-icon>mdi-account-plus</v-icon>
-          </v-list-item-icon>
-          <v-list-item-title>新規会員登録</v-list-item-title>
-        </v-list-item>
-        <v-divider />
-        <v-list-item
-          class="my-8"
-          @click="toTopPage"
+          <v-list-item
+            class="my-8"
+          >
+            <v-list-item-icon>
+              <v-icon>mdi-account-plus</v-icon>
+            </v-list-item-icon>
+            <v-list-item-title>新規会員登録</v-list-item-title>
+          </v-list-item>
+        </router-link>
+        <router-link
+          to="/"
+          class="button"
         >
-          <v-list-item-icon>
-            <v-icon>mdi-home</v-icon>
-          </v-list-item-icon>
-          <v-list-item-title>Home</v-list-item-title>
-        </v-list-item>
+          <v-list-item
+            class="my-8"
+          >
+            <v-list-item-icon>
+              <v-icon>mdi-home</v-icon>
+            </v-list-item-icon>
+            <v-list-item-title>Home</v-list-item-title>
+          </v-list-item>
+        </router-link>
         <!-- <v-list-item class="my-8">
           <v-list-item-icon>
             <v-icon>mdi-medal</v-icon>
@@ -72,19 +83,13 @@ export default {
   data: () => ({
       group: null,
     }),
-  methods: {
-    toLoginPage() {
-      this.$router.push("/login")
-    },
-    toSignUpPage() {
-      this.$router.push("/signup")
-    },
-    toTopPage() {
-      this.$router.push("/")
-    }
-  }
 }
 </script>
 
 <style scoped>
+.button {
+  text-decoration: none;
+  color: white;
+  cursor: pointer;
+}
 </style>
