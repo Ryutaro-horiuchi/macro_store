@@ -22,12 +22,12 @@
     <v-container mt-15>
       <v-row>
         <v-col>
-          <div class="text-center text-h4 text-md-h3">
-            What can I do?
+          <div class="text-center text-h6 text-md-h4">
+            Macro Storeでできること
           </div>
         </v-col>
       </v-row>
-      <v-divider />
+      <!-- <v-divider /> -->
       <v-row
         class="my-10"
         align-content="center"
@@ -37,7 +37,7 @@
           md="5"
           offset-md="1"
         >
-          <div class="text-left text-h6 text-md-h5 font-weight-bold">
+          <div class="text-left text-body-1 text-md-h5 font-weight-bold">
             検索機能
           </div>
           <br>
@@ -75,7 +75,7 @@
           cols="6"
           md="5"
         >
-          <div class="text-left text-h6 text-md-h5 font-weight-bold">
+          <div class="text-left text-body-1 text-md-h5 font-weight-bold">
             カロリー計算機能
           </div>
           <br>
@@ -94,7 +94,7 @@
           md="5"
           offset-md="1"
         >
-          <div class="text-left text-h6 text-md-h5 font-weight-bold">
+          <div class="text-left text-body-1 text-md-h5 font-weight-bold">
             その他にも...
           </div>
           <br>
@@ -111,76 +111,31 @@
           />
         </v-col>
       </v-row>
-      <v-divider />
     </v-container>
-    <v-col>
-      <div class="text-center text-h4 text-md-h3">
-        Let's get started！
+    <v-container style="margin-top: 50px; margin-bottom: 200px">
+      <div
+        class="text-center text-h6 text-md-h4"
+      >
+        カロリー計算から始めてみましょう
       </div>
-    </v-col>
-    <v-container style="margin-bottom: 150px;">
-      <v-row>
-        <v-col
-          cols="12"
-          md="6"
-        >
-          <v-row
-            justify="center"
-            class="ma-10"
-          >
-            <v-btn
-              class="mx-auto"
-              color="#1c65ac"
-              dark
-              x-large
-              elevation="3"
-              @click="toCalculationPage"
-            >
-              摂取カロリーを知る
-            </v-btn>
-          </v-row>
-        </v-col>
-        <v-col
-          cols="12"
-          md="6"
-        >
-          <v-row
-            justify="center"
-            class="ma-10"
-          >
-            <v-btn
-              class="mx-auto"
-              color="#1c65ac"
-              dark
-              x-large
-              elevation="3"
-              @click="toSearchPage"
-            >
-              食品を探す
-            </v-btn>
-          </v-row>
-        </v-col>
-      </v-row>
+      <CalCalculation />
     </v-container>
   </div>
 </template>
 
 <script>
+import CalCalculation from "./components/CalCalculation.vue";
+
 export default {
+  components: {
+    CalCalculation,
+  },
   data() {
     return {
       foodImg: require("../../../assets/images/undraw_online_groceries_a02y (1).png"),
       dataImg: require("../../../assets/images/undraw_app_data_re_vg5c (2).png"),
       swipeImg: require("../../../assets/images/undraw_swipe_options_2e4v (2).png"),
       logoImg: require("../../../assets/images/MacroStore-logo.png")
-    }
-  },
-  methods: {
-    toSearchPage() {
-      this.$router.push('/search')
-    },
-    toCalculationPage() {
-      this.$router.push('/calculation')
     }
   }
 }
