@@ -26,7 +26,9 @@
             cols="4"
             class="text-caption text-md-body-2"
           >
+          <router-link to="/privacy" class="link">
             <strong>プライバシーポリシー</strong>
+          </router-link>
           </v-col>
           <v-divider
             vertical
