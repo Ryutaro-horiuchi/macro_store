@@ -17,7 +17,9 @@
             cols="4"
             class="text-caption text-md-body-2"
           >
+          <router-link to="/terms" class="link">
             <strong>利用規約</strong>
+          </router-link>
           </v-col>
           <v-divider
             vertical
