@@ -113,7 +113,8 @@
       </v-row>
     </v-container>
     <v-container style="margin-top: 50px; margin-bottom: 200px">
-      <div class="text-center text-h6 text-md-h4"
+      <div
+        class="text-center text-h6 text-md-h4"
       >
         カロリー計算から始めてみましょう
       </div>
