@@ -73,7 +73,8 @@
           全件取得しました
         </div>
         <div slot="no-results">
-          条件に合致するデータがありません
+          条件に合致するデータがありません。
+          数値検索時の場合は、値を調整して再度試してみてください
         </div>
       </infinite-loading>
     </v-container>

@@ -5,7 +5,7 @@ import privacy from '../pages/top/privacy.vue';
 import terms from '../pages/top/terms.vue';
 import register from '../pages/user/register/index.vue';
 import login from '../pages/user/login/index.vue';
-import result from '../pages/user/calorie/result.vue'
+import result from '../pages/calorie/result.vue'
 import search from '../pages/food/search.vue';
 import food from '../pages/food/index.vue'
 import confirmation from '../pages/food/confirmation.vue';
