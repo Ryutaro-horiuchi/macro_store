@@ -144,7 +144,7 @@ export default {
   },
   created() {
     if (this.ingestionCal.protein) {
-      this.nutrients.proteinValue.minimum = this.ingestionCal.protein - 20
+      this.nutrients.proteinValue.minimum = this.ingestionCal.protein - 30
       this.nutrients.proteinValue.maximum = this.ingestionCal.protein
       this.nutrients.carbohydrateValue.minimum = this.ingestionCal.carbohydrate - 30
       this.nutrients.carbohydrateValue.maximum = this.ingestionCal.carbohydrate
