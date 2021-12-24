@@ -5,10 +5,13 @@
            margin-bottom: 150px;"
   >
     <v-container>
-      <template 
-        v-if="currentNutrientsExist"
-      >
-        <FoodCurrentNutrinet />
+      <template v-if="this.foods.length">
+        <div class="text-center text-h6 text-md-h5 my-10">
+          気になる食品があった際には、タップをし<strong>「選択する」</strong>を押してください
+        </div>
+        <div class="text-right text-body-2 text-md-body-1">
+          <strong>{{ this.foods.length }}件ヒットしました</strong>
+        </div>
       </template>
       <v-row>
         <v-col
@@ -73,8 +76,10 @@
           全件取得しました
         </div>
         <div slot="no-results">
-          条件に合致するデータがありません。
-          数値検索時の場合は、値を調整して再度試してみてください
+          <div class="text-center text-body-1 text-md-h5">
+            条件に合致するデータがありません。<br>
+            数値検索の場合は、値を調整して再度試してみてください。
+          </div>
         </div>
       </infinite-loading>
     </v-container>
@@ -174,3 +179,8 @@ export default {
   }
 }
 </script>
+
+<style scoped>
+.text-center {
+}
+</style>

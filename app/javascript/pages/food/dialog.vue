@@ -51,7 +51,7 @@
               elevation="3"
               @click="addNutrients(); selectFood(food)"
             >
-              カートへ
+              選択する<v-icon>mdi-cart</v-icon>
             </v-btn>        
           </v-row>
         </v-col>
