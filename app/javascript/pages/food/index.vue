@@ -50,6 +50,11 @@
                 align-content="center"
               >
                 <FoodBarChart :food="food" />
+                <v-img
+                  :src="sevenImg"
+                  height="32"
+                  width="32"
+                />
               </v-col>
             </v-row>
           </v-card>
@@ -105,6 +110,7 @@ export default {
       page: 0,
       pageSize: 20, // １ページに表示するデータ件数
       initialized: false, //データアクセスが完了した後にtrueを設定するフラグ
+      sevenImg: require("../../../assets/images/seven_eleven.logo")
     }
   },
   computed: {

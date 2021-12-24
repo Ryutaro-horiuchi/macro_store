@@ -12,6 +12,13 @@
       <v-col cols="9">
         <v-img :src="food.image.url" />
       </v-col>
+      <v-col cols="2">
+        <v-img
+          :src="sevenImg"
+          height="64"
+          width="64"
+        />
+      </v-col>
       <v-col cols="9">
         <FoodBarChart
           :key="food.id"
@@ -70,7 +77,8 @@ export default {
   },
   data() {
     return {
-      add_nutrients: { calorie: 0, carbohydrate: 0, protein: 0, lipid: 0 }
+      add_nutrients: { calorie: 0, carbohydrate: 0, protein: 0, lipid: 0 },
+      sevenImg: require("../../../assets/images/seven_eleven.logo")
     }
   },
   computed: {
