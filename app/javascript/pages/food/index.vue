@@ -5,12 +5,12 @@
            margin-bottom: 150px;"
   >
     <v-container>
-      <template v-if="this.foods.length">
+      <template v-if="foods.length">
         <div class="text-center text-h6 text-md-h5 my-10">
           気になる食品があった際には、タップをし<strong>「選択する」</strong>を押してください
         </div>
         <div class="text-right text-body-2 text-md-body-1">
-          <strong>{{ this.foods.length }}件ヒットしました</strong>
+          <strong>{{ foods.length }}件ヒットしました</strong>
         </div>
       </template>
       <v-row>
@@ -89,14 +89,12 @@
 <script>
 import { mapGetters, mapActions } from "vuex";
 import Dialog from './dialog.vue'
-import FoodCurrentNutrinet from './components/FoodCurrentNutrient.vue'
 import InfiniteLoading from 'vue-infinite-loading';
 import FoodBarChart from "./components/FoodBarChart.vue"
 
 export default {
   components: {
     Dialog,
-    FoodCurrentNutrinet,
     InfiniteLoading,
     FoodBarChart,
   },
@@ -179,8 +177,3 @@ export default {
   }
 }
 </script>
-
-<style scoped>
-.text-center {
-}
-</style>
