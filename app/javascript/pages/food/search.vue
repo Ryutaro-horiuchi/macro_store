@@ -40,7 +40,7 @@
         @search-nutrient="searchNutrient"
       >
         <p class="text-body-2 text-md-body-1">
-          ※摂取カロリー計算の質問に応えていただくと、デフォルトでおすすめの数値が反映されます。
+          ※摂取カロリー計算の質問に応えていただくと、おすすめの数値が反映されます。
         </p>
       </FoodNutrientSearchForm>
     </template>
@@ -74,26 +74,15 @@ export default {
     ...mapGetters(["ingestionCal"]),
   },
   created() {
+    if (this.ingestionCal.protein) {
     this.nutrients.proteinValue.minimum = this.ingestionCal.protein - 20
     this.nutrients.proteinValue.maximum = this.ingestionCal.protein
     this.nutrients.carbohydrateValue.minimum = this.ingestionCal.carbohydrate - 30
     this.nutrients.carbohydrateValue.maximum = this.ingestionCal.carbohydrate
     this.nutrients.lipidValue.minimum　= this.ingestionCal.lipid - 10
     this.nutrients.lipidValue.maximum　= this.ingestionCal.lipid
-    if (this.nutrients.proteinValue.minimum < 0) {
-      this.nutrients.proteinValue.value = 0
     }
-    // })
-    // Object.values(this.nutrients.carbohydrateValue).forEach(function (value) {
-    //     if (value < 0) {
-    //       this.nutrients.carbohydrateValue.value = 0
-    //     }  
-    // })
-    // Object.values(this.nutrients.lipidValue).forEach(function (value) {
-    //     if (value < 0) {
-    //       this.nutrients.lipidValue.value = 0
-    //     }  
-    // })
+
   },
   methods: {
     // 名前フォームのnullチェック。

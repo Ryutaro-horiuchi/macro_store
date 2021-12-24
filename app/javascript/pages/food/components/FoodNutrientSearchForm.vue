@@ -149,27 +149,27 @@ export default {
   props: {
     proteinMinimum: {
       type: Number,
-      default: 0
+      default: null
     },
     proteinMaximum: {
       type: Number,
-      default: 0
+      default: null
     },
     carbohydrateMinimum: {
       type: Number,
-      default: 0
+      default: null
     },
     carbohydrateMaximum: {
       type: Number,
-      default: 0
+      default: null
     },
     lipidMinimum: {
       type: Number,
-      default: 0
+      default: null
     },
     lipidMaximum: {
       type: Number,
-      default: 0
+      default: null
     },
   },
   data() {

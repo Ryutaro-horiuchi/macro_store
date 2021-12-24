@@ -87,7 +87,7 @@
             数値を元に検索してみましょう
           </div>
           <p class="text-body-2 text-md-body-1">
-            ※上記の数値を参考に、値はデフォルトで入っています。画面下部にある<strong>「この条件で検索」</strong>ボタンを押してください。
+            ※上記の数値を参考に、値が入力されています。画面下部にある<strong>「この条件で検索」</strong>ボタンを押してください。
           </p>
         </v-col>
       </v-row>
@@ -143,12 +143,14 @@ export default {
     ...mapGetters(["ingestionCal"]),
   },
   created() {
-    this.nutrients.proteinValue.minimum = this.ingestionCal.protein - 20
-    this.nutrients.proteinValue.maximum = this.ingestionCal.protein
-    this.nutrients.carbohydrateValue.minimum = this.ingestionCal.carbohydrate - 30
-    this.nutrients.carbohydrateValue.maximum = this.ingestionCal.carbohydrate
-    this.nutrients.lipidValue.minimum　= this.ingestionCal.lipid - 10
-    this.nutrients.lipidValue.maximum　= this.ingestionCal.lipid
+    if (this.ingestionCal.protein) {
+      this.nutrients.proteinValue.minimum = this.ingestionCal.protein - 20
+      this.nutrients.proteinValue.maximum = this.ingestionCal.protein
+      this.nutrients.carbohydrateValue.minimum = this.ingestionCal.carbohydrate - 30
+      this.nutrients.carbohydrateValue.maximum = this.ingestionCal.carbohydrate
+      this.nutrients.lipidValue.minimum　= this.ingestionCal.lipid - 10
+      this.nutrients.lipidValue.maximum　= this.ingestionCal.lipid
+    }
   },
   methods: {
     toSearchPage() {
