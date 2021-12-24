@@ -16,170 +16,46 @@
       </v-row>
     </template>
     <template v-if="!loading">
-      <FoodSearchBar
+      <FoodNameSearchForm
         :name.sync="params.name"
         @searchName="searchName"
       />
-      <v-row justify="center">
-        <v-col
-          cols="10"
-          class="text-left my-10"
-        >
-          <h2>栄養素量から探す</h2>
-          <template v-if="nullValidation">
-            <v-container>
-              <v-row
-                justify="center"
-                class="error_message"
-              >
-                {{ errorMessage }}
-              </v-row>
-            </v-container>
-          </template>
-          <v-form
-            ref="form"
-          > 
-            <v-container>
-              <v-row
-                class="my-5"
-                justify="center"
-              >
-                <v-col cols="5">
-                  <label>たんぱく質</label>
-                  <v-text-field 
-                    v-model.number="nutrients.proteinValue.minimum"
-                    dense
-                    background-color="white"
-                    placeholder="0"
-                    outlined
-                    :rules="rules"
-                  />
-                </v-col>
-                <h2 class="my-10 text-center">
-                  &sim;
-                </h2>
-                <v-col
-                  cols="5"
-                >
-                  <v-text-field
-                    v-model.number="nutrients.proteinValue.maximum"
-                    dense
-                    background-color="white"      
-                    placeholder="上限なし"
-                    outlined
-                    :rules="rules"
-                    class="my-6"
-                  />
-                </v-col>
-                <v-col cols="5">
-                  <label>炭水化物</label>
-                  <v-text-field 
-                    v-model.number="nutrients.carbohydrateValue.minimum"
-                    dense
-                    background-color="white"
-                    placeholder="0"
-                    outlined
-                    :rules="rules"
-                  />
-                </v-col>
-                <h2 class="my-10 text-center">
-                  &sim;
-                </h2>
-                <v-col
-                  cols="5"
-                >
-                  <v-text-field
-                    v-model.number="nutrients.carbohydrateValue.maximum"
-                    dense
-                    background-color="white"
-                    placeholder="上限なし"
-                    outlined
-                    :rules="rules"
-                    class="my-6"
-                  />
-                </v-col>
-                <v-col cols="5">
-                  <label>脂質</label>
-                  <v-text-field 
-                    v-model.number="nutrients.lipidValue.minimum"
-                    dense
-                    background-color="white"
-                    placeholder="0"
-                    outlined
-                    :rules="rules"
-                  />
-                </v-col>
-                <h2 class="my-10 text-center">
-                  &sim;
-                </h2>
-                <v-col
-                  cols="5"
-                >
-                  <v-text-field
-                    v-model.number="nutrients.lipidValue.maximum"
-                    dense
-                    background-color="white"
-                    placeholder="上限なし"
-                    outlined
-                    :rules="rules"
-                    class="mt-6"
-                  />
-                </v-col>
-              </v-row>
-            </v-container>
-          </v-form>        
-        </v-col>
-      </v-row>
-      <v-row justify="center">
-        <v-col
-          cols="6"
-        >
+      <template v-if="nullValidation">
+        <v-container class="mt-5">
           <v-row
             justify="center"
-            class="ma-5"
+            class="error_message"
           >
-            <v-btn
-              class="mx-auto"
-              color="#1c65ac"
-              dark
-              x-large
-              elevation="3"
-              @click="reset"
-            >
-              クリア
-            </v-btn>
+            {{ errorMessage }}
           </v-row>
-        </v-col>
-        <v-col
-          cols="6"
-        >
-          <v-row
-            justify="center"
-            class="ma-5"
-          >
-            <v-btn
-              class="mx-auto"
-              color="#1c65ac"
-              dark
-              x-large
-              elevation="3"
-              @click="searchNutrient"
-            >
-              この条件で検索
-            </v-btn>
-          </v-row>
-        </v-col>
-      </v-row>
+        </v-container>
+      </template>
+      <FoodNutrientSearchForm
+        :carbohydrate-minimum.sync="nutrients.carbohydrateValue.minimum"
+        :carbohydrate-maximum.sync="nutrients.carbohydrateValue.maximum"
+        :protein-minimum.sync="nutrients.proteinValue.minimum"
+        :protein-maximum.sync="nutrients.proteinValue.maximum"
+        :lipid-minimum.sync="nutrients.lipidValue.minimum"
+        :lipid-maximum.sync="nutrients.lipidValue.maximum"
+        @search-nutrient="searchNutrient"
+      >
+        <p class="text-body-2 text-md-body-1">
+          ※摂取カロリー計算の質問に応えていただくと、デフォルトでおすすめの数値が反映されます。
+        </p>
+      </FoodNutrientSearchForm>
     </template>
   </v-container>
 </template>
 
 <script>
-import FoodSearchBar from "./components/FoodSearchBar.vue"
+import FoodNameSearchForm from "./components/FoodNameSearchForm.vue"
+import FoodNutrientSearchForm from "./components/FoodNutrientSearchForm.vue"
+import { mapGetters } from "vuex";
 
 export default {
   components: {
-    FoodSearchBar,
+    FoodNameSearchForm,
+    FoodNutrientSearchForm
   },
   data() {
     return {
@@ -192,15 +68,34 @@ export default {
         carbohydrateValue: { minimum: null, maximum: null },
         lipidValue: { minimum: null, maximum: null },
       },
-      rules: [
-        v => /^[\d]{1,3}$/.test(v) || '1桁〜3桁の半角英数字で入力してください'
-      ],
     }
   },
+  computed: {
+    ...mapGetters(["ingestionCal"]),
+  },
+  created() {
+    this.nutrients.proteinValue.minimum = this.ingestionCal.protein - 20
+    this.nutrients.proteinValue.maximum = this.ingestionCal.protein
+    this.nutrients.carbohydrateValue.minimum = this.ingestionCal.carbohydrate - 30
+    this.nutrients.carbohydrateValue.maximum = this.ingestionCal.carbohydrate
+    this.nutrients.lipidValue.minimum　= this.ingestionCal.lipid - 10
+    this.nutrients.lipidValue.maximum　= this.ingestionCal.lipid
+    if (this.nutrients.proteinValue.minimum < 0) {
+      this.nutrients.proteinValue.value = 0
+    }
+    // })
+    // Object.values(this.nutrients.carbohydrateValue).forEach(function (value) {
+    //     if (value < 0) {
+    //       this.nutrients.carbohydrateValue.value = 0
+    //     }  
+    // })
+    // Object.values(this.nutrients.lipidValue).forEach(function (value) {
+    //     if (value < 0) {
+    //       this.nutrients.lipidValue.value = 0
+    //     }  
+    // })
+  },
   methods: {
-    reset() {
-      this.$refs.form.reset()
-    },
     // 名前フォームのnullチェック。
     checkStringNull() {
       return this.params.name?  true : false
@@ -208,14 +103,14 @@ export default {
     // 栄養素フォームのnullチェック。全てnullだった場合falseを返す
     checkNumericNull() {
       let array = []
-      Object.values(this.nutrients.proteinValue).forEach(function (values) {
-        array.push(values)
+      Object.values(this.nutrients.proteinValue).forEach(function (value) {
+        array.push(value)
       })
-      Object.values(this.nutrients.carbohydrateValue).forEach(function (values) {
-        array.push(values)
+      Object.values(this.nutrients.carbohydrateValue).forEach(function (value) {
+        array.push(value)
       })
-      Object.values(this.nutrients.lipidValue).forEach(function (values) {
-        array.push(values)
+      Object.values(this.nutrients.lipidValue).forEach(function (value) {
+        array.push(value)
       })
       array = array.filter(v => v)
       return array.length ? true : false
@@ -230,6 +125,8 @@ export default {
       }
     },
     searchNutrient() {
+      console.log('ok')
+      console.log(this.nutrients)
       if (this.checkNumericNull()) {
         this.loading = true
         this.$store.dispatch("searchNutrient", this.nutrients) 

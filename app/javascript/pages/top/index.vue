@@ -22,12 +22,14 @@
     <v-container mt-15>
       <v-row>
         <v-col>
-          <div class="text-center text-h6 text-md-h4">
+          <div
+            class="text-center text-h6 text-md-h4"
+            style="margin-bottom: 80px; margin-top: 50px;"
+          >
             Macro Storeでできること
           </div>
         </v-col>
       </v-row>
-      <!-- <v-divider /> -->
       <v-row
         class="my-10"
         align-content="center"
@@ -149,7 +151,7 @@ export default {
   background-position: center;
   position: relative;
   width: 100%;
-  height: 70vh;
+  height: 80vh;
 }
 
 .top-page::before {

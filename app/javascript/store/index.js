@@ -13,8 +13,10 @@ export default new Vuex.Store({
       paths: [
         'foods',
         'selectFoods',
-        'current_nutrients'
-      ]
+        'current_nutrients',
+        'ingestionCal'
+      ],
+      storage: window.sessionStorage
     }
   )
   ],
