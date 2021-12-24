@@ -171,7 +171,6 @@ export default {
       return array.length ? true : false
     },
     searchNutrient() {
-
       if (this.checkNumericNull()) {
         this.loading = true
         this.$store.dispatch("searchNutrient", this.nutrients) 

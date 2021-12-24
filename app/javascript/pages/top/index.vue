@@ -23,7 +23,7 @@
       <v-row>
         <v-col>
           <div
-            class="text-center text-h6 text-md-h4"
+            class="text-center text-h5 text-md-h3"
             style="margin-bottom: 80px; margin-top: 50px;"
           >
             Macro Storeでできること
@@ -116,9 +116,9 @@
     </v-container>
     <v-container style="margin-top: 50px; margin-bottom: 200px">
       <div
-        class="text-center text-h6 text-md-h4"
+        class="text-center text-h5 text-md-h3" style="margin-top: 100px; margin-bottom: 100px;"
       >
-        カロリー計算から始めてみましょう
+        カロリー計算から始めよう
       </div>
       <CalCalculation />
     </v-container>
