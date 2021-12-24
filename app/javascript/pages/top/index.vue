@@ -116,7 +116,8 @@
     </v-container>
     <v-container style="margin-top: 50px; margin-bottom: 200px">
       <div
-        class="text-center text-h5 text-md-h3" style="margin-top: 100px; margin-bottom: 100px;"
+        class="text-center text-h5 text-md-h3"
+        style="margin-top: 100px; margin-bottom: 100px;"
       >
         カロリー計算から始めよう
       </div>
