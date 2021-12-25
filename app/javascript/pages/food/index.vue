@@ -7,7 +7,7 @@
     <v-container>
       <template v-if="foods.length">
         <div class="text-center text-h6 text-md-h5 my-10">
-          気になる食品があった際には、タップをし<strong>「選択する」</strong>を押してください
+          気になる食品をタップし、<strong>「選択する」</strong>を押してください
         </div>
         <div class="text-right text-body-2 text-md-body-1">
           <strong>{{ foods.length }}件ヒットしました</strong>
