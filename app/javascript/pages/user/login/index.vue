@@ -1,36 +1,33 @@
 <template>
-  <UserForm :title="title">
-    <template #form-card-content>
-      <!-- 以下form-card-contentととして、LoginFormコンポーネントに渡している -->
-      <v-form
-        ref="form"
-        v-model="isValid"
-      >
-        <UserFormEmail :email.sync="params.email" />
-        <UserFormPassword
-          no-validation
-          :password.sync="params.password"
-        />
-        <!-- <v-card-actions>
-          <router-link to="#">
-            パスワードを忘れた場合
-          </router-link>
-        </v-card-actions> -->
-        <v-card-text class="px-0">
-          <v-btn
-            :disabled="!isValid || loading"
-            :loading="loading"
-            color="#1c65ac"
-            dark
-            block
-            @click="login"
-          >
-            <span>ログインする</span>
-          </v-btn> 
-        </v-card-text>
-      </v-form>
-    </template>
-  </UserForm> 
+  <div style="margin-top: 100px; margin-bottom: 150px;">  
+    <UserForm :title="title">
+      <template #form-card-content>
+        <!-- 以下form-card-contentととして、LoginFormコンポーネントに渡している -->
+        <v-form
+          ref="form"
+          v-model="isValid"
+        >
+          <UserFormEmail :email.sync="params.email" />
+          <UserFormPassword
+            no-validation
+            :password.sync="params.password"
+          />
+          <v-card-text class="px-0">
+            <v-btn
+              :disabled="!isValid || loading"
+              :loading="loading"
+              color="#1c65ac"
+              dark
+              block
+              @click="login"
+            >
+              <span>ログインする</span>
+            </v-btn> 
+          </v-card-text>
+        </v-form>
+      </template>
+    </UserForm>
+  </div>
 </template>
 
 <script>

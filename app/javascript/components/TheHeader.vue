@@ -11,7 +11,11 @@
         to="/"
         class="title_logo"
       >
-        Macro Store
+        <v-row>
+          <v-col cols="10" md="12">
+            <v-img :src="headerImg" max-height="150" max-width="150"></v-img>
+          </v-col>
+        </v-row>
       </router-link>
     </v-toolbar-title>
     <v-spacer />
@@ -71,6 +75,11 @@
 <script>
 import { mapGetters, mapActions } from "vuex";
 export default {
+  data() {
+    return {
+      headerImg: require("../../assets/images/MacroStore_header_logo.png")
+    }
+  },
   computed: {
     ...mapGetters(["selectFoods"]),
     isAutheniticated() {
