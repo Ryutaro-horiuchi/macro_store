@@ -179,23 +179,25 @@ export default new Vuex.Store({
       }, 1000);
     },
     searchNutrient({ commit },value) {
+      setTimeout(() => {
     // 最小値がnullであれば、0を代入する。冗長なのでリファクタリングする
-      if (value.carbohydrateValue.minimum === null) {
-        value.carbohydrateValue.minimum = 0
-      }
-      if (value.proteinValue.minimum === null) {
-        value.proteinValue.minimum = 0
-      }
-      if (value.lipidValue.minimum === null) {
-        value.lipidValue.minimum = 0
-      }
-      return axios.post('/search/nutrient', value)
-      .then(res => {
-        commit('foodList', res.data)
-      })
-      .catch(err => {
-        console.log(err)
-      })
+        if (value.carbohydrateValue.minimum === null) {
+          value.carbohydrateValue.minimum = 0
+        }
+        if (value.proteinValue.minimum === null) {
+          value.proteinValue.minimum = 0
+        }
+        if (value.lipidValue.minimum === null) {
+          value.lipidValue.minimum = 0
+        }
+        return axios.post('/search/nutrient', value)
+        .then(res => {
+          commit('foodList', res.data)
+        })
+        .catch(err => {
+          console.log(err)
+        })
+      }, 1000);
     },
     openDialog({ commit }, food_data) {
       commit('openDialog', food_data)

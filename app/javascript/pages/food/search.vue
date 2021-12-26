@@ -133,7 +133,7 @@ h2 {
   font-weight: normal;
 }
 .loader {
-  margin-top: 300px;
+  margin-top: 200px;
 }
 .error_message {
   color: red;

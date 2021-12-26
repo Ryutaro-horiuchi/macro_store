@@ -2,7 +2,7 @@
   <v-container
     fluid
     style="margin-top: 50px;
-           margin-bottom: 50px;"
+           margin-bottom: 150px;"
   >
     <v-container>
       <template v-if="foods.length">
