@@ -5,14 +5,15 @@
         cols="10"
         class="text-left"
       >
-        <h2>栄養素量から探す</h2>
+      <div class="text-left text-h6 text-md-h4">
+        栄養素量から探す
+      </div>
         <slot />
         <v-form
           ref="form"
         > 
           <v-container>
             <v-row
-              class="my-5"
               justify="center"
             >
               <v-col cols="5">
@@ -107,7 +108,6 @@
       >
         <v-row
           justify="center"
-          class="ma-5"
         >
           <v-btn
             class="mx-auto"
@@ -126,7 +126,6 @@
       >
         <v-row
           justify="center"
-          class="ma-5"
         >
           <v-btn
             class="mx-auto"

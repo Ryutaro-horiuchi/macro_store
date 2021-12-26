@@ -19,12 +19,12 @@
         </v-col>
       </v-row>
     </v-container>
-    <v-container mt-15>
+    <v-container>
       <v-row>
         <v-col>
           <div
             class="text-center text-h5 text-md-h3"
-            style="margin-bottom: 80px; margin-top: 50px;"
+            style="margin-top: 50px; margin-bottom: 30px;"
           >
             Macro Storeでできること
           </div>
@@ -114,10 +114,10 @@
         </v-col>
       </v-row>
     </v-container>
-    <v-container style="margin-top: 50px; margin-bottom: 200px">
+    <v-container style="margin-bottom: 100px">
       <div
         class="text-center text-h5 text-md-h3"
-        style="margin-top: 100px; margin-bottom: 100px;"
+        style="margin-top: 50px; margin-bottom: 30px;"
       >
         カロリー計算から始めよう
       </div>

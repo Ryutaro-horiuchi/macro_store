@@ -81,8 +81,8 @@
           offset="1"
         >
           <div
-            class="text-color text-center text-h5 text-md-h4"
-            style="margin-top: 200px; margin-bottom: 80px;"
+            class="text-color text-center text-h6 text-md-h4"
+            style="margin-top: 100px; margin-bottom: 50px;"
           >
             数値を元に検索してみましょう
           </div>

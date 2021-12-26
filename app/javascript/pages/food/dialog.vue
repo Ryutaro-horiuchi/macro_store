@@ -15,8 +15,8 @@
       <v-col cols="2">
         <v-img
           :src="sevenImg"
-          height="64"
-          width="64"
+          height="32"
+          width="32"
         />
       </v-col>
       <v-col cols="9">

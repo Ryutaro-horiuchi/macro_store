@@ -1,8 +1,8 @@
 <template>
   <v-container
     fluid
-    style="margin-top: 100px;
-           margin-bottom: 150px;"
+    style="margin-top: 50px;
+           margin-bottom: 50px;"
   >
     <v-container>
       <template v-if="foods.length">
