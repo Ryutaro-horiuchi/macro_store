@@ -4,10 +4,9 @@ class Scraping
   def self.seven_urls
     agent = Mechanize.new
     links = []
-    next_url = 'products/a/chukaman/'
+    next_url = 'products/a/cat/010010010000000/'
 
-    # 商品詳細情報のリンクのタグを指定し、全てelementsに格納する
-    # elementsの一つ一つからhref属性を指定してurlを抜き出し、linksに保存
+    # 商品一覧から商品詳細のリンクを取得し、linksに格納する
     loop do
       current_page = agent.get("https://www.sej.co.jp/#{next_url}")
       elements = current_page.search('.item_ttl p a')
@@ -40,14 +39,11 @@ class Scraping
     url = page.at('.productWrap img')[:src] if page.at('.productWrap img')
 
     if page.at('.item_price p')
-      price_strings = page.at('.item_price p').inner_text
-      letter = price_strings.split('円')
-      price = letter.first.to_i
+      price = page.at('.item_price p').inner_text.split('円').first.to_i
     end
 
     if page.at('.allergy tr:nth-child(2) td')
-      array = page.at('.allergy tr:nth-child(2) td').inner_text
-      array = array.split(/[、（]/).first(4)
+      array = page.at('.allergy tr:nth-child(2) td').inner_text.split(/[、（]/).first(4)
       array.map! { |arr| arr.gsub(/[^\d+.\d+]/, '').to_f }
       calorie = array[0]
       protein = array[1]
@@ -57,7 +53,6 @@ class Scraping
 
     food = Food.where(name: name)
 
-    # もし該当しなければ、保存する
     return unless food.blank? && protein.present?
 
     Food.create(name: name,

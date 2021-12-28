@@ -2,7 +2,6 @@
   <div style="margin-top: 100px; margin-bottom: 150px;">
     <UserForm :title="title">
       <template #form-card-content>
-        <!-- 以下form-card-contentととして、LoginFormコンポーネントに渡している -->
         <v-form
           ref="form"
           v-model="isValid"
@@ -50,7 +49,6 @@ export default {
     return {
       title: "会員登録",
       isValid: false,
-        // v-formタグ内のバリデーションが有効なときにtrueを返す
       loading: false,
       params: { user: { name: '', email: '', password: '', password_confirmation: '' } },
     }
@@ -64,7 +62,6 @@ export default {
       }, 1500)
     },
     formReset() {
-      // this.$refs.form.reset() この関数があると、paramsの値がnullになるため一度保留
       this.params = { user: {name: '', email: '', password: '', password_confirmation: ''} }
     }
   }

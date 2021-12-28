@@ -19,7 +19,6 @@
         color="transparent"
         class="mx-auto"
       >
-        <!-- テンプレートを差し込むスロット -->
         <slot name="form-card-content" />
       </v-card>
     </v-row>

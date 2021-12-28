@@ -23,9 +23,6 @@ jobs:
           command: |
             curl -sSL "https://nodejs.org/dist/v14.17.0/node-v14.17.0-linux-x64.tar.xz" | sudo tar --strip-components=2 -xJ -C /usr/local/bin/ node-v14.17.0-linux-x64/bin/node
             curl https://www.npmjs.com/install.sh | sudo bash
-      - run:
-          name: 現行バージョンのノードのチェック
-          command: node -v
       - restore_cache: # 以下がキャッシュされていれば使用する
           keys:
             - v1-dependencies-{{ checksum "Gemfile.lock" }}
@@ -48,14 +45,14 @@ jobs:
       - run:
           name: Database setup
           command: |
-            bundle exec rake db:create
-            bundle exec rake db:schema:load
+            bundle exec rails db:create
+            bundle exec rails db:schema:load
       - run:
           name: Rubocop
           command: bundle exec rubocop
       - run:
           name: rails-best-practice
-          command: bundle exec rails_best_practices .
+          command: bundle exec rails_best_practices
       - run:
           name: lint
           command: |

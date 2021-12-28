@@ -180,7 +180,7 @@ export default new Vuex.Store({
     },
     searchNutrient({ commit },value) {
       setTimeout(() => {
-    // 最小値がnullであれば、0を代入する。冗長なのでリファクタリングする
+    // 最小値がnullであれば、0を代入する。リファクタリングする
         if (value.carbohydrateValue.minimum === null) {
           value.carbohydrateValue.minimum = 0
         }

@@ -38,13 +38,13 @@ export default {
     form () {
       const min = '8文字以上'
       const msg = `${min}。半角英数字•ﾊｲﾌﾝ•ｱﾝﾀﾞｰﾊﾞｰが使えます`
-      const required = v => !!v || ''
       // ログイン時のバリデーション
-      const format = v => /^[\w-]{8,72}$/.test(v) || msg
+      const required = v => !!v || ''
       // 会員登録時のバリデーション
+      const format = v => /^[\w-]{8,72}$/.test(v) || msg
       const rules = this.noValidation ? [required] : [format]
+      // ヒント：会員登録の時のみメッセージを表示する
       const hint = this.noValidation ? undefined : msg
-      // 会員登録の時のみメッセージを表示する
       return { rules, hint }
     },
     toggle () {

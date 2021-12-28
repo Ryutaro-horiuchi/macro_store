@@ -27,7 +27,7 @@ export default {
   computed: {
     setEmail: {
       get() { return this.email },
-      set(newValue) { return this.$emit('update:email', newValue) }
+      set(newVal) { return this.$emit('update:email', newVal) }
     }
   }
 }

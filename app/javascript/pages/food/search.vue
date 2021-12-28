@@ -114,8 +114,6 @@ export default {
       }
     },
     searchNutrient() {
-      console.log('ok')
-      console.log(this.nutrients)
       if (this.checkNumericNull()) {
         this.loading = true
         this.$store.dispatch("searchNutrient", this.nutrients) 

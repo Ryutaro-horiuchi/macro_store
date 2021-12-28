@@ -29,7 +29,7 @@ export default {
   computed: {
     setName: {
       get() { return this.name },
-      set(newValue) { return this.$emit('update:name', newValue) }
+      set(newVal) { return this.$emit('update:name', newVal) }
     }
   }
 }

@@ -1,4 +1,4 @@
-module JwtToken
+module Jwt
   extend ActiveSupport::Concern
 
   def create_token(user_id)
