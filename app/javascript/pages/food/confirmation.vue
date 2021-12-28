@@ -98,6 +98,7 @@
               dark
               x-large
               elevation="3"
+              @click="toFoodResultPage"
             >
               戻る
             </v-btn> 

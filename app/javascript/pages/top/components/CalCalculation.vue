@@ -180,7 +180,7 @@ export default {
       selectedAge: null,
       weight: null,
       selectedExercise: null,
-      consumedCalorie: { calorie: 0, carbohydrate: 0, protein: 0, lipid: 0 },
+      ingestionCalorie: { calorie: 0, carbohydrate: 0, protein: 0, lipid: 0 },
       weightRules: [
         v => !!v || '',
         v => /^[\d]+$/.test(v) || '数値を入力してください',
@@ -214,11 +214,11 @@ export default {
   },
   methods: {
     calculateCalorie() {
-      this.consumedCalorie["calorie"]　= (this.selectedAge * this.weight * this.selectedExercise - 300) / 3;
-      this.consumedCalorie["carbohydrate"] = this.consumedCalorie["calorie"] * 0.55 / 4 
-      this.consumedCalorie["protein"] = this.consumedCalorie["calorie"] * 0.25 / 4 
-      this.consumedCalorie["lipid"] = this.consumedCalorie["calorie"] * 0.2 / 9 
-      this.$store.dispatch("saveIngestionCal", this.consumedCalorie)
+      this.ingestionCalorie["calorie"]　= (this.selectedAge * this.weight * this.selectedExercise - 300) / 3;
+      this.ingestionCalorie["carbohydrate"] = this.ingestionCalorie["calorie"] * 0.55 / 4 
+      this.ingestionCalorie["protein"] = this.ingestionCalorie["calorie"] * 0.25 / 4 
+      this.ingestionCalorie["lipid"] = this.ingestionCalorie["calorie"] * 0.2 / 9 
+      this.$store.dispatch("saveIngestionCal", this.ingestionCalorie)
       this.$router.push('/result')
     },
     toTopPage() {

@@ -38,24 +38,6 @@
               {{ current_nutrients.lipid }}g
             </p>
           </v-col>
-          <template v-if="notConfirmationPage">
-            <v-col
-              cols="7"
-              md="3"
-            >
-              <v-row justify="center">
-                <v-btn
-                  color="#1c65ac"
-                  dark
-                  large
-                  elevation="3"
-                  @click="toConfirmationPage"
-                >
-                  確認画面へ
-                </v-btn>
-              </v-row>
-            </v-col>
-          </template>
         </v-row>
       </v-col>
     </v-row>
@@ -68,9 +50,6 @@ import { mapGetters } from "vuex";
 export default {
   computed: {
     ...mapGetters(["current_nutrients"]),
-    notConfirmationPage() {
-      return this.$route.path !== "/confirmation"
-    }
   },
   methods: {
     toConfirmationPage() {

@@ -5,7 +5,6 @@ class Api::FoodsController < ApplicationController
   end
 
   def search_nutrient
-    # pluckメソッドでリファクタリングができるかもしれない
     foods = search_protein
     if foods.present?
       foods = search_carbohydrate(foods)
@@ -21,7 +20,7 @@ class Api::FoodsController < ApplicationController
   end
 
   def search_protein
-    if !protein_params[:maximum].nil?
+    if protein_params[:maximum].present?
       Food.where(protein: protein_params[:minimum]..protein_params[:maximum])
     else
       Food.where(protein: protein_params[:minimum]..)
@@ -29,7 +28,7 @@ class Api::FoodsController < ApplicationController
   end
 
   def search_carbohydrate(foods)
-    if !carbohydrate_params[:maximum].nil?
+    if carbohydrate_params[:maximum].present?
       foods.where(carbohydrate: carbohydrate_params[:minimum]..carbohydrate_params[:maximum])
     else
       foods.where(carbohydrate: carbohydrate_params[:minimum]..)
@@ -37,7 +36,7 @@ class Api::FoodsController < ApplicationController
   end
 
   def search_lipid(foods)
-    if !lipid_params[:maximum].nil?
+    if lipid_params[:maximum].present?
       foods.where(lipid: lipid_params[:minimum]..lipid_params[:maximum])
     else
       foods.where(lipid: lipid_params[:minimum]..)

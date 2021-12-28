@@ -91,7 +91,6 @@ export default new Vuex.Store({
       state.current_nutrients["carbohydrate"] += multiplyData[1].carbohydrate * multiplyData[0]
       state.current_nutrients["protein"] += multiplyData[1].protein * multiplyData[0]
       state.current_nutrients["lipid"] += multiplyData[1].lipid * multiplyData[0]
-      // multiplyData[2には新しい数値が入っている]
       state.selectFoods.find((food) => {
         if (food.id === multiplyData[1].id) {
           food.quantity = multiplyData[2]
@@ -115,7 +114,7 @@ export default new Vuex.Store({
       state.foods = null
       localStorage.removeItem('MacroStore')
     },
-    saveIngestionCal(state, calorie ) {
+    saveIngestionCal(state, calorie) {
       state.ingestionCal = calorie
       Object.keys(state.ingestionCal).forEach(function (key) {
         state.ingestionCal[key] =  Math.round(state.ingestionCal[key])
@@ -178,7 +177,7 @@ export default new Vuex.Store({
         })
       }, 1000);
     },
-    searchNutrient({ commit },value) {
+    searchNutrient({ commit }, value) {
       setTimeout(() => {
     // 最小値がnullであれば、0を代入する。リファクタリングする
         if (value.carbohydrateValue.minimum === null) {

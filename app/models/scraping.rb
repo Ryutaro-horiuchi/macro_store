@@ -37,10 +37,7 @@ class Scraping
 
     name = page.at('.item_ttl h1').inner_text if page.at('.item_ttl h1')
     url = page.at('.productWrap img')[:src] if page.at('.productWrap img')
-
-    if page.at('.item_price p')
-      price = page.at('.item_price p').inner_text.split('円').first.to_i
-    end
+    price = page.at('.item_price p').inner_text.split('円').first.to_i if page.at('.item_price p')
 
     if page.at('.allergy tr:nth-child(2) td')
       array = page.at('.allergy tr:nth-child(2) td').inner_text.split(/[、（]/).first(4)

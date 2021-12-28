@@ -168,7 +168,7 @@ export default {
       Object.values(this.nutrients.lipidValue).forEach(function (value) {
         array.push(value)
       })
-      array = array.filter(v => v)
+      array = array.filter(v => !!v)
       return array.length ? true : false
     },
     searchNutrient() {

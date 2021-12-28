@@ -161,7 +161,7 @@ export default {
       }
     },
     fetchFoods($state, page) {
-      // setTimeout(() => {
+      setTimeout(() => {
         this.foodList = this.foods.slice(page * this.pageSize - this.pageSize, page * this.pageSize)
         this.getFoods = this.getFoods.concat(this.foodList)
         this.page = page
@@ -171,13 +171,13 @@ export default {
         this.$nextTick(() => {
           this.initialized = true
         })
-      // }, 500)
+      }, 500)
     },
     scroll() {
       // 現在のスクロールY座標から、画面に表示されているページ番号を計算する
       let scroll_position = window.pageYOffset || document.documentElement.scrollTop
       let page = Math.ceil(((scroll_position + 0.5) / 7234))
-      // replaceStateでurlを書き換え（urlパラメータにページ番号を設定)
+      // urlを書き換え（urlパラメータにページ番号を設定)
       window.history.replaceState(null, null, "/?page=" + page)
     }
   }

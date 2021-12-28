@@ -25,8 +25,8 @@ Chart.plugins.register({
   },
   afterDraw: function (chart, easing) {
     if (chart.config.options.showAllTooltips) {
-      /* 常設のツールチップをアニメーションさせたくないので、
-          アニメーションが少なくとも1回実行されるまで何もしないでください。 */
+      /* 常設のツールチップをアニメーションさせたくないため、
+          アニメーションが少なくとも1回実行されるまで何もしない。 */
       if (!chart.allTooltipsOnce) {
         if (easing !== 1)
           return;
@@ -38,7 +38,7 @@ Chart.plugins.register({
       Chart.helpers.each(chart.pluginTooltips, function (tooltip) {
         tooltip.initialize();
         tooltip.update();
-        // ツールチップをアニメーションさせていないので、実際には必要ありません
+        // ツールチップをアニメーションさせていないので、実際には必要ない
         tooltip.transition(easing).draw();
       });
       chart.options.tooltips.enabled = false;
@@ -77,7 +77,7 @@ export default {
       { 
         showAllTooltips: true,
         legend: {
-          display: false　//凡例の省略
+          display: false //凡例の省略
         },
         scales: {
           xAxes:[
