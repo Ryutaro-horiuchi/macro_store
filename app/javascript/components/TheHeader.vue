@@ -12,8 +12,15 @@
         class="title_logo"
       >
         <v-row>
-          <v-col cols="10" md="12">
-            <v-img :src="headerImg" max-height="150" max-width="150"></v-img>
+          <v-col
+            cols="10"
+            md="12"
+          >
+            <v-img
+              :src="headerImg"
+              max-height="150"
+              max-width="150"
+            />
           </v-col>
         </v-row>
       </router-link>

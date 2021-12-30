@@ -5,9 +5,9 @@
         cols="10"
         class="text-left"
       >
-      <div class="text-left text-h6 text-md-h4">
-        栄養素量から探す
-      </div>
+        <div class="text-left text-h6 text-md-h4">
+          栄養素量から探す
+        </div>
         <slot />
         <v-form
           ref="form"
