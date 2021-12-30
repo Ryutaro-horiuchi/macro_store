@@ -1,7 +1,7 @@
 <template>
   <v-text-field
-    v-model="setPassword"
-    :rules="confirmPasswordRules"
+    v-model="setPasswordConfirmation"
+    :rules="rules"
     :counter="true"
     label="パスワード (確認用)"
     :append-icon="toggle.icon"
@@ -27,16 +27,16 @@ export default {
   data () {
     return {
       show: false,
+      rules: [
+        v => !!v || '',
+        v => v === this.password || 'パスワードが一致しません'
+      ]
     }
   },
   computed: {
-    setPassword: {
+    setPasswordConfirmation: {
       get () { return this.passwordConfirmation },
       set (newVal) { return this.$emit('update:password_confirmation', newVal) }
-    },
-    confirmPasswordRules() {
-      const rules = [(this.password_confirmation === this.password) || "パスワードと一致していません"];
-      return rules
     },
     toggle () {
       const icon = this.show ? 'mdi-eye' : 'mdi-eye-off'
