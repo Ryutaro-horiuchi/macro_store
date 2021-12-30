@@ -8,23 +8,32 @@
     <v-card-subtitle class="text-right text-h6">
       <p>{{ food.calorie }}kcal</p>
     </v-card-subtitle>
-    <v-row justify="center">
-      <v-col cols="9">
-        <v-img :src="food.image.url" />
-      </v-col>
-      <v-col cols="2">
+    <v-row>
+      <v-col cols="2" offset="7">
         <v-img
           :src="sevenImg"
           height="32"
           width="32"
         />
       </v-col>
+      <v-col cols="2">
+        <v-icon large>mdi-star-outline</v-icon>
+      </v-col>
+    </v-row>
+    <v-row justify="center">
+      <v-col cols="10">
+        <v-img :src="food.image.url" />
+      </v-col>
+    </v-row>
+    <v-row justify="center">
       <v-col cols="9">
         <FoodBarChart
           :key="food.id"
           :food="food"
         />
       </v-col>
+    </v-row>
+    <v-row>
       <v-col
         cols="6"
       >

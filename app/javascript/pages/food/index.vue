@@ -25,36 +25,34 @@
             outlined
             @click="openDialog(food)"
           > 
-            <v-row
-              justify="center"
-              align-content="center"
-            >
-              <v-col
-                cols="4"
-                md="6"
-              >
+            <v-row>
+              <v-col cols="6">
                 <v-img :src="food.image.url" />
+              </v-col>
+              <v-col cols="6">
                 <v-card-subtitle class="text-xs-body-1 text-md-h5">
-                  {{ food.name }}
+                  {{ food.name }}<br>
                 </v-card-subtitle>
-                <v-card-subtitle class="text-md-h6">
-                  税抜{{ food.price }}円
-                </v-card-subtitle>
-                <v-card-subtitle class="text-md-h6">
+                <v-card-subtitle class="text-xs-body-1 text-md-h5 text-right">
                   {{ food.calorie }}kcal
                 </v-card-subtitle>
+                <v-row>
+                  <v-col cols="4" offset="2">
+                    <v-img
+                      :src="sevenImg"
+                      height="32"
+                      width="32"
+                    />
+                  </v-col>
+                  <v-col cols="4">
+                    <v-icon large>mdi-star-outline</v-icon>
+                  </v-col>
+                </v-row>
               </v-col>
-              <v-col
-                cols="8"
-                md="6"
-                align-content="center"
-              >
+            </v-row>
+            <v-row justify="center"> 
+              <v-col cols="10" md="8">
                 <FoodBarChart :food="food" />
-                <v-img
-                  :src="sevenImg"
-                  height="32"
-                  width="32"
-                />
               </v-col>
             </v-row>
           </v-card>
