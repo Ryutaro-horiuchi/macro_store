@@ -1,6 +1,4 @@
 class Api::SessionsController < ApplicationController
-  include Jwt
-
   def create
     user = login(params[:email], params[:password])
     if user
@@ -10,4 +8,5 @@ class Api::SessionsController < ApplicationController
       render json: user.errors, status: :bad_request
     end
   end
+
 end

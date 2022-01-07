@@ -28,12 +28,12 @@ document.addEventListener('DOMContentLoaded', () => {
 })
 
 // ページ遷移のたびに実行。fetchAuthUserを取得し、ログインが必要なページであれば、ログインページに遷移するようにする。
-// router.beforeEach((to, from, next) => {
-//   store.dispatch('fetchAuthUser').then((authUser) => {
-//     if (to.matched.some(record => record.meta.requiredAuth) && !authUser) {
-//       next(('/login'));
-//     } else {
-//       next();
-//     }
-//   })
-// })
+router.beforeEach((to, from, next) => {
+  store.dispatch('fetchAuthUser').then((authUser) => {
+    if (to.matched.some(record => record.meta.requiredAuth) && !authUser) {
+      next(('/login'));
+    } else {
+      next();
+    }
+  })
+})

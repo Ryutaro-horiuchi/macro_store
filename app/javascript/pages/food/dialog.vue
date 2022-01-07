@@ -17,7 +17,7 @@
         />
       </v-col>
       <v-col cols="2">
-        <v-icon large>mdi-star-outline</v-icon>
+        <v-icon large @click.stop="makeFavorite(food)">mdi-star-outline</v-icon>
       </v-col>
     </v-row>
     <v-row justify="center">
@@ -97,7 +97,7 @@ export default {
     }
   },
   methods: {
-    ...mapActions(["closeDialog", "selectFood"]),
+    ...mapActions(["closeDialog", "selectFood", "makeFavorite"]),
     addNutrients() {
       this.$store.dispatch("addNutrients", this.food)
     },

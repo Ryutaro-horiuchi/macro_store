@@ -119,7 +119,7 @@ export default new Vuex.Store({
       Object.keys(state.ingestionCal).forEach(function (key) {
         state.ingestionCal[key] =  Math.round(state.ingestionCal[key])
       })
-    }
+    },
   },
   actions: {
     changeDrawer({ commit }) {
@@ -128,13 +128,13 @@ export default new Vuex.Store({
     async fetchAuthUser({ commit , state }) {
       if(!localStorage.idToken) return null
       if(state.user) return state.user
-
+      
       const userResponse = await axios.get('users/me')
       .catch((err) => {
         return null
       })
       if (!userResponse) return null
-
+      
       const authUser = userResponse.data
       if (authUser) {
         commit('setUser', authUser)
@@ -154,7 +154,8 @@ export default new Vuex.Store({
     login({ commit }, user ) {
       return axios.post('/login', user)
       .then(res => {
-        localStorage.setItem('idToken', res.data.token);
+        localStorage.idToken = res.data.token
+        axios.defaults.headers.common['Authorization'] = `Bearer ${localStorage.idToken}`
         commit('setUser', res.data.user)
         router.push('/')
       })
@@ -197,6 +198,15 @@ export default new Vuex.Store({
           console.log(err)
         })
       }, 1000);
+    },
+    makeFavorite({ commit }, food) {
+      return axios.post('/bookmarks/create', food)
+      .then(res => {
+        console.log(res)
+      })
+      .catch(err => {
+        console.log(err)
+      })
     },
     openDialog({ commit }, food_data) {
       commit('openDialog', food_data)
