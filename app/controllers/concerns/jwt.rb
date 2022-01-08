@@ -11,6 +11,7 @@ module Jwt
   def current_user
     return @current_user if @current_user
     return unless bearer_token
+
     payload = decode(bearer_token)
     @current_user ||= User.find(payload[0]["id"])
   rescue JWT::ExpiredSignature

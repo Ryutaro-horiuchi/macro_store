@@ -3,7 +3,6 @@ class Api::BookmarksController < ApplicationController
   end
 
   def create
-    binding.pry
     food = Food.find(params[:id])
     current_user.bookmark(food)
     render json: food

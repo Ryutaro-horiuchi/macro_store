@@ -32,6 +32,23 @@
     >
       <v-icon>mdi-magnify</v-icon>
     </router-link>
+    <router-link
+      to="/confirmation"
+      class="button"
+    >
+      <v-btn icon>
+        <v-badge
+          :content="selectedFoodNumber"
+          :value="selectedFoodNumber"
+          color="#1c65ac"
+          overlap
+        >          
+          <v-icon>
+            mdi-cart
+          </v-icon>
+        </v-badge>
+      </v-btn>
+    </router-link>
     <template v-if="isAutheniticated">
       <v-btn
         icon
@@ -41,7 +58,7 @@
       </v-btn>
     </template>
     <template v-if="!isAutheniticated">
-      <!-- <router-link
+      <router-link
         style="text-decoration: none;"
         to="/login"
       >
@@ -55,23 +72,6 @@
       >
         <v-btn icon>
           <v-icon>mdi-account-plus</v-icon>
-        </v-btn>
-      </router-link> -->
-      <router-link
-        to="/confirmation"
-        class="button"
-      >
-        <v-btn icon>
-          <v-badge
-            :content="selectedFoodNumber"
-            :value="selectedFoodNumber"
-            color="#1c65ac"
-            overlap
-          >          
-            <v-icon>
-              mdi-cart
-            </v-icon>
-          </v-badge>
         </v-btn>
       </router-link>
     </template>

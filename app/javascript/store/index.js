@@ -25,6 +25,7 @@ export default new Vuex.Store({
     foodDialog: false,
     endDialog: false,
     user: null,
+    bookmarkedFoods: [],
     foods: null,
     food: null,
     ingestionCal: {},
@@ -36,6 +37,7 @@ export default new Vuex.Store({
     foodDialog: state => state.foodDialog,
     endDialog: state => state.endDialog,
     user: state => state.user,
+    bookmarkedFoods: state => state.bookmarkedFoods,
     foods: state => state.foods,
     food: state => state.food,
     ingestionCal: state => state.ingestionCal,
@@ -48,6 +50,17 @@ export default new Vuex.Store({
     },
     setUser(state, data) {
       state.user = data
+    },
+    setBookmarkedFoods(state, foods) {
+      state.bookmarkedFoods = foods
+    },
+    addToBookmarkedFoods(state, food) {
+      state.bookmarkedFoods.push(food)
+    },
+    deleteFromBookmarkedFoods(state, deletefood) {
+      state.bookmarkedFoods = state.bookmarkedFoods.filter((food) => {
+        return food.id !== deletefood.id
+      })
     },
     foodList(state, data) {
       state.foods = data
@@ -135,9 +148,10 @@ export default new Vuex.Store({
       })
       if (!userResponse) return null
       
-      const authUser = userResponse.data
-      if (authUser) {
-        commit('setUser', authUser)
+
+      if (userResponse) {
+        commit('setUser', userResponse.data.user)
+        commit('setBookmarkedFoods', userResponse.data.foods )
       } else {
         commit('setUser', null)
       }
@@ -157,6 +171,7 @@ export default new Vuex.Store({
         localStorage.idToken = res.data.token
         axios.defaults.headers.common['Authorization'] = `Bearer ${localStorage.idToken}`
         commit('setUser', res.data.user)
+        commit('setBookmarkedFoods', res.data.foods)
         router.push('/')
       })
       .catch(err => {
@@ -199,10 +214,24 @@ export default new Vuex.Store({
         })
       }, 1000);
     },
-    makeFavorite({ commit }, food) {
-      return axios.post('/bookmarks/create', food)
+    makeBookmark(context, food) {
+      if (context.state.user === null) {
+        router.push('/login') 
+      }
+      else {
+        return axios.post('/bookmarks/create', food)
+        .then(res => {
+          context.commit('addToBookmarkedFoods', res.data)
+        })
+        .catch(err => {
+          console.log(err)
+        })
+      }
+    },
+    removeBookmark({ commit }, food) {
+      return axios.post('/bookmarks/destroy', food)
       .then(res => {
-        console.log(res)
+        commit('deleteFromBookmarkedFoods', res.data)
       })
       .catch(err => {
         console.log(err)

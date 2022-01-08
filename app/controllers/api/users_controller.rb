@@ -12,7 +12,7 @@ class Api::UsersController < ApplicationController
   end
 
   def me
-    render json: current_user
+    render json: { user: current_user, foods: current_user.bookmark_foods }
   end
 
   private

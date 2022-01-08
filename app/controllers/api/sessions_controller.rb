@@ -3,7 +3,7 @@ class Api::SessionsController < ApplicationController
     user = login(params[:email], params[:password])
     if user
       token = create_token(user.id)
-      render json: { token: token, user: user }
+      render json: { token: token, user: user, foods: user.bookmark_foods }
     else
       render json: user.errors, status: :bad_request
     end
