@@ -275,6 +275,11 @@ export default new Vuex.Store({
     },
     makeBookmark(context, food) {
       if (context.state.user === null) {
+          context.dispatch('flashMessage', {
+            message: 'ログインが必要です',
+            color: 'blue',
+            status: 'true',
+          })
         router.push('/login') 
       }
       else {

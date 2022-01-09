@@ -4,7 +4,8 @@
     transition="slide-y-transition"
     right
     top
-    :color="flashColor">
+    :color="flashColor"
+  >
     {{ flashMessage }}
   </v-snackbar>
 </template>
