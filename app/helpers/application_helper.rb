@@ -13,8 +13,7 @@ module ApplicationHelper
         image: image_url('MacroStore_ogp.png')
       },
       twitter: {
-        card: 'summary_large_image',
-        site: '@yorutaru097'
+        card: 'summary_large_image'
       }
     }
   end
