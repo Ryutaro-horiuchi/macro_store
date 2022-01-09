@@ -149,8 +149,8 @@ export default {
       this.nutrients.proteinValue.maximum = this.ingestionCal.protein
       this.nutrients.carbohydrateValue.minimum = this.ingestionCal.carbohydrate - 30
       this.nutrients.carbohydrateValue.maximum = this.ingestionCal.carbohydrate
-      this.nutrients.lipidValue.minimum　= this.ingestionCal.lipid - 10
-      this.nutrients.lipidValue.maximum　= this.ingestionCal.lipid
+      this.nutrients.lipidValue.minimum = this.ingestionCal.lipid - 10
+      this.nutrients.lipidValue.maximum = this.ingestionCal.lipid
     }
   },
   methods: {

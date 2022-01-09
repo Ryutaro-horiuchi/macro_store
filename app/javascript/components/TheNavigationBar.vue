@@ -40,6 +40,7 @@
             <v-list-item-title>新規会員登録</v-list-item-title>
           </v-list-item>
         </router-link>
+        <v-divider />
         <router-link
           to="/"
           class="button"
@@ -53,19 +54,24 @@
             <v-list-item-title>Home</v-list-item-title>
           </v-list-item>
         </router-link>
+        <router-link
+          to="/bookmark"
+          class="button"
+        >
+          <v-list-item class="my-8">
+            <v-list-item-icon>
+              <v-icon>mdi-food-drumstick</v-icon>
+            </v-list-item-icon>
+            <v-list-item-title>
+              お気に入り食品
+            </v-list-item-title>
+          </v-list-item>
+        </router-link>
         <!-- <v-list-item class="my-8">
           <v-list-item-icon>
             <v-icon>mdi-medal</v-icon>
           </v-list-item-icon>
           <v-list-item-title>ランキング</v-list-item-title>
-        </v-list-item>
-        <v-list-item class="my-8">
-          <v-list-item-icon>
-            <v-icon>mdi-food-drumstick</v-icon>
-          </v-list-item-icon>
-          <v-list-item-title>
-            お気に入り食品
-          </v-list-item-title>
         </v-list-item>
         <v-list-item class="my-8">
           <v-list-item-icon>

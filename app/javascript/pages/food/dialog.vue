@@ -8,23 +8,54 @@
     <v-card-subtitle class="text-right text-h6">
       <p>{{ food.calorie }}kcal</p>
     </v-card-subtitle>
-    <v-row justify="center">
-      <v-col cols="9">
-        <v-img :src="food.image.url" />
-      </v-col>
-      <v-col cols="2">
+    <v-row>
+      <v-col
+        cols="2"
+        offset="7"
+      >
         <v-img
           :src="sevenImg"
           height="32"
           width="32"
         />
       </v-col>
+      <template v-if="!isBookmarked">
+        <v-col cols="2">
+          <v-icon
+            color="blue"
+            large
+            @click.stop="makeBookmark(food)"
+          >
+            mdi-star-outline
+          </v-icon>
+        </v-col>
+      </template>
+      <template v-if="isBookmarked">
+        <v-col cols="2">
+          <v-icon
+            color="blue"
+            large
+            @click.stop="removeBookmark(food)"
+          >
+            mdi-star
+          </v-icon>
+        </v-col>
+      </template> 
+    </v-row>
+    <v-row justify="center">
+      <v-col cols="10">
+        <v-img :src="food.image.url" />
+      </v-col>
+    </v-row>
+    <v-row justify="center">
       <v-col cols="9">
         <FoodBarChart
           :key="food.id"
           :food="food"
         />
       </v-col>
+    </v-row>
+    <v-row>
       <v-col
         cols="6"
       >
@@ -43,7 +74,7 @@
           </v-btn>
         </v-row>
       </v-col>
-      <template v-if="isNotSelected">
+      <template v-if="!isSelected">
         <v-col
           cols="6"
         >
@@ -82,13 +113,16 @@ export default {
     }
   },
   computed: {
-    ...mapGetters(["foodDialog", "food", "selectFoods"]),
-    isNotSelected() {
-      return !this.selectFoods.includes(this.food)
+    ...mapGetters(["foodDialog", "food", "selectFoods", "bookmarkedFoods"]),
+    isSelected() {
+      return this.selectFoods.some(food => food.id === this.food.id)
+    },
+    isBookmarked() {
+      return this.bookmarkedFoods.some(food => food.id === this.food.id)
     }
   },
   methods: {
-    ...mapActions(["closeDialog", "selectFood"]),
+    ...mapActions(["closeDialog", "selectFood", "makeBookmark", "removeBookmark"]),
     addNutrients() {
       this.$store.dispatch("addNutrients", this.food)
     },

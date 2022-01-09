@@ -9,6 +9,7 @@ import result from '../pages/calorie/result.vue'
 import search from '../pages/food/search.vue';
 import food from '../pages/food/index.vue'
 import confirmation from '../pages/food/confirmation.vue';
+import bookmarkFoods from '../pages/food/bookmarkFoods.vue';
 
 Vue.use(Router);
 
@@ -22,7 +23,10 @@ export default new Router({
            {path: '/result', component: result},
            {path: '/search', component: search},
            {path: '/foods', component: food},
-           {path: '/confirmation', component: confirmation}
+           {path: '/confirmation', component: confirmation},
+           {path: '/bookmark', component: bookmarkFoods,
+            meta: { requiredAuth: true },
+           }
   ],
   scrollBehavior(to, from, savedPosition) {
     if (savedPosition) {

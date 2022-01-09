@@ -1,5 +1,6 @@
 class Api::UsersController < ApplicationController
   skip_before_action :verify_authenticity_token
+  before_action :authenticate!, only: %i[me]
 
   def create
     user = User.new(user_params)
@@ -11,12 +12,12 @@ class Api::UsersController < ApplicationController
   end
 
   def me
-    render json: current_user
+    render json: { user: current_user, foods: current_user.bookmark_foods }
   end
 
   private
 
   def user_params
-    params.require(:user).permit(:name, :email, :password, :password_confirmation)
+    params.require(:user).permit(:name, :email, :password, :password_confirmation, :calorie, :carbohydrate, :protein, :lipid)
   end
 end
