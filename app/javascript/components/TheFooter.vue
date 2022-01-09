@@ -56,10 +56,22 @@
       </v-card-text>
       <v-card-text class="white--text body-2">
         &copy; 2021 - Macro Store
+        <v-icon @click="twitterShare">mdi-twitter</v-icon>
       </v-card-text>
     </v-card>
   </v-footer>
 </template>
+
+<script>
+export default {
+  methods: {
+    twitterShare() {
+      const shareURL = 'https://twitter.com/intent/tweet?&url=' + 'https://www.macrostore.jp' + '&text=' + 'ダイエットに最適なカロリー（PFC）を提案。数値を元にコンビニ食品を検索、保存できるサービス' + '%20%23MacroStore'+ '%20%23コンビニ' + '%20%23ダイエット' + '%20%23ボディメイク'
+      location.href = shareURL
+    }
+  }
+}
+</script>
 
 <style scoped>
 .link {
