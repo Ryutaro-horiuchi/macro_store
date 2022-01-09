@@ -7,7 +7,7 @@
       <v-container>
         <v-row justify="center">
           <div
-            class="text-center text-h5 text-md-h3"
+            class="text-center text-h6 text-md-h4"
             style="margin-top: 50px; margin-bottom: 30px;"
           >
             お気に入り
