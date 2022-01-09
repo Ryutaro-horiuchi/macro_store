@@ -56,7 +56,9 @@
       </v-card-text>
       <v-card-text class="white--text body-2">
         &copy; 2021 - Macro Store
-        <v-icon @click="twitterShare">mdi-twitter</v-icon>
+        <v-icon @click="twitterShare">
+          mdi-twitter
+        </v-icon>
       </v-card-text>
     </v-card>
   </v-footer>

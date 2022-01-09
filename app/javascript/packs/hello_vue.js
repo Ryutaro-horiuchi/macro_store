@@ -32,6 +32,11 @@ router.beforeEach((to, from, next) => {
   store.dispatch('fetchAuthUser').then((authUser) => {
     if (to.matched.some(record => record.meta.requiredAuth) && !authUser) {
       next(('/login'));
+      store.dispatch('flashMessage', {
+        message: 'ログインが必要です',
+        color: 'blue',
+        status: 'true'
+      })
     } else {
       next();
     }

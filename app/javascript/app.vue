@@ -7,6 +7,7 @@
       width="100%"
     >
       <TheHeader />
+      <TheFlashMessage />
       <router-view />
       <TheNavigationBar />
       <TheFooter />
@@ -18,12 +19,14 @@
 import TheHeader from "./components/TheHeader.vue"
 import TheNavigationBar from "./components/TheNavigationBar.vue"
 import TheFooter from "./components/TheFooter.vue"
+import TheFlashMessage from "./components/TheFlashMessage.vue"
 
 export default {
   components: {
     TheHeader,
     TheNavigationBar,
-    TheFooter
+    TheFooter,
+    TheFlashMessage
   }
 }
 </script>
