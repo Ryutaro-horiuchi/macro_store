@@ -8,5 +8,4 @@ class Api::SessionsController < ApplicationController
       render json: user.errors, status: :bad_request
     end
   end
-
 end

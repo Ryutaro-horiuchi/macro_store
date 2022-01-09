@@ -6,7 +6,7 @@
   >
     <v-container>
       <template v-if="foods.length">
-        <slot name="message"></slot>
+        <slot name="message" />
       </template>
       <v-row>
         <v-col
@@ -32,7 +32,10 @@
                   {{ food.calorie }}kcal
                 </v-card-subtitle>
                 <v-row>
-                  <v-col cols="4" offset="2">
+                  <v-col
+                    cols="4"
+                    offset="2"
+                  >
                     <v-img
                       :src="sevenImg"
                       height="32"
@@ -43,7 +46,10 @@
               </v-col>
             </v-row>
             <v-row justify="center"> 
-              <v-col cols="10" md="8">
+              <v-col
+                cols="10"
+                md="8"
+              >
                 <FoodBarChart :food="food" />
               </v-col>
             </v-row>
@@ -67,11 +73,14 @@
         class="mt-10"
         @infinite="infiniteHandler"
       >
-        <div slot="no-more" class="text-center text-body-1 text-md-h5">
+        <div
+          slot="no-more"
+          class="text-center text-body-1 text-md-h5"
+        >
           全件取得しました
         </div>
         <div slot="no-results">
-          <slot name="noData"></slot>
+          <slot name="noData" />
         </div>
       </infinite-loading>
     </v-container>
@@ -112,11 +121,6 @@ export default {
       return this.initialized 
     },
   },
-  methods: {
-    toSearchPage() {
-      this.$emit("to-search-page")
-    }
-  },
   mounted() {
     // 現在表示中のページ番号をURLに設定する為に、スクロール時にイベントを発火
     window.addEventListener("scroll", ()=> this.scroll())
@@ -135,6 +139,11 @@ export default {
 
     // 初期データ取得をする
     this.fetchFoods(null, this.page)
+  },
+  methods: {
+    toSearchPage() {
+      this.$emit("to-search-page")
+    }
   },
   methods: {
     ...mapActions(["openDialog", "closeDialog"]),

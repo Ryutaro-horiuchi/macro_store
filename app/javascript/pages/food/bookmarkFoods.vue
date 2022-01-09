@@ -1,8 +1,9 @@
 <template>
   <FoodList
     :foods="bookmarkedFoods"
-    @to-search-page="toSearchPage">
-    <template v-slot:message>
+    @to-search-page="toSearchPage"
+  >
+    <template #message>
       <v-container>
         <v-row justify="center">
           <div
@@ -14,25 +15,25 @@
         </v-row>
       </v-container>
     </template>
-    <template v-slot:noData>
+    <template #noData>
       <h2 style="margin-top: 100px;">
         お気に入り食品がありません
       </h2>
-        <v-row
-          justify="center"
-          class="mt-10"
+      <v-row
+        justify="center"
+        class="mt-10"
+      >
+        <v-btn
+          color="#1c65ac"
+          class="mx-auto"
+          dark
+          x-large
+          elevation="3"
+          @click="toSearchPage"
         >
-          <v-btn
-            color="#1c65ac"
-            class="mx-auto"
-            dark
-            x-large
-            elevation="3"
-            @click="toSearchPage"
-          >
-            食品を探す
-          </v-btn>
-        </v-row>
+          食品を探す
+        </v-btn>
+      </v-row>
     </template>
   </FoodList>
 </template>

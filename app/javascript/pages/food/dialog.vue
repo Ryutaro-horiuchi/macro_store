@@ -9,7 +9,10 @@
       <p>{{ food.calorie }}kcal</p>
     </v-card-subtitle>
     <v-row>
-      <v-col cols="2" offset="7">
+      <v-col
+        cols="2"
+        offset="7"
+      >
         <v-img
           :src="sevenImg"
           height="32"
@@ -18,12 +21,24 @@
       </v-col>
       <template v-if="!isBookmarked">
         <v-col cols="2">
-          <v-icon color="blue" large @click.stop="makeBookmark(food)">mdi-star-outline</v-icon>
+          <v-icon
+            color="blue"
+            large
+            @click.stop="makeBookmark(food)"
+          >
+            mdi-star-outline
+          </v-icon>
         </v-col>
       </template>
       <template v-if="isBookmarked">
         <v-col cols="2">
-          <v-icon color="blue" large @click.stop="removeBookmark(food)">mdi-star</v-icon>
+          <v-icon
+            color="blue"
+            large
+            @click.stop="removeBookmark(food)"
+          >
+            mdi-star
+          </v-icon>
         </v-col>
       </template> 
     </v-row>

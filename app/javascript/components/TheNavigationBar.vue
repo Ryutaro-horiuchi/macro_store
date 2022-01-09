@@ -40,7 +40,7 @@
             <v-list-item-title>新規会員登録</v-list-item-title>
           </v-list-item>
         </router-link>
-        <v-divider></v-divider>
+        <v-divider />
         <router-link
           to="/"
           class="button"
