@@ -47,7 +47,7 @@ export default {
   },
   data() {
     return {
-      title: "会員登録",
+      title: "ユーザー登録",
       isValid: false,
       loading: false,
       params: { user: { name: '', email: '', password: '', password_confirmation: '' } },

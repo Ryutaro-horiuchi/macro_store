@@ -21,6 +21,9 @@ export default new Vuex.Store({
   )
   ],
   state: {
+    flashMessage: "",
+    flashColor: null,
+    flashStatus: false,
     drawer: false,
     foodDialog: false,
     endDialog: false,
@@ -33,6 +36,9 @@ export default new Vuex.Store({
     current_nutrients: { calorie: 0, carbohydrate: 0, protein: 0, lipid: 0 }
   },
   getters: {
+    flashMessage: state => state.flashMessage,
+    flashColor :state => state.flashColor,
+    flashStatus: state => state.flashStatus,
     drawer: state => state.drawer,
     foodDialog: state => state.foodDialog,
     endDialog: state => state.endDialog,
@@ -135,7 +141,18 @@ export default new Vuex.Store({
     },
     clearIngestionCal(state) {
       state.ingestionCal = null
+    },
+    setMessage(state, message) {
+      state.flashMessage = message
+    },
+    setColor(state, color) {
+      state.flashColor = color
+    },
+    setStatus(state, status) {
+      state.flashStatus = status
     }
+
+    
   },
   actions: {
     changeDrawer({ commit }) {
@@ -169,37 +186,60 @@ export default new Vuex.Store({
       return axios.post('/signUp', params)
       .then(res => {
         router.push('/login')
+        context.dispatch('flashMessage', {
+          message: 'ユーザー登録が完了しました',
+          color: 'success',
+          status: 'true',
+        })
       })
       .catch(err => {
-        console.log(err)
+        context.dispatch('flashMessage', {
+          message: '無効なメールアドレスです',
+          color: 'orange',
+          status: 'true',
+        })
       })
     },
-    login({ commit }, user ) {
+    login(context,  user) {
       return axios.post('/login', user)
       .then(res => {
         localStorage.idToken = res.data.token
         axios.defaults.headers.common['Authorization'] = `Bearer ${localStorage.idToken}`
         const loginUser = res.data.user
-        commit('setUser', loginUser)
+        context.commit('setUser', loginUser)
         if (loginUser.calorie) {
           const ingestionCal = {}
           ingestionCal["calorie"] = loginUser.calorie
           ingestionCal["carbohydrate"] = loginUser.carbohydrate
           ingestionCal["protein"] = loginUser.protein
           ingestionCal["lipid"] = loginUser.lipid
-          commit('saveIngestionCal', ingestionCal)
+          context.commit('saveIngestionCal', ingestionCal)
         }
-        commit('setBookmarkedFoods', res.data.foods)
+        context.commit('setBookmarkedFoods', res.data.foods)
+        context.dispatch('flashMessage', {
+          message: 'ログインしました',
+          color: 'success',
+          status: 'true',
+        })
         router.push('/')
       })
       .catch(err => {
-        console.log(err)
+        context.dispatch('flashMessage', {
+          message: 'ログインに失敗しました',
+          color: 'orange',
+          status: 'true',
+        }) 
       })
     },
-    logout({ commit }) {
+    logout(context) {
       localStorage.removeItem('idToken')
-      commit('setUser', null)
-      commit('clearIngestionCal')
+      context.commit('setUser', null)
+      context.commit('clearIngestionCal')
+      context.dispatch('flashMessage', {
+        message: 'ログアウトしました',
+        color: 'success',
+        status: 'true',
+      })
     },
     searchName({ commit }, name) {
       setTimeout(() => {
@@ -255,6 +295,14 @@ export default new Vuex.Store({
       .catch(err => {
         console.log(err)
       })
+    },
+    flashMessage({ commit }, {message, color, status}) {
+      commit('setMessage', message)
+      commit('setColor', color)
+      commit('setStatus', status)
+      setTimeout(() => {
+        commit('setStatus', false)
+      }, 1500)
     },
     openDialog({ commit }, food_data) {
       commit('openDialog', food_data)
