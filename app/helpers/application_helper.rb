@@ -1,7 +1,7 @@
 module ApplicationHelper
   def default_meta_tags
     {
-      site: 'MacroStore(マクロストア)〜コンビニ食品で簡単ダイエット〜',
+      site: 'MacroStore(マクロストア) | コンビニ食品で簡単ダイエット',
       charset: 'utf-8',
       description: 'ついつい食事はコンビニ食品...でも太りたくない...そんなあなたにMacroStore(マクロストア)。4つの質問に答えるだけで、ダイエットに最適なカロリーとPFCバランスを提案。その数値に見合ったコンビニ食品を検索できるサービスです。MacroStoreで、理想の体を手に入れましょう！',
       canonical: 'https://www.macrostore.jp',
@@ -13,7 +13,7 @@ module ApplicationHelper
         image: image_url('MacroStore_ogp.png')
       },
       twitter: {
-        card: 'summary',
+        card: 'summary_large_image',
         site: '@yorutaru097'
       }
     }
