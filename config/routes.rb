@@ -1,9 +1,8 @@
 Rails.application.routes.draw do
   namespace :api do
     post 'login', to: 'sessions#create'
-    post 'users', to: 'users#create'
+    post 'signUp', to: 'users#create'
     get 'users/me', to: 'users#me'
-    get 'bookmarks/index'
     post 'bookmarks/create'
     post 'bookmarks/destroy'
     post '/search/name', to: 'foods#search_name'

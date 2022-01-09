@@ -25,11 +25,11 @@ export default new Vuex.Store({
     foodDialog: false,
     endDialog: false,
     user: null,
-    bookmarkedFoods: [],
     foods: null,
     food: null,
-    ingestionCal: {},
     selectFoods: [],
+    bookmarkedFoods: [],
+    ingestionCal: null,
     current_nutrients: { calorie: 0, carbohydrate: 0, protein: 0, lipid: 0 }
   },
   getters: {
@@ -133,6 +133,9 @@ export default new Vuex.Store({
         state.ingestionCal[key] =  Math.round(state.ingestionCal[key])
       })
     },
+    clearIngestionCal(state) {
+      state.ingestionCal = null
+    }
   },
   actions: {
     changeDrawer({ commit }) {
@@ -156,8 +159,14 @@ export default new Vuex.Store({
         commit('setUser', null)
       }
     },
-    signUp({ commit }, user ) {
-      return axios.post('/users', user)
+    signUp(context, params ) {
+      if (context.getters.ingestionCal !== null) {
+        params.user["calorie"] = context.getters.ingestionCal["calorie"]
+        params.user["carbohydrate"] = context.getters.ingestionCal["carbohydrate"]
+        params.user["protein"] = context.getters.ingestionCal["protein"] 
+        params.user["lipid"] = context.getters.ingestionCal["lipid"]
+      } 
+      return axios.post('/signUp', params)
       .then(res => {
         router.push('/login')
       })
@@ -170,7 +179,16 @@ export default new Vuex.Store({
       .then(res => {
         localStorage.idToken = res.data.token
         axios.defaults.headers.common['Authorization'] = `Bearer ${localStorage.idToken}`
-        commit('setUser', res.data.user)
+        const loginUser = res.data.user
+        commit('setUser', loginUser)
+        if (loginUser.calorie) {
+          const ingestionCal = {}
+          ingestionCal["calorie"] = loginUser.calorie
+          ingestionCal["carbohydrate"] = loginUser.carbohydrate
+          ingestionCal["protein"] = loginUser.protein
+          ingestionCal["lipid"] = loginUser.lipid
+          commit('saveIngestionCal', ingestionCal)
+        }
         commit('setBookmarkedFoods', res.data.foods)
         router.push('/')
       })
@@ -181,6 +199,7 @@ export default new Vuex.Store({
     logout({ commit }) {
       localStorage.removeItem('idToken')
       commit('setUser', null)
+      commit('clearIngestionCal')
     },
     searchName({ commit }, name) {
       setTimeout(() => {

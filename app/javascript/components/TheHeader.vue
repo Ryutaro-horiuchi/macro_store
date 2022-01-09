@@ -3,6 +3,7 @@
     color="#D63D17"
     outlined
     dark
+    flat
     fixed
   >
     <v-app-bar-nav-icon @click="changeDrawer" />

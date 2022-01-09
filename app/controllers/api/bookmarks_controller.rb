@@ -1,7 +1,4 @@
 class Api::BookmarksController < ApplicationController
-  def index
-  end
-
   def create
     food = Food.find(params[:id])
     current_user.bookmark(food)
