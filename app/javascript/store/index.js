@@ -189,14 +189,14 @@ export default new Vuex.Store({
         context.dispatch('flashMessage', {
           message: 'ユーザー登録が完了しました',
           color: 'success',
-          status: 'true',
+          status: true,
         })
       })
       .catch(err => {
         context.dispatch('flashMessage', {
           message: '無効なメールアドレスです',
           color: 'orange',
-          status: 'true',
+          status: true,
         })
       })
     },
@@ -219,7 +219,7 @@ export default new Vuex.Store({
         context.dispatch('flashMessage', {
           message: 'ログインしました',
           color: 'success',
-          status: 'true',
+          status: true,
         })
         router.push('/')
       })
@@ -227,7 +227,7 @@ export default new Vuex.Store({
         context.dispatch('flashMessage', {
           message: 'ログインに失敗しました',
           color: 'orange',
-          status: 'true',
+          status: true,
         }) 
       })
     },
@@ -238,7 +238,7 @@ export default new Vuex.Store({
       context.dispatch('flashMessage', {
         message: 'ログアウトしました',
         color: 'success',
-        status: 'true',
+        status: true,
       })
     },
     searchName({ commit }, name) {
@@ -278,7 +278,7 @@ export default new Vuex.Store({
           context.dispatch('flashMessage', {
             message: 'ログインが必要です',
             color: 'blue',
-            status: 'true',
+            status: true,
           })
         router.push('/login') 
       }
@@ -306,7 +306,7 @@ export default new Vuex.Store({
       commit('setColor', color)
       commit('setStatus', status)
       setTimeout(() => {
-        commit('setStatus', false)
+        commit('setStatus', !status)
       }, 1500)
     },
     openDialog({ commit }, food_data) {
