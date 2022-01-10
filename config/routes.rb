@@ -2,6 +2,7 @@ Rails.application.routes.draw do
   namespace :api do
     post 'login', to: 'sessions#create'
     post 'signUp', to: 'users#create'
+    patch 'update', to: 'users#update'
     get 'users/me', to: 'users#me'
     post 'bookmarks/create'
     post 'bookmarks/destroy'

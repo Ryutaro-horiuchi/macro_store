@@ -1,5 +1,5 @@
 <template>
-  <v-container>
+  <v-container style="margin-top: 100px; margin-bottom: 150px;">
     <v-row
       align="center"
     >
@@ -15,7 +15,7 @@
       <v-card
         flat
         width="80%"
-        max-width="320"
+        max-width="500"
         color="transparent"
         class="mx-auto"
       >

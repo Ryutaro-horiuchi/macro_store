@@ -11,6 +11,14 @@ class Api::UsersController < ApplicationController
     end
   end
 
+  def update
+    if current_user.update!(update_params)
+      render json: current_user
+    else
+      render json: curretn_user.errors, status: :bad_request
+    end
+  end
+
   def me
     render json: { user: current_user, foods: current_user.bookmark_foods }
   end
@@ -19,5 +27,9 @@ class Api::UsersController < ApplicationController
 
   def user_params
     params.require(:user).permit(:name, :email, :password, :password_confirmation, :calorie, :carbohydrate, :protein, :lipid)
+  end
+
+  def update_params
+    params.require(:user).permit(:name, :email, :calorie, :carbohydrate, :protein, :lipid)
   end
 end

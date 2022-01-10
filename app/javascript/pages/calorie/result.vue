@@ -117,47 +117,110 @@
         </v-row>
       </v-container>
     </template>
+    <v-dialog
+      v-model="updateDialog"
+      width="600"
+      persistent
+      @click:outside="closeDialog"
+    >
+      <v-card
+        width="600"
+        height="200"
+      >
+        <v-container>
+          <v-card-text class="text-h6 text-md-h5">
+            今回の計算結果を保存しますか？
+          </v-card-text>
+          <v-row style="margin-top: 20px">
+            <v-col cols="6">
+              <v-row justify="center">
+                <v-btn
+                  color="#1c65ac"
+                  dark
+                  large
+                  elevation="3"
+                  @click="closeDialog"
+                >
+                  閉じる
+                </v-btn>
+              </v-row>
+            </v-col>
+            <v-col cols="6">
+              <v-row justify="center">
+                <v-btn
+                  color="#1c65ac"
+                  dark
+                  large
+                  elevation="3"
+                  @click="turnOnCalculationResultParams"
+                >
+                  保存する
+                </v-btn>
+              </v-row>
+            </v-col>
+          </v-row>
+        </v-container>
+      </v-card>
+    </v-dialog>
   </div>
 </template>
 
 <script>
-import { mapGetters } from "vuex";
+import { mapGetters, mapActions } from "vuex";
 import FoodNutrientSearchForm from "../food/components/FoodNutrientSearchForm.vue"
 
 export default {
   components: {
-    FoodNutrientSearchForm
+    FoodNutrientSearchForm,
   },
   data() {
     return {
       loading: false,
       nullValidation: false,
       errorMessage: null,
+      updateDialog: false,
       nutrients: {
         proteinValue: { minimum: null, maximum: null },
         carbohydrateValue: { minimum: null, maximum: null },
         lipidValue: { minimum: null, maximum: null },
       },
+      params: {},
     }
   },
   computed: {
-    ...mapGetters(["ingestionCal"]),
+    ...mapGetters(["ingestionCal", "user"]),
   },
   created() {
-    if (this.ingestionCal.protein) {
-      this.nutrients.proteinValue.minimum = this.ingestionCal.protein - 30
-      this.nutrients.proteinValue.maximum = this.ingestionCal.protein
-      this.nutrients.carbohydrateValue.minimum = this.ingestionCal.carbohydrate - 30
-      this.nutrients.carbohydrateValue.maximum = this.ingestionCal.carbohydrate
-      this.nutrients.lipidValue.minimum = this.ingestionCal.lipid - 10
-      this.nutrients.lipidValue.maximum = this.ingestionCal.lipid
-    }
+    this.turnOnValueForm()
+    this.checkDialog()
   },
   methods: {
-    toSearchPage() {
-      this.$router.push('/search')
+    ...mapActions(["update"]),
+    turnOnCalculationResultParams() {
+      Object.assign(this.params, this.ingestionCal)
+      this.update(this.params)
     },
-      checkNumericNull() {
+    checkDialog() {
+      if (this.user) {
+        setTimeout(() => {
+          this.updateDialog = true
+        }, 1500)
+      }
+    },
+    closeDialog() {
+      this.updateDialog = false
+    },
+    turnOnValueForm() {
+      if (this.ingestionCal.protein) {
+        this.nutrients.proteinValue.minimum = this.ingestionCal.protein - 30
+        this.nutrients.proteinValue.maximum = this.ingestionCal.protein
+        this.nutrients.carbohydrateValue.minimum = this.ingestionCal.carbohydrate - 30
+        this.nutrients.carbohydrateValue.maximum = this.ingestionCal.carbohydrate
+        this.nutrients.lipidValue.minimum = this.ingestionCal.lipid - 10
+        this.nutrients.lipidValue.maximum = this.ingestionCal.lipid
+      }
+    },
+    checkNumericNull() {
       let array = []
       Object.values(this.nutrients.proteinValue).forEach(function (value) {
         array.push(value)
