@@ -30,13 +30,13 @@
           </v-row>
         </v-container>
       </template>
-      <FoodNutrientSearchForm
-        :carbohydrate-minimum.sync="nutrients.carbohydrateValue.minimum"
-        :carbohydrate-maximum.sync="nutrients.carbohydrateValue.maximum"
-        :protein-minimum.sync="nutrients.proteinValue.minimum"
-        :protein-maximum.sync="nutrients.proteinValue.maximum"
-        :lipid-minimum.sync="nutrients.lipidValue.minimum"
-        :lipid-maximum.sync="nutrients.lipidValue.maximum"
+      <FoodNutrientSearchForm 
+        :carbohydrate-minimum.sync="nutrients.carbohydrateMinimum"
+        :carbohydrate-maximum.sync="nutrients.carbohydrateMaximum"
+        :protein-minimum.sync="nutrients.proteinMinimum"
+        :protein-maximum.sync="nutrients.proteinMaximum"
+        :lipid-minimum.sync="nutrients.lipidMinimum"
+        :lipid-maximum.sync="nutrients.lipidMaximum"
         @search-nutrient="searchNutrient"
       >
         <p class="text-body-2 text-md-body-1">
@@ -64,9 +64,12 @@ export default {
       nullValidation: false,
       params: { name: null },
       nutrients: {
-        proteinValue: { minimum: null, maximum: null },
-        carbohydrateValue: { minimum: null, maximum: null },
-        lipidValue: { minimum: null, maximum: null },
+        proteinMinimum: null,
+        proteinMaximum: null,
+        carbohydrateMinimum: null,
+        carbohydrateMaximum: null,
+        lipidMinimum: null,
+        lipidMaximum: null,
       },
     }
   },
@@ -74,17 +77,27 @@ export default {
     ...mapGetters(["ingestionCal"]),
   },
   created() {
-    if (this.ingestionCal.protein) {
-    this.nutrients.proteinValue.minimum = this.ingestionCal.protein - 30
-    this.nutrients.proteinValue.maximum = this.ingestionCal.protein
-    this.nutrients.carbohydrateValue.minimum = this.ingestionCal.carbohydrate - 30
-    this.nutrients.carbohydrateValue.maximum = this.ingestionCal.carbohydrate
-    this.nutrients.lipidValue.minimum　= this.ingestionCal.lipid - 10
-    this.nutrients.lipidValue.maximum　= this.ingestionCal.lipid
-    }
-
+    this.turnOnValueForm()
   },
   methods: {
+    turnOnValueForm() {
+      if (this.ingestionCal.protein) {
+        this.nutrients.proteinMinimum = this.ingestionCal.protein - 30
+        this.nutrients.proteinMaximum = this.ingestionCal.protein
+        this.nutrients.carbohydrateMinimum = this.ingestionCal.carbohydrate - 30
+        this.nutrients.carbohydrateMaximum = this.ingestionCal.carbohydrate
+        this.nutrients.lipidMinimum = this.ingestionCal.lipid - 10
+        this.nutrients.lipidMaximum = this.ingestionCal.lipid
+      this.checkNegative()
+      }
+    },
+    checkNegative() {
+      Object.keys(this.nutrients).forEach((key) => {
+        if (Math.sign(this.nutrients[key]) === -1) {
+          this.nutrients[key] = 0
+        }
+      })
+    },
     // 名前フォームのnullチェック。
     checkStringNull() {
       return this.params.name?  true : false
@@ -92,13 +105,7 @@ export default {
     // 栄養素フォームのnullチェック。全てnullだった場合falseを返す
     checkNumericNull() {
       let array = []
-      Object.values(this.nutrients.proteinValue).forEach(function (value) {
-        array.push(value)
-      })
-      Object.values(this.nutrients.carbohydrateValue).forEach(function (value) {
-        array.push(value)
-      })
-      Object.values(this.nutrients.lipidValue).forEach(function (value) {
+      Object.values(this.nutrients).forEach(function (value) {
         array.push(value)
       })
       array = array.filter(v => !!v)

@@ -33,7 +33,7 @@
     >
       <v-icon>mdi-magnify</v-icon>
     </router-link>
-    <router-link
+    <!-- <router-link
       to="/confirmation"
       class="button"
     >
@@ -49,7 +49,7 @@
           </v-icon>
         </v-badge>
       </v-btn>
-    </router-link>
+    </router-link> -->
     <template v-if="isAutheniticated">
       <v-btn
         icon
@@ -67,14 +67,14 @@
           <v-icon>mdi-login</v-icon>
         </v-btn>
       </router-link>
-      <router-link
+      <!-- <router-link
         style="text-decoration: none;"
         to="/signup"
       >
         <v-btn icon>
           <v-icon>mdi-account-plus</v-icon>
         </v-btn>
-      </router-link>
+      </router-link> -->
     </template>
   </v-app-bar>
 </template>
@@ -89,9 +89,9 @@ export default {
     }
   },
   computed: {
-    ...mapGetters(["selectFoods"]),
+    ...mapGetters(["selectFoods", "user"]),
     isAutheniticated() {
-      return this.$store.getters.user !== null;
+      return this.user !== null
     },
     selectedFoodNumber() {
       return this.selectFoods.length

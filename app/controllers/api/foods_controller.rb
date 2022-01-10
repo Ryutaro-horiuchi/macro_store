@@ -20,38 +20,30 @@ class Api::FoodsController < ApplicationController
   end
 
   def search_protein
-    if protein_params[:maximum].present?
-      Food.where(protein: protein_params[:minimum]..protein_params[:maximum])
+    if nutrient_params[:proteinMaximum].present?
+      Food.where(protein: nutrient_params[:proteinMinimum]..nutrient_params[:proteinMaximum])
     else
-      Food.where(protein: protein_params[:minimum]..)
+      Food.where(protein: nutrient_params[:proteinMinimum]..)
     end
   end
 
   def search_carbohydrate(foods)
-    if carbohydrate_params[:maximum].present?
-      foods.where(carbohydrate: carbohydrate_params[:minimum]..carbohydrate_params[:maximum])
+    if nutrient_params[:carbohydrateMaximum].present?
+      foods.where(carbohydrate: nutrient_params[:carbohydrateMinimum]..nutrient_params[:carbohydrateMaximum])
     else
-      foods.where(carbohydrate: carbohydrate_params[:minimum]..)
+      foods.where(carbohydrate: nutrient_params[:carbohydrateMinimum]..)
     end
   end
 
   def search_lipid(foods)
-    if lipid_params[:maximum].present?
-      foods.where(lipid: lipid_params[:minimum]..lipid_params[:maximum])
+    if nutrient_params[:lipidMaximum].present?
+      foods.where(lipid: nutrient_params[:lipidMinimum]..nutrient_params[:lipidMaximum])
     else
-      foods.where(lipid: lipid_params[:minimum]..)
+      foods.where(lipid: nutrient_params[:lipidMinimum]..)
     end
   end
 
-  def protein_params
-    params.require(:proteinValue).permit(:minimum, :maximum)
-  end
-
-  def carbohydrate_params
-    params.require(:carbohydrateValue).permit(:minimum, :maximum)
-  end
-
-  def lipid_params
-    params.require(:lipidValue).permit(:minimum, :maximum)
+  def nutrient_params
+    params.permit(:proteinMinimum, :proteinMaximum, :carbohydrateMinimum, :carbohydrateMaximum, :lipidMinimum, :lipidMaximum)
   end
 end
