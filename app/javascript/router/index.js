@@ -12,6 +12,7 @@ import confirmation from '../pages/food/confirmation.vue';
 import bookmarkFoods from '../pages/food/bookmarkFoods.vue';
 import myPage from '../pages/user/myPage/index.vue';
 import editPage from '../pages/user/myPage/edit.vue';
+import calculation from '../pages/user/calculation/index.vue'
 
 Vue.use(Router);
 
@@ -34,7 +35,8 @@ export default new Router({
            },
            {path: '/edit', component: editPage,
             meta: { requiredAuth: true },
-           }
+           },
+           {path: '/calculation', component: calculation},
   ],
   scrollBehavior(to, from, savedPosition) {
     if (savedPosition) {
