@@ -5,6 +5,7 @@
     label="メールアドレス"
     prepend-inner-icon="mdi-email"
     outlined
+    background-color="white"
   />
 </template>
 

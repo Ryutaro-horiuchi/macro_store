@@ -9,6 +9,7 @@
     :type="toggle.type"
     outlined
     autocomplete="on"
+    background-color="white"
     @click:append="show = !show"
   />
 </template>

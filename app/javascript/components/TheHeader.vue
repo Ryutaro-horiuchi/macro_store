@@ -98,8 +98,13 @@ export default {
     }
   },
   methods: {
-    ...mapActions(["changeDrawer", "logout"]),
-  },
+    ...mapActions(["changeDrawer"]),
+    logout() {
+      if (confirm('ログアウトしてもよろしいですか？')) {
+        this.$store.dispatch("logout")
+      }
+    },
+  }
 }
 </script>
 

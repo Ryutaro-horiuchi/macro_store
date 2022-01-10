@@ -178,16 +178,13 @@ export default new Vuex.Store({
     },
     signUp(context, params ) {
       if (context.getters.ingestionCal !== null) {
-        params.user["calorie"] = context.getters.ingestionCal["calorie"]
-        params.user["carbohydrate"] = context.getters.ingestionCal["carbohydrate"]
-        params.user["protein"] = context.getters.ingestionCal["protein"] 
-        params.user["lipid"] = context.getters.ingestionCal["lipid"]
+        Object.assign(params.user, context.getters.ingestionCal)
       } 
       return axios.post('/signUp', params)
       .then(res => {
         router.push('/login')
         context.dispatch('flashMessage', {
-          message: 'ユーザー登録が完了しました',
+          message: 'ユーザー登録が完了しました、ログインしてください',
           color: 'success',
           status: true,
         })
@@ -239,6 +236,26 @@ export default new Vuex.Store({
         message: 'ログアウトしました',
         color: 'success',
         status: true,
+      })
+    },
+    update(context, params) {
+      console.log(params)
+      axios.patch('/update', params)
+      .then(res => {
+        context.commit('setUser', res.data)
+        router.push('/mypage')
+        context.dispatch('flashMessage', {
+          message: 'ユーザー情報を更新しました',
+          color: 'success',
+          status: true,
+        })
+      })
+      .catch(err => {
+        context.dispatch('flashMessage', {
+          message: '無効なメールアドレスです',
+          color: 'orange',
+          status: true,
+        })
       })
     },
     searchName({ commit }, name) {

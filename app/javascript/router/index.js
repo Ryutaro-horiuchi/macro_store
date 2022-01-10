@@ -10,6 +10,8 @@ import search from '../pages/food/search.vue';
 import food from '../pages/food/index.vue'
 import confirmation from '../pages/food/confirmation.vue';
 import bookmarkFoods from '../pages/food/bookmarkFoods.vue';
+import myPage from '../pages/user/myPage/index.vue';
+import editPage from '../pages/user/myPage/edit.vue';
 
 Vue.use(Router);
 
@@ -25,6 +27,12 @@ export default new Router({
            {path: '/foods', component: food},
            {path: '/confirmation', component: confirmation},
            {path: '/bookmark', component: bookmarkFoods,
+            meta: { requiredAuth: true },
+           },
+           {path: '/mypage', component: myPage,
+            meta: { requiredAuth: true },
+           },
+           {path: '/edit', component: editPage,
             meta: { requiredAuth: true },
            }
   ],

@@ -7,11 +7,6 @@
       >
         <UserFormName :name.sync="params.user.name" />
         <UserFormEmail :email.sync="params.user.email" />
-        <UserFormPassword :password.sync="params.user.password" />
-        <UserFormPasswordConfirmation
-          :password_confirmation.sync="params.user.password_confirmation"
-          :password="params.user.password"
-        />
       </v-form>
       <v-row
         justify="center"
@@ -24,44 +19,48 @@
             color="#1c65ac"
             dark
             block
-            @click="signUp"
+            @click="update"
           >
             <!-- disabledはtrueの場合にボタンを無効にする。この時はvalidが有効ではない時がtrueであり、無効になる。 -->
-            <span>登録する</span>
+            <span>更新する</span>
           </v-btn>
         </v-col>
       </v-row>
     </template>
-  </UserForm> 
+  </UserForm>
 </template>
 
 <script>
 import UserForm from "../components/UserForm.vue"
 import UserFormName from "../components/UserFormName.vue"
 import UserFormEmail from "../components/UserFormEmail.vue"
-import UserFormPassword from "../components/UserFormPassword.vue"
-import UserFormPasswordConfirmation from "../components/UserFormPasswordConfirmation.vue"
+import { mapGetters } from "vuex"
 
 export default {
   components: {
     UserForm,
     UserFormName,
-    UserFormEmail,
-    UserFormPassword,
-    UserFormPasswordConfirmation
+    UserFormEmail
   },
   data() {
     return {
-      title: "ユーザー登録",
+      title: "アカウント編集",
       isValid: false,
       loading: false,
-      params: { user: { name: '', email: '', password: '', password_confirmation: '' } },
+      params: { user: { name: '', email: ''} }
     }
   },
+  computed: {
+    ...mapGetters(["user"])
+  },
+  created() {
+    this.params.user.name = this.user.name
+    this.params.user.email = this.user.email
+  },
   methods: {
-    signUp() {
+    update() {
       this.loading = true
-      this.$store.dispatch('signUp', this.params)
+      this.$store.dispatch('update', this.params)
       setTimeout(() => {
         this.formReset()
         this.loading = false

@@ -6,6 +6,7 @@
     label="ユーザー名"
     prepend-inner-icon="mdi-account"
     outlined
+    background-color="white"
   />
 </template>
 <script>

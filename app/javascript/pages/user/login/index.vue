@@ -1,18 +1,21 @@
 <template>
-  <div style="margin-top: 100px; margin-bottom: 150px;">  
-    <UserForm :title="title">
-      <template #form-card-content>
-        <!-- 以下form-card-contentととして、LoginFormコンポーネントに渡している -->
-        <v-form
-          ref="form"
-          v-model="isValid"
+  <UserForm :title="title">
+    <template #form-card-content>
+      <!-- 以下form-card-contentととして、LoginFormコンポーネントに渡している -->
+      <v-form
+        ref="form"
+        v-model="isValid"
+      >
+        <UserFormEmail :email.sync="params.email" />
+        <UserFormPassword
+          no-validation
+          :password.sync="params.password"
+        />
+        <v-row
+          justify="center"
+          style="margin-top: 80px"
         >
-          <UserFormEmail :email.sync="params.email" />
-          <UserFormPassword
-            no-validation
-            :password.sync="params.password"
-          />
-          <v-card-text class="px-0">
+          <v-col cols="6">
             <v-btn
               :disabled="!isValid || loading"
               :loading="loading"
@@ -23,11 +26,13 @@
             >
               <span>ログインする</span>
             </v-btn> 
-          </v-card-text>
-        </v-form>
-      </template>
-    </UserForm>
-  </div>
+          </v-col>
+        </v-row>
+        <!-- <v-card-text class="px-0"> -->
+        <!-- </v-card-text>  -->
+      </v-form>
+    </template>
+  </UserForm>
 </template>
 
 <script>
