@@ -12,8 +12,6 @@ export default new Vuex.Store({
       key: 'MacroStore',
       paths: [
         'foods',
-        'selectFoods',
-        'current_nutrients',
         'ingestionCal'
       ],
       storage: window.sessionStorage
@@ -30,10 +28,8 @@ export default new Vuex.Store({
     user: null,
     foods: null,
     food: null,
-    selectFoods: [],
     bookmarkedFoods: [],
     ingestionCal: null,
-    current_nutrients: { calorie: 0, carbohydrate: 0, protein: 0, lipid: 0 }
   },
   getters: {
     flashMessage: state => state.flashMessage,
@@ -47,8 +43,6 @@ export default new Vuex.Store({
     foods: state => state.foods,
     food: state => state.food,
     ingestionCal: state => state.ingestionCal,
-    current_nutrients: state => state.current_nutrients,
-    selectFoods: state => state.selectFoods
   },
   mutations: {
     changeDrawer(state) {
@@ -85,54 +79,6 @@ export default new Vuex.Store({
     closeEndDialog(state) {
       state.endDialog = false
     },
-    roundOff(state) {
-      // キーの配列を取得し、それらをforEachで要素ごとに四捨五入を実行する
-      Object.keys(state.current_nutrients).forEach(function (key) {
-        state.current_nutrients[key] =  Math.round(state.current_nutrients[key] * 100) / 100;
-      })
-    },
-    addNutrients(state, food) {
-      state.current_nutrients["calorie"] += food.calorie
-      state.current_nutrients["carbohydrate"] += food.carbohydrate
-      state.current_nutrients["protein"] += food.protein
-      state.current_nutrients["lipid"] += food.lipid
-      // キーの配列を取得し、それらをforEachで要素ごとに四捨五入を実行する
-    },
-    removeNutrients(state, food) {
-     state.current_nutrients["calorie"] -= food.calorie * food.quantity
-      state.current_nutrients["carbohydrate"] -= food.carbohydrate * food.quantity
-      state.current_nutrients["protein"] -= food.protein * food.quantity
-      state.current_nutrients["lipid"] -= food.lipid * food.quantity
-    },
-    multiplyNutrient(state, multiplyData) {
-      // multiplyData[0]には前回の数量との差の値が入っている。[1]はfoodのオブジェクト。[2]は新しく指定した数量の値
-      state.current_nutrients["calorie"] += multiplyData[1].calorie * multiplyData[0]
-      state.current_nutrients["carbohydrate"] += multiplyData[1].carbohydrate * multiplyData[0]
-      state.current_nutrients["protein"] += multiplyData[1].protein * multiplyData[0]
-      state.current_nutrients["lipid"] += multiplyData[1].lipid * multiplyData[0]
-      state.selectFoods.find((food) => {
-        if (food.id === multiplyData[1].id) {
-          food.quantity = multiplyData[2]
-        }
-      })
-    },
-    selectFood(state, food) {
-      food["quantity"] = 1
-      state.selectFoods.push(food)
-    },
-    deleteFood(state, deleteFood) {
-      state.selectFoods = state.selectFoods.filter((food) => {
-        return food.id !== deleteFood.id
-      })
-    },
-    removeAllSelectedFood(state) {
-      state.selectFoods = []
-      Object.keys(state.current_nutrients).forEach(function (key) {
-        state.current_nutrients[key] = 0
-      })
-      state.foods = null
-      localStorage.removeItem('MacroStore')
-    },
     saveIngestionCal(state, calorie) {
       state.ingestionCal = calorie
       Object.keys(state.ingestionCal).forEach(function (key) {
@@ -151,8 +97,6 @@ export default new Vuex.Store({
     setStatus(state, status) {
       state.flashStatus = status
     }
-
-    
   },
   actions: {
     changeDrawer({ commit }) {
@@ -337,28 +281,6 @@ export default new Vuex.Store({
     },
     closeEndDialog({ commit }) {
       commit('closeEndDialog')
-    },
-    async addNutrients({ commit }, food) {
-      await commit('addNutrients', food)
-      commit('roundOff')
-      commit('closeDialog')
-    },
-    async removeNutrients({ commit }, food) {
-      await commit('removeNutrients', food)
-      commit('roundOff')
-    },
-    async multiplyNutrient({ commit }, multiplyData) {
-      await commit('multiplyNutrient', multiplyData)
-      commit('roundOff')
-    },
-    selectFood({ commit }, food) {
-      commit('selectFood', food)
-    },
-    deleteFood({ commit }, deleteFood) {
-      commit('deleteFood', deleteFood)
-    },
-    removeAllSelectedFood({ commit }) {
-      commit('removeAllSelectedFood')
     },
     saveIngestionCal({ commit }, calorie) {
       commit('saveIngestionCal', calorie)

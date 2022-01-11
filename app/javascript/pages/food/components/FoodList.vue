@@ -42,6 +42,28 @@
                       width="32"
                     />
                   </v-col>
+                  <template v-if="!isBookmarked(food)">
+                    <v-col cols="2">
+                      <v-icon
+                        color="blue"
+                        large
+                        @click.stop="makeBookmark(food)"
+                      >
+                        mdi-star-outline
+                      </v-icon>
+                    </v-col>
+                  </template>
+                  <template v-if="isBookmarked(food)">
+                    <v-col cols="2">
+                      <v-icon
+                        color="blue"
+                        large
+                        @click.stop="removeBookmark(food)"
+                      >
+                        mdi-star
+                      </v-icon>
+                    </v-col>
+                  </template> 
                 </v-row>
               </v-col>
             </v-row>
@@ -116,10 +138,11 @@ export default {
     }
   },
   computed: {
-    ...mapGetters(["foodDialog", "current_nutrients"]),
+    ...mapGetters(["foodDialog", "current_nutrients", "bookmarkedFoods"]),
     hasNext() {
       return this.initialized 
     },
+
   },
   mounted() {
     // 現在表示中のページ番号をURLに設定する為に、スクロール時にイベントを発火
@@ -146,7 +169,10 @@ export default {
     }
   },
   methods: {
-    ...mapActions(["openDialog", "closeDialog"]),
+    ...mapActions(["openDialog", "closeDialog", "makeBookmark", "removeBookmark"]),
+    isBookmarked(food) {
+      return this.bookmarkedFoods.some(v => v.id === food.id)
+    },
     infiniteHandler($state) {
       // 商品がそもそもなければ、completeでno-resultを呼ぶ
       if (!this.foods.length) {
