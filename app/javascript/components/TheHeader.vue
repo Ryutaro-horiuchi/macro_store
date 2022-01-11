@@ -33,23 +33,6 @@
     >
       <v-icon>mdi-magnify</v-icon>
     </router-link>
-    <!-- <router-link
-      to="/confirmation"
-      class="button"
-    >
-      <v-btn icon>
-        <v-badge
-          :content="selectedFoodNumber"
-          :value="selectedFoodNumber"
-          color="#1c65ac"
-          overlap
-        >          
-          <v-icon>
-            mdi-cart
-          </v-icon>
-        </v-badge>
-      </v-btn>
-    </router-link> -->
     <template v-if="isAutheniticated">
       <v-btn
         icon
@@ -89,12 +72,9 @@ export default {
     }
   },
   computed: {
-    ...mapGetters(["selectFoods", "user"]),
+    ...mapGetters(["user"]),
     isAutheniticated() {
       return this.user !== null
-    },
-    selectedFoodNumber() {
-      return this.selectFoods.length
     }
   },
   methods: {

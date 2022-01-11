@@ -11,7 +11,7 @@
     <v-row>
       <v-col
         cols="2"
-        offset="7"
+        offset="9"
       >
         <v-img
           :src="sevenImg"
@@ -19,28 +19,6 @@
           width="32"
         />
       </v-col>
-      <template v-if="!isBookmarked">
-        <v-col cols="2">
-          <v-icon
-            color="blue"
-            large
-            @click.stop="makeBookmark(food)"
-          >
-            mdi-star-outline
-          </v-icon>
-        </v-col>
-      </template>
-      <template v-if="isBookmarked">
-        <v-col cols="2">
-          <v-icon
-            color="blue"
-            large
-            @click.stop="removeBookmark(food)"
-          >
-            mdi-star
-          </v-icon>
-        </v-col>
-      </template> 
     </v-row>
     <v-row justify="center">
       <v-col cols="10">
@@ -66,7 +44,6 @@
           <v-btn
             color="#1c65ac"
             dark
-            x-large
             elevation="3"
             @click="closeDialog"
           >
@@ -74,9 +51,9 @@
           </v-btn>
         </v-row>
       </v-col>
-      <template v-if="!isSelected">
+      <template v-if="!isBookmarked">
         <v-col
-          cols="6"
+          cols="5"
         >
           <v-row
             justify="center"
@@ -85,15 +62,33 @@
             <v-btn
               color="#1c65ac"
               dark
-              x-large
               elevation="3"
-              @click="addNutrients(); selectFood(food)"
+              @click="makeBookmark(food)"
             >
-              選択する<v-icon>mdi-cart</v-icon>
+              お気に入りに追加
             </v-btn>        
           </v-row>
         </v-col>
       </template>
+      <template v-if="isBookmarked">
+        <v-col
+          cols="5"
+        >
+          <v-row
+            justify="center"
+            class="mb-5"
+          >
+            <v-btn
+              color="#1c65ac"
+              dark
+              elevation="3"
+              @click="removeBookmark(food)"
+            >
+              お気に入りから削除
+            </v-btn>        
+          </v-row>
+        </v-col>
+      </template> 
     </v-row>
   </v-card>
 </template>
@@ -113,19 +108,13 @@ export default {
     }
   },
   computed: {
-    ...mapGetters(["foodDialog", "food", "selectFoods", "bookmarkedFoods"]),
-    isSelected() {
-      return this.selectFoods.some(food => food.id === this.food.id)
-    },
+    ...mapGetters(["food", "foodDialog", "bookmarkedFoods"]),
     isBookmarked() {
       return this.bookmarkedFoods.some(food => food.id === this.food.id)
     }
   },
   methods: {
-    ...mapActions(["closeDialog", "selectFood", "makeBookmark", "removeBookmark"]),
-    addNutrients() {
-      this.$store.dispatch("addNutrients", this.food)
-    },
+    ...mapActions(["closeDialog", "makeBookmark", "removeBookmark"]),
   }
 }
 </script>

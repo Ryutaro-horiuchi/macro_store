@@ -4,10 +4,10 @@
   >
     <template #message>
       <div class="text-center text-h6 text-md-h5 my-10">
-        気になる食品をタップし、<strong>「選択する」</strong>を押してください
+        <strong>{{ foods.length }}件ヒットしました</strong><br>
       </div>
-      <div class="text-right text-body-2 text-md-body-1">
-        <strong>{{ foods.length }}件ヒットしました</strong>
+      <div class="text-left text-body-2 text-md-body-1">
+        件数が多い場合は、数値を絞り込んで再度試してみましょう
       </div>
     </template>
     <template #noData>
