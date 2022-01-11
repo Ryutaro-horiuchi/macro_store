@@ -4,6 +4,15 @@
     <%= display_meta_tags(default_meta_tags) %>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
+    <% if Rails.env.production? %>
+      <script async src="https://www.googletagmanager.com/gtag/js?id=G-6J7EW3KY15"></script>
+      <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-6J7EW3KY15');
+      </script>
+    <% end %>
     <meta name="viewport" content="width=device-width">
     <link href="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/@mdi/font@5.x/css/materialdesignicons.min.css" rel="stylesheet">
@@ -11,7 +20,6 @@
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
-
   <body>
     <%= yield %>
   </body>

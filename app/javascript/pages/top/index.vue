@@ -140,6 +140,9 @@ export default {
       swipeImg: require("../../../assets/images/undraw_swipe_options_2e4v (2).png"),
       logoImg: require("../../../assets/images/MacroStore-logo.png"),
     }
+  },
+  created() {
+    console.log(process.env.NODE_ENV)
   }
 }
 

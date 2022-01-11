@@ -11,7 +11,7 @@ import food from '../pages/food/index.vue'
 import bookmarkFoods from '../pages/food/bookmarkFoods.vue';
 import myPage from '../pages/user/myPage/index.vue';
 import editPage from '../pages/user/myPage/edit.vue';
-import calculation from '../pages/user/calculation/index.vue'
+import calculation from '../pages/user/calculation/index.vue';
 
 Vue.use(Router);
 

@@ -16,6 +16,7 @@
     "turbolinks": "^5.2.0",
     "vue": "^2.6.11",
     "vue-chartjs": "3.4.0",
+    "vue-gtag": "^1.16.1",
     "vue-infinite-loading": "^2.4.5",
     "vue-loader": "^15.8.3",
     "vue-loaders": "^4.1.4",
