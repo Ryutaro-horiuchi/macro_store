@@ -21,27 +21,28 @@
         >
           <v-list-item
             class="my-8"
-          >
-            <v-list-item-icon>
+          > -->
+            <!-- <v-list-item-icon>
               <v-icon>mdi-login</v-icon>
             </v-list-item-icon>
             <v-list-item-title>ログイン</v-list-item-title>
           </v-list-item>
-        </router-link>
-        <router-link
-          to="/signup"
-          class="button"
-        >
-          <v-list-item
-            class="my-8"
+        </router-link> -->
+        <template v-if="!isAutheniticated">
+          <router-link
+            to="/signup"
+            class="button"
           >
-            <v-list-item-icon>
-              <v-icon>mdi-account-plus</v-icon>
-            </v-list-item-icon>
-            <v-list-item-title>新規会員登録</v-list-item-title>
-          </v-list-item>
-        </router-link>
-        <v-divider /> -->
+            <v-list-item
+              class="my-8"
+            >
+              <v-list-item-icon>
+                <v-icon>mdi-account-plus</v-icon>
+              </v-list-item-icon>
+              <v-list-item-title>新規会員登録</v-list-item-title>
+            </v-list-item>
+          </router-link>
+        </template>
         <router-link
           to="/"
           class="button"
