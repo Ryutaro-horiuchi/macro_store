@@ -12,9 +12,15 @@ import axios from '../plugins/axios'
 import router from '../router'
 import store from '../store'
 import VueLoaders from 'vue-loaders';
+import VueGtag from "vue-gtag";
 import 'vue-loaders/dist/vue-loaders.css';
 
 Vue.use(VueLoaders)
+if (process.env.NODE_ENV === "production") {
+  Vue.use(VueGtag, {
+    config: 'G-6J7EW3KY15'
+  }, router);
+}
 Vue.prototype.$axios = axios
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -42,3 +48,8 @@ router.beforeEach((to, from, next) => {
     }
   })
 })
+if (process.env.NODE_ENV === "production") {
+  router.afterEach((to, from) => {
+    gtag('set', 'page_path', to.path);
+  })
+}
