@@ -1,6 +1,9 @@
 <template>
   <v-container class="mt-14">
-    <v-form v-model="isValid">
+    <v-form 
+      ref="form"
+      v-model="isValid"
+    >
       <v-row class="text-left">
         <v-col
           cols="10"
@@ -20,10 +23,12 @@
               <v-radio
                 label="男性"
                 value="male"
+                id="male"
               />
               <v-radio
                 label="女性"
                 value="female"
+                id="female"
               />
             </v-radio-group>
           </v-row>
@@ -89,6 +94,7 @@
                   background-color="white"
                   suffix="kg"
                   :rules="weightRules"
+                  id="weight"
                 />
               </v-form>
             </v-col>

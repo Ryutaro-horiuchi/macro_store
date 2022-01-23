@@ -6,7 +6,7 @@
     flat
     fixed
   >
-    <v-app-bar-nav-icon @click="changeDrawer" />
+    <v-app-bar-nav-icon id="nav" @click="changeDrawer" />
     <v-toolbar-title>
       <router-link
         to="/"
@@ -37,6 +37,7 @@
       <v-btn
         icon
         @click="logout"
+        id="logout"
       >
         <v-icon>mdi-logout</v-icon>
       </v-btn>
@@ -46,18 +47,13 @@
         style="text-decoration: none;"
         to="/login"
       >
-        <v-btn icon>
+        <v-btn 
+           icon
+           id="login"
+           >
           <v-icon>mdi-login</v-icon>
         </v-btn>
       </router-link>
-      <!-- <router-link
-        style="text-decoration: none;"
-        to="/signup"
-      >
-        <v-btn icon>
-          <v-icon>mdi-account-plus</v-icon>
-        </v-btn>
-      </router-link> -->
     </template>
   </v-app-bar>
 </template>

@@ -11,7 +11,7 @@
           no-validation
           :password.sync="params.password"
         />
-        <p class="text-right" style="color: #616161">会員登録は<u style="cursor: pointer;" @click="toSignUp">こちら</u>から</p>
+        <p class="text-right" style="color: #616161">会員登録は<a href="/signup" style="cursor: pointer;">こちら</a>から</p>
         <v-row
           justify="center"
           style="margin-top: 80px"
@@ -63,9 +63,6 @@ export default {
       setTimeout(() => {
         this.loading = false
       }, 1500)
-    },
-    toSignUp() {
-      this.$router.push('/signup')
     }
   }
 }

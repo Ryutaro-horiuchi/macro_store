@@ -4,7 +4,7 @@ class Scraping
   def self.seven_urls
     agent = Mechanize.new
     links = []
-    next_url = 'products/a/cat/010010010000000/'
+    next_url = 'products/a/cat/030010010000000/'
 
     # 商品一覧から商品詳細のリンクを取得し、linksに格納する
     loop do

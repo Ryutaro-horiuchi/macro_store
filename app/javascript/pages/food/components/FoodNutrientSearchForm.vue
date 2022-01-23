@@ -24,6 +24,7 @@
                   background-color="white"
                   placeholder="0"
                   outlined
+                  id="proteinMin"
                   :rules="rules"
                 />
               </v-col>
@@ -39,6 +40,7 @@
                   background-color="white"      
                   placeholder="上限なし"
                   outlined
+                  id="proteinMax"
                   :rules="rules"
                   class="my-6"
                 />
@@ -51,6 +53,7 @@
                   background-color="white"
                   placeholder="0"
                   outlined
+                  id="carboMin"
                   :rules="rules"
                 />
               </v-col>
@@ -66,6 +69,7 @@
                   background-color="white"
                   placeholder="上限なし"
                   outlined
+                  id="carboMax"
                   :rules="rules"
                   class="my-6"
                 />
@@ -78,6 +82,7 @@
                   background-color="white"
                   placeholder="0"
                   outlined
+                  id="lipidMin"
                   :rules="rules"
                 />
               </v-col>
@@ -93,6 +98,7 @@
                   background-color="white"
                   placeholder="上限なし"
                   outlined
+                  id="lipidMax"
                   :rules="rules"
                   class="mt-6"
                 />

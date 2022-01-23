@@ -41,9 +41,9 @@ group :development, :test do
   gem 'rubocop', '~> 1.20', require: false
   gem 'rubocop-rails'
   gem 'rails_best_practices'
-  gem 'capybara'
   gem 'factory_bot_rails'
   gem 'pry-byebug'
+  gem 'rspec-rails', '~> 5.0.0'
 end
 
 group :development do
@@ -55,7 +55,11 @@ group :development do
   # gem 'spring-watcher-listen', '~> 2.0.0'
   gem 'better_errors'
   gem 'binding_of_caller'
-  gem 'rspec-rails', '~> 5.0.0'
+end
+
+group :test do
+  gem 'capybara'
+  gem 'webdrivers'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem

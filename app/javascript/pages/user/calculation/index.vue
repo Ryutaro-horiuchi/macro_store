@@ -1,14 +1,14 @@
 <template>
   <div style="margin-top: 100px; margin-bottom: 150px;">
-    <calculation />
+    <CalCalculation />
   </div>
 </template>
 
 <script>
-import calculation from "../../top/components/CalCalculation.vue"
+import CalCalculation from "../../top/components/CalCalculation.vue"
 export default {
   components: {
-    calculation
+    CalCalculation
   }
 }
 </script>

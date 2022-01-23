@@ -10,24 +10,9 @@
       nav
       dense
     >
-      <!-- v-model="group" -->
-
       <v-list-item-group 
         active-class="deep-purple--text text--accent-4"
       >
-        <!-- <router-link
-          to="/login"
-          class="button"
-        >
-          <v-list-item
-            class="my-8"
-          > -->
-            <!-- <v-list-item-icon>
-              <v-icon>mdi-login</v-icon>
-            </v-list-item-icon>
-            <v-list-item-title>ログイン</v-list-item-title>
-          </v-list-item>
-        </router-link> -->
         <template v-if="!isAutheniticated">
           <router-link
             to="/signup"
@@ -58,6 +43,7 @@
         </router-link>
         <router-link
           to="/mypage"
+          id="mypage"
           class="button"
         >
           <v-list-item class="my-8">
@@ -69,20 +55,20 @@
         </router-link>
         <router-link
           to="/bookmark"
+          id="bookmark"
           class="button"
         >
           <v-list-item class="my-8">
             <v-list-item-icon>
               <v-icon>mdi-food-drumstick</v-icon>
             </v-list-item-icon>
-            <v-list-item-title>
-              お気に入り食品
-            </v-list-item-title>
+            <v-list-item-title>お気に入り食品</v-list-item-title>
           </v-list-item>
         </router-link>
         <router-link
           to="/calculation"
           class="button"
+          id="calculation"
         >
           <v-list-item class="my-8">
             <v-list-item-icon>
