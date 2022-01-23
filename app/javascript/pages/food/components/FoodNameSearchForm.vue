@@ -21,8 +21,8 @@
             placeholder="名前検索"
           />
           <v-icon 
-            class="ml-3"
             id="magnify"
+            class="ml-3"
             color="#D63D17"
             style="cursor: pointer"
             large

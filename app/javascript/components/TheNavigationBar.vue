@@ -42,8 +42,8 @@
           </v-list-item>
         </router-link>
         <router-link
-          to="/mypage"
           id="mypage"
+          to="/mypage"
           class="button"
         >
           <v-list-item class="my-8">
@@ -54,8 +54,8 @@
           </v-list-item>
         </router-link>
         <router-link
-          to="/bookmark"
           id="bookmark"
+          to="/bookmark"
           class="button"
         >
           <v-list-item class="my-8">
@@ -66,9 +66,9 @@
           </v-list-item>
         </router-link>
         <router-link
+          id="calculation"
           to="/calculation"
           class="button"
-          id="calculation"
         >
           <v-list-item class="my-8">
             <v-list-item-icon>

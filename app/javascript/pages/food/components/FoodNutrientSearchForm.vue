@@ -19,12 +19,12 @@
               <v-col cols="5">
                 <label>たんぱく質</label>
                 <v-text-field 
+                  id="proteinMin"
                   v-model.number="setProteinMinimum"
                   dense
                   background-color="white"
                   placeholder="0"
                   outlined
-                  id="proteinMin"
                   :rules="rules"
                 />
               </v-col>
@@ -35,12 +35,12 @@
                 cols="5"
               >
                 <v-text-field
+                  id="proteinMax"
                   v-model.number="setProteinMaximum"
-                  dense
-                  background-color="white"      
+                  dense      
+                  background-color="white"
                   placeholder="上限なし"
                   outlined
-                  id="proteinMax"
                   :rules="rules"
                   class="my-6"
                 />
@@ -48,12 +48,12 @@
               <v-col cols="5">
                 <label>炭水化物</label>
                 <v-text-field 
+                  id="carboMin"
                   v-model.number="setCarbohydrateMinimum"
                   dense
                   background-color="white"
                   placeholder="0"
                   outlined
-                  id="carboMin"
                   :rules="rules"
                 />
               </v-col>
@@ -64,12 +64,12 @@
                 cols="5"
               >
                 <v-text-field
+                  id="carboMax"
                   v-model.number="setCarbohydrateMaximum"
                   dense
                   background-color="white"
                   placeholder="上限なし"
                   outlined
-                  id="carboMax"
                   :rules="rules"
                   class="my-6"
                 />
@@ -77,12 +77,12 @@
               <v-col cols="5">
                 <label>脂質</label>
                 <v-text-field 
+                  id="lipidMin"
                   v-model.number="setLipidMinimum"
                   dense
                   background-color="white"
                   placeholder="0"
                   outlined
-                  id="lipidMin"
                   :rules="rules"
                 />
               </v-col>
@@ -93,12 +93,12 @@
                 cols="5"
               >
                 <v-text-field
+                  id="lipidMax"
                   v-model.number="setLipidMaximum"
                   dense
                   background-color="white"
                   placeholder="上限なし"
                   outlined
-                  id="lipidMax"
                   :rules="rules"
                   class="mt-6"
                 />

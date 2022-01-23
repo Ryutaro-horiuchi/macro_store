@@ -9,7 +9,7 @@
       <TheHeader />
       <TheFlashMessage />
       <router-view />
-      <TheNavigationBar/>
+      <TheNavigationBar />
       <TheFooter />
     </v-card>
   </v-app>

@@ -11,7 +11,15 @@
           no-validation
           :password.sync="params.password"
         />
-        <p class="text-right" style="color: #616161">会員登録は<a href="/signup" style="cursor: pointer;">こちら</a>から</p>
+        <p
+          class="text-right"
+          style="color: #616161"
+        >
+          会員登録は<a
+            href="/signup"
+            style="cursor: pointer;"
+          >こちら</a>から
+        </p>
         <v-row
           justify="center"
           style="margin-top: 80px"

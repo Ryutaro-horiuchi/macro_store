@@ -6,7 +6,10 @@
     flat
     fixed
   >
-    <v-app-bar-nav-icon id="nav" @click="changeDrawer" />
+    <v-app-bar-nav-icon
+      id="nav"
+      @click="changeDrawer"
+    />
     <v-toolbar-title>
       <router-link
         to="/"
@@ -35,9 +38,9 @@
     </router-link>
     <template v-if="isAutheniticated">
       <v-btn
+        id="logout"
         icon
         @click="logout"
-        id="logout"
       >
         <v-icon>mdi-logout</v-icon>
       </v-btn>
@@ -48,9 +51,9 @@
         to="/login"
       >
         <v-btn 
-           icon
-           id="login"
-           >
+          id="login"
+          icon
+        >
           <v-icon>mdi-login</v-icon>
         </v-btn>
       </router-link>

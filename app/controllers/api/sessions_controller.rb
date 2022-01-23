@@ -5,7 +5,7 @@ class Api::SessionsController < ApplicationController
       token = create_token(user.id)
       render json: { token: token, user: user, foods: user.bookmark_foods }
     else
-      render status: 404, json: { status: :bad_request }
+      render status: :not_found, json: { status: :bad_request }
     end
   end
 end
