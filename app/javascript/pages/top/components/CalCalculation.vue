@@ -21,14 +21,14 @@
               :rules="selectRules"
             >
               <v-radio
+                id="male"
                 label="男性"
                 value="male"
-                id="male"
               />
               <v-radio
+                id="female"
                 label="女性"
                 value="female"
-                id="female"
               />
             </v-radio-group>
           </v-row>
@@ -89,12 +89,12 @@
             <v-col cols="6">
               <v-form>
                 <v-text-field
+                  id="weight"
                   v-model="weight"
                   outlined
                   background-color="white"
                   suffix="kg"
                   :rules="weightRules"
-                  id="weight"
                 />
               </v-form>
             </v-col>

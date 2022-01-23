@@ -16,10 +16,10 @@
           md="6"
         >
           <v-card
+            id="food_card"
             class="my-5"
             outlined
             @click="openDialog(food)"
-            id="food_card"
           > 
             <v-row>
               <v-col cols="6">
@@ -46,8 +46,8 @@
                   <template v-if="!isBookmarked(food)">
                     <v-col cols="2">
                       <v-icon
-                        color="blue"
                         id="star"
+                        color="blue"
                         large
                         @click.stop="makeBookmark(food)"
                       >
@@ -58,8 +58,8 @@
                   <template v-if="isBookmarked(food)">
                     <v-col cols="2">
                       <v-icon
-                        color="blue"
                         id="star"
+                        color="blue"
                         large
                         @click.stop="removeBookmark(food)"
                       >
