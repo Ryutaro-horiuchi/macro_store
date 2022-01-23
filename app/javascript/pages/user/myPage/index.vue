@@ -19,7 +19,7 @@
             </th>
           </tr>
         </thead>
-        <tbody>
+        <tbody id="nutrient">
           <tr
             v-for="nutrient in nutrients"
             :key="nutrient.name"

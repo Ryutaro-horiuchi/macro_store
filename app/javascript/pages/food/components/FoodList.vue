@@ -19,6 +19,7 @@
             class="my-5"
             outlined
             @click="openDialog(food)"
+            id="food_card"
           > 
             <v-row>
               <v-col cols="6">
@@ -46,6 +47,7 @@
                     <v-col cols="2">
                       <v-icon
                         color="blue"
+                        id="star"
                         large
                         @click.stop="makeBookmark(food)"
                       >
@@ -57,6 +59,7 @@
                     <v-col cols="2">
                       <v-icon
                         color="blue"
+                        id="star"
                         large
                         @click.stop="removeBookmark(food)"
                       >

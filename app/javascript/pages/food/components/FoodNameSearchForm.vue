@@ -22,6 +22,7 @@
           />
           <v-icon 
             class="ml-3"
+            id="magnify"
             color="#D63D17"
             style="cursor: pointer"
             large

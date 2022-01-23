@@ -215,16 +215,17 @@ export default new Vuex.Store({
       }, 1000);
     },
     searchNutrient({ commit }, value) {
+      console.log(value)
       setTimeout(() => {
     // 最小値がnullであれば、0を代入する。リファクタリングする
         if (value.carbohydrateMinimum === null) {
-          value.carbohydrateValue.minimum = 0
+          value.carbohydrateValueMinimum = 0
         }
         if (value.proteinMinimum === null) {
-          value.proteinValue.minimum = 0
+          value.proteinValueMinimum = 0
         }
         if (value.lipidMinimum === null) {
-          value.lipidValue.minimum = 0
+          value.lipidValueMinimum = 0
         }
         return axios.post('/search/nutrient', value)
         .then(res => {
