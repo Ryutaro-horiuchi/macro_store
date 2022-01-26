@@ -1,12 +1,12 @@
 <template>
-  <div style="margin-top: 100px; margin-bottom: 100px;">
+  <div style="margin-top: 100px; margin-bottom: 100px">
     <template v-if="loading">
       <v-row
         justify="center"
         class="loader"
       >
         <vue-loaders-line-spin-fade-loader
-          color="#D63D17" 
+          color="#D63D17"
           scale="2"
         />
       </v-row>
@@ -82,7 +82,7 @@
           >
             <div
               class="text-color text-center text-h6 text-md-h4"
-              style="margin-top: 100px; margin-bottom: 30px;"
+              style="margin-top: 100px; margin-bottom: 30px"
             >
               数値を元に検索してみましょう
             </div>
@@ -93,7 +93,7 @@
         </v-row>
         <v-row
           justify="center"
-          style="margin-bottom: 150px;"
+          style="margin-bottom: 150px"
         >
           <template v-if="nullValidation">
             <v-container class="mt-5">
@@ -105,7 +105,7 @@
               </v-row>
             </v-container>
           </template>
-          <FoodNutrientSearchForm 
+          <FoodNutrientSearchForm
             :carbohydrate-minimum.sync="nutrients.carbohydrateMinimum"
             :carbohydrate-maximum.sync="nutrients.carbohydrateMaximum"
             :protein-minimum.sync="nutrients.proteinMinimum"
@@ -167,7 +167,7 @@
 
 <script>
 import { mapGetters, mapActions } from "vuex";
-import FoodNutrientSearchForm from "../food/components/FoodNutrientSearchForm.vue"
+import FoodNutrientSearchForm from "../food/components/FoodNutrientSearchForm.vue";
 
 export default {
   components: {
@@ -188,73 +188,74 @@ export default {
         lipidMaximum: null,
       },
       params: {},
-    }
+    };
   },
   computed: {
     ...mapGetters(["ingestionCal", "user"]),
   },
   created() {
-    this.turnOnValueForm()
-    this.checkDialog()
+    this.turnOnValueForm();
+    this.checkDialog();
   },
   methods: {
     ...mapActions(["update"]),
     turnOnCalculationResultParams() {
-      Object.assign(this.params, this.ingestionCal)
-      this.update(this.params)
+      Object.assign(this.params, this.ingestionCal);
+      this.update(this.params);
     },
     checkDialog() {
       if (this.user) {
         setTimeout(() => {
-          this.updateDialog = true
-        }, 1500)
+          this.updateDialog = true;
+        }, 1500);
       }
     },
     closeDialog() {
-      this.updateDialog = false
+      this.updateDialog = false;
     },
     turnOnValueForm() {
       if (this.ingestionCal.protein) {
-        this.nutrients.proteinMinimum = this.ingestionCal.protein - 30
-        this.nutrients.proteinMaximum = this.ingestionCal.protein
-        this.nutrients.carbohydrateMinimum = this.ingestionCal.carbohydrate - 30
-        this.nutrients.carbohydrateMaximum = this.ingestionCal.carbohydrate
-        this.nutrients.lipidMinimum = this.ingestionCal.lipid - 10
-        this.nutrients.lipidMaximum = this.ingestionCal.lipid
-        this.checkNegative()
+        this.nutrients.proteinMinimum = this.ingestionCal.protein - 30;
+        this.nutrients.proteinMaximum = this.ingestionCal.protein;
+        this.nutrients.carbohydrateMinimum =
+          this.ingestionCal.carbohydrate - 30;
+        this.nutrients.carbohydrateMaximum = this.ingestionCal.carbohydrate;
+        this.nutrients.lipidMinimum = this.ingestionCal.lipid - 10;
+        this.nutrients.lipidMaximum = this.ingestionCal.lipid;
+        this.checkNegative();
       }
     },
     checkNegative() {
       Object.keys(this.nutrients).forEach((key) => {
         if (Math.sign(this.nutrients[key]) === -1) {
-          this.nutrients[key] = 0
+          this.nutrients[key] = 0;
         }
-      })
+      });
     },
     checkNumericNull() {
-      let array = []
+      let array = [];
       Object.values(this.nutrients).forEach(function (value) {
-        array.push(value)
-      })
-      array = array.filter(v => !!v)
-      return array.length ? true : false
+        array.push(value);
+      });
+      array = array.filter((v) => !!v);
+      return array.length ? true : false;
     },
     searchNutrient() {
       if (this.checkNumericNull()) {
-        this.loading = true
-        this.$store.dispatch("searchNutrient", this.nutrients) 
+        this.loading = true;
+        this.$store.dispatch("searchNutrient", this.nutrients);
       } else {
-        this.nullValidation = true
-        this.errorMessage = "数値を入力してください"
+        this.nullValidation = true;
+        this.errorMessage = "数値を入力してください";
       }
-    }
-  }
-}
+    },
+  },
+};
 </script>
 
 <style scoped>
 .text-color {
-  color: #D63D17;
+  color: #d63d17;
 }
 .error_message {
   color: red;

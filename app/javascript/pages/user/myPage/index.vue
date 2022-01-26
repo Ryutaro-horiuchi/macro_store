@@ -49,7 +49,7 @@
 
 <script>
 import { mapGetters } from "vuex";
-import UserForm from "../components/UserForm.vue"
+import UserForm from "../components/UserForm.vue";
 
 export default {
   components: {
@@ -57,40 +57,40 @@ export default {
   },
   data() {
     return {
-      title: 'マイページ',
-        nutrients: [
-          {
-            name: 'カロリー',
-            number: 0
-          },
-          {
-            name: 'たんぱく質',
-            number: 0,
-          },
-          {
-            name: '炭水化物',
-            number: 0,
-          },
-          {
-            name: '脂質',
-            number: 0,
-          },
-        ],
-    }
+      title: "マイページ",
+      nutrients: [
+        {
+          name: "カロリー",
+          number: 0,
+        },
+        {
+          name: "たんぱく質",
+          number: 0,
+        },
+        {
+          name: "炭水化物",
+          number: 0,
+        },
+        {
+          name: "脂質",
+          number: 0,
+        },
+      ],
+    };
   },
   computed: {
-    ...mapGetters(["user", "ingestionCal"])
+    ...mapGetters(["user"]),
   },
   created() {
-    this.nutrients[0].number = this.ingestionCal.calorie
-    this.nutrients[1].number= this.ingestionCal.protein
-    this.nutrients[2].number = this.ingestionCal.carbohydrate
-    this.nutrients[3].number = this.ingestionCal.lipid
+    this.nutrients[0].number = this.user.calorie;
+    this.nutrients[1].number = this.user.protein;
+    this.nutrients[2].number = this.user.carbohydrate;
+    this.nutrients[3].number = this.user.lipid;
   },
   methods: {
     toUserEditPage() {
-      this.$router.push('edit')
-    }
-  }
-}
+      this.$router.push("edit");
+    },
+  },
+};
 </script>
