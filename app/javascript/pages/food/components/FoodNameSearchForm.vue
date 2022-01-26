@@ -1,7 +1,7 @@
 <template>
   <v-container
     pt-0
-    class="mt-14"
+    style="margin-top: 90px"
   >
     <v-row justify="center">
       <v-col
@@ -10,6 +10,7 @@
         lg="6"
       >
         <v-toolbar
+          shaped
           class="toolbar"
           dense
           color="#FFFFFF"
@@ -20,7 +21,7 @@
             background-color="#EEEEEE"
             placeholder="名前検索"
           />
-          <v-icon 
+          <v-icon
             id="magnify"
             class="ml-3"
             color="#D63D17"
@@ -28,8 +29,7 @@
             large
             @click="searchName"
           >
-            large
-            mdi-magnify
+            large mdi-magnify
           </v-icon>
         </v-toolbar>
       </v-col>
@@ -42,21 +42,25 @@ export default {
   props: {
     name: {
       type: String,
-      default: ''
-    }
+      default: "",
+    },
   },
   computed: {
     setSearchFood: {
-      get () { return this.name },
-      set (newVal) { return this.$emit('update:name', newVal) }
-    }
+      get() {
+        return this.name;
+      },
+      set(newVal) {
+        return this.$emit("update:name", newVal);
+      },
+    },
   },
   methods: {
     searchName() {
-      this.$emit('searchName')
-    }
-  }
-}
+      this.$emit("searchName");
+    },
+  },
+};
 </script>
 
 <style>

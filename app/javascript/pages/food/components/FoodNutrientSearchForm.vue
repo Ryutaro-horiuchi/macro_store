@@ -6,19 +6,15 @@
         class="text-left"
       >
         <div class="text-left text-h6 text-md-h4">
-          栄養素量から探す
+          栄養素から探す
         </div>
         <slot />
-        <v-form
-          ref="form"
-        > 
+        <v-form ref="form">
           <v-container>
-            <v-row
-              justify="center"
-            >
+            <v-row justify="center">
               <v-col cols="5">
                 <label>たんぱく質</label>
-                <v-text-field 
+                <v-text-field
                   id="proteinMin"
                   v-model.number="setProteinMinimum"
                   dense
@@ -31,13 +27,11 @@
               <h2 class="my-10 text-center">
                 &sim;
               </h2>
-              <v-col
-                cols="5"
-              >
+              <v-col cols="5">
                 <v-text-field
                   id="proteinMax"
                   v-model.number="setProteinMaximum"
-                  dense      
+                  dense
                   background-color="white"
                   placeholder="上限なし"
                   outlined
@@ -47,7 +41,7 @@
               </v-col>
               <v-col cols="5">
                 <label>炭水化物</label>
-                <v-text-field 
+                <v-text-field
                   id="carboMin"
                   v-model.number="setCarbohydrateMinimum"
                   dense
@@ -60,9 +54,7 @@
               <h2 class="my-10 text-center">
                 &sim;
               </h2>
-              <v-col
-                cols="5"
-              >
+              <v-col cols="5">
                 <v-text-field
                   id="carboMax"
                   v-model.number="setCarbohydrateMaximum"
@@ -76,7 +68,7 @@
               </v-col>
               <v-col cols="5">
                 <label>脂質</label>
-                <v-text-field 
+                <v-text-field
                   id="lipidMin"
                   v-model.number="setLipidMinimum"
                   dense
@@ -89,9 +81,7 @@
               <h2 class="my-10 text-center">
                 &sim;
               </h2>
-              <v-col
-                cols="5"
-              >
+              <v-col cols="5">
                 <v-text-field
                   id="lipidMax"
                   v-model.number="setLipidMaximum"
@@ -105,16 +95,12 @@
               </v-col>
             </v-row>
           </v-container>
-        </v-form>        
+        </v-form>
       </v-col>
     </v-row>
     <v-row justify="center">
-      <v-col
-        cols="6"
-      >
-        <v-row
-          justify="center"
-        >
+      <v-col cols="6">
+        <v-row justify="center">
           <v-btn
             class="mx-auto"
             color="#1c65ac"
@@ -127,12 +113,8 @@
           </v-btn>
         </v-row>
       </v-col>
-      <v-col
-        cols="6"
-      >
-        <v-row
-          justify="center"
-        >
+      <v-col cols="6">
+        <v-row justify="center">
           <v-btn
             class="mx-auto"
             color="#1c65ac"
@@ -154,69 +136,94 @@ export default {
   props: {
     proteinMinimum: {
       type: Number,
-      default: null
+      default: null,
     },
     proteinMaximum: {
       type: Number,
-      default: null
+      default: null,
     },
     carbohydrateMinimum: {
       type: Number,
-      default: null
+      default: null,
     },
     carbohydrateMaximum: {
       type: Number,
-      default: null
+      default: null,
     },
     lipidMinimum: {
       type: Number,
-      default: null
+      default: null,
     },
     lipidMaximum: {
       type: Number,
-      default: null
+      default: null,
     },
   },
   data() {
     return {
       rules: [
-        v => /^[\d]{1,3}$/.test(v) || '1桁〜3桁の半角英数字で入力してください'
+        (v) =>
+          /^[\d]{1,3}$/.test(v) || "1桁〜3桁の半角英数字で入力してください",
       ],
-    }
+    };
   },
   computed: {
     setProteinMinimum: {
-      get () { return this.proteinMinimum },
-      set (newVal) { return this.$emit('update:protein-minimum', newVal) }
+      get() {
+        return this.proteinMinimum;
+      },
+      set(newVal) {
+        return this.$emit("update:protein-minimum", newVal);
+      },
     },
     setProteinMaximum: {
-      get () { return this.proteinMaximum },
-      set (newVal) { return this.$emit('update:protein-maximum', newVal) }
+      get() {
+        return this.proteinMaximum;
+      },
+      set(newVal) {
+        return this.$emit("update:protein-maximum", newVal);
+      },
     },
     setCarbohydrateMinimum: {
-      get () { return this.carbohydrateMinimum },
-      set (newVal) { return this.$emit('update:carbohydrate-minimum', newVal) }
+      get() {
+        return this.carbohydrateMinimum;
+      },
+      set(newVal) {
+        return this.$emit("update:carbohydrate-minimum", newVal);
+      },
     },
     setCarbohydrateMaximum: {
-      get () { return this.carbohydrateMaximum },
-      set (newVal) { return this.$emit('update:carbohydrate-maximum', newVal) }
+      get() {
+        return this.carbohydrateMaximum;
+      },
+      set(newVal) {
+        return this.$emit("update:carbohydrate-maximum", newVal);
+      },
     },
     setLipidMinimum: {
-      get () { return this.lipidMinimum },
-      set (newVal) { return this.$emit('update:lipid-minimum', newVal) }
+      get() {
+        return this.lipidMinimum;
+      },
+      set(newVal) {
+        return this.$emit("update:lipid-minimum", newVal);
+      },
     },
     setLipidMaximum: {
-      get () { return this.lipidMaximum },
-      set (newVal) { return this.$emit('update:lipid-maximum', newVal) }
+      get() {
+        return this.lipidMaximum;
+      },
+      set(newVal) {
+        return this.$emit("update:lipid-maximum", newVal);
+      },
     },
   },
   methods: {
     reset() {
-      this.$refs.form.reset()
+      this.$refs.form.reset();
     },
     searchNutrient() {
-      this.$emit('search-nutrient')
-    }
-  }
-}
+      this.$emit("search-nutrient");
+    },
+  },
+};
 </script>
