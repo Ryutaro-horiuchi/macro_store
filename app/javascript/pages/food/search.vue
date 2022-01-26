@@ -74,23 +74,30 @@ export default {
     };
   },
   computed: {
-    ...mapGetters(["ingestionCal"]),
+    ...mapGetters(["ingestionCal", "user"]),
   },
   created() {
     this.turnOnValueForm();
   },
   methods: {
     turnOnValueForm() {
-      if (this.ingestionCal.protein) {
+        if (this.ingestionCal.protein) {
         this.nutrients.proteinMinimum = this.ingestionCal.protein - 30;
         this.nutrients.proteinMaximum = this.ingestionCal.protein;
-        this.nutrients.carbohydrateMinimum =
-          this.ingestionCal.carbohydrate - 30;
+        this.nutrients.carbohydrateMinimum = this.ingestionCal.carbohydrate - 30;
         this.nutrients.carbohydrateMaximum = this.ingestionCal.carbohydrate;
         this.nutrients.lipidMinimum = this.ingestionCal.lipid - 10;
         this.nutrients.lipidMaximum = this.ingestionCal.lipid;
         this.checkNegative();
-      }
+      } else {
+        this.nutrients.proteinMinimum = this.user.protein - 30;
+        this.nutrients.proteinMaximum = this.user.protein;
+        this.nutrients.carbohydrateMinimum = this.user.carbohydrate - 30;
+        this.nutrients.carbohydrateMaximum = this.user.carbohydrate;
+        this.nutrients.lipidMinimum = this.user.lipid - 10;
+        this.nutrients.lipidMaximum = this.user.lipid;
+        this.checkNegative();
+      } 
     },
     checkNegative() {
       Object.keys(this.nutrients).forEach((key) => {

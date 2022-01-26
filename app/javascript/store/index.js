@@ -33,7 +33,7 @@ export default new Vuex.Store({
   },
   getters: {
     flashMessage: state => state.flashMessage,
-    flashColor :state => state.flashColor,
+    flashColor: state => state.flashColor,
     flashStatus: state => state.flashStatus,
     drawer: state => state.drawer,
     foodDialog: state => state.foodDialog,
@@ -82,7 +82,7 @@ export default new Vuex.Store({
     saveIngestionCal(state, calorie) {
       state.ingestionCal = calorie
       Object.keys(state.ingestionCal).forEach(function (key) {
-        state.ingestionCal[key] =  Math.round(state.ingestionCal[key])
+        state.ingestionCal[key] = Math.round(state.ingestionCal[key])
       })
     },
     clearIngestionCal(state) {
@@ -102,76 +102,76 @@ export default new Vuex.Store({
     changeDrawer({ commit }) {
       commit('changeDrawer');
     },
-    async fetchAuthUser({ commit , state }) {
-      if(!localStorage.idToken) return null
-      if(state.user) return state.user
-      
+    async fetchAuthUser({ commit, state }) {
+      if (!localStorage.idToken) return null
+      if (state.user) return state.user
+
       const userResponse = await axios.get('users/me')
-      .catch((err) => {
-        return null
-      })
+        .catch((err) => {
+          return null
+        })
       if (!userResponse) return null
-      
+
 
       if (userResponse) {
         commit('setUser', userResponse.data.user)
-        commit('setBookmarkedFoods', userResponse.data.foods )
+        commit('setBookmarkedFoods', userResponse.data.foods)
       } else {
         commit('setUser', null)
       }
     },
-    signUp(context, params ) {
+    signUp(context, params) {
       if (context.getters.ingestionCal !== null) {
         Object.assign(params.user, context.getters.ingestionCal)
-      } 
+      }
       return axios.post('/signUp', params)
-      .then(res => {
-        router.push('/login')
-        context.dispatch('flashMessage', {
-          message: 'ユーザー登録が完了しました、ログインしてください',
-          color: 'success',
-          status: true,
+        .then(res => {
+          router.push('/login')
+          context.dispatch('flashMessage', {
+            message: 'ユーザー登録が完了しました、ログインしてください',
+            color: 'success',
+            status: true,
+          })
         })
-      })
-      .catch(err => {
-        context.dispatch('flashMessage', {
-          message: '無効なメールアドレスです',
-          color: 'orange',
-          status: true,
+        .catch(err => {
+          context.dispatch('flashMessage', {
+            message: '無効なメールアドレスです',
+            color: 'orange',
+            status: true,
+          })
         })
-      })
     },
-    login(context,  user) {
+    login(context, user) {
       return axios.post('/login', user)
-      .then(res => {
-        // localStorage.setItem('idToken', res.data.token)
-        localStorage.idToken = res.data.token
-        axios.defaults.headers.common['Authorization'] = `Bearer ${localStorage.idToken}`
-        const loginUser = res.data.user
-        context.commit('setUser', loginUser)
-        if (loginUser.calorie) {
-          const ingestionCal = {}
-          ingestionCal["calorie"] = loginUser.calorie
-          ingestionCal["carbohydrate"] = loginUser.carbohydrate
-          ingestionCal["protein"] = loginUser.protein
-          ingestionCal["lipid"] = loginUser.lipid
-          context.commit('saveIngestionCal', ingestionCal)
-        }
-        context.commit('setBookmarkedFoods', res.data.foods)
-        context.dispatch('flashMessage', {
-          message: 'ログインしました',
-          color: 'success',
-          status: true,
+        .then(res => {
+          // localStorage.setItem('idToken', res.data.token)
+          localStorage.idToken = res.data.token
+          axios.defaults.headers.common['Authorization'] = `Bearer ${localStorage.idToken}`
+          const loginUser = res.data.user
+          context.commit('setUser', loginUser)
+          if (loginUser.calorie) {
+            const ingestionCal = {}
+            ingestionCal["calorie"] = loginUser.calorie
+            ingestionCal["carbohydrate"] = loginUser.carbohydrate
+            ingestionCal["protein"] = loginUser.protein
+            ingestionCal["lipid"] = loginUser.lipid
+            context.commit('saveIngestionCal', ingestionCal)
+          }
+          context.commit('setBookmarkedFoods', res.data.foods)
+          context.dispatch('flashMessage', {
+            message: 'ログインしました',
+            color: 'success',
+            status: true,
+          })
+          router.push('/')
         })
-        router.push('/')
-      })
-      .catch(err => {
-        context.dispatch('flashMessage', {
-          message: 'ログインに失敗しました',
-          color: 'orange',
-          status: true,
-        }) 
-      })
+        .catch(err => {
+          context.dispatch('flashMessage', {
+            message: 'ログインに失敗しました',
+            color: 'orange',
+            status: true,
+          })
+        })
     },
     logout(context) {
       localStorage.removeItem('idToken')
@@ -186,38 +186,38 @@ export default new Vuex.Store({
     update(context, params) {
       console.log(params)
       axios.patch('/update', params)
-      .then(res => {
-        context.commit('setUser', res.data)
-        router.push('/mypage')
-        context.dispatch('flashMessage', {
-          message: 'ユーザー情報を更新しました',
-          color: 'success',
-          status: true,
+        .then(res => {
+          context.commit('setUser', res.data)
+          router.push('/mypage')
+          context.dispatch('flashMessage', {
+            message: 'ユーザー情報を更新しました',
+            color: 'success',
+            status: true,
+          })
         })
-      })
-      .catch(err => {
-        context.dispatch('flashMessage', {
-          message: '無効なメールアドレスです',
-          color: 'orange',
-          status: true,
+        .catch(err => {
+          context.dispatch('flashMessage', {
+            message: '更新に失敗しました',
+            color: 'orange',
+            status: true,
+          })
         })
-      })
     },
     searchName({ commit }, name) {
       setTimeout(() => {
         return axios.post('/search/name', name)
-        .then(res => {
-          commit('foodList', res.data)
-        })
-        .catch(err => {
-          console.log(err)
-        })
+          .then(res => {
+            commit('foodList', res.data)
+          })
+          .catch(err => {
+            console.log(err)
+          })
       }, 1000);
     },
     searchNutrient({ commit }, value) {
       console.log(value)
       setTimeout(() => {
-    // 最小値がnullであれば、0を代入する。リファクタリングする
+        // 最小値がnullであれば、0を代入する。リファクタリングする
         if (value.carbohydrateMinimum === null) {
           value.carbohydrateValueMinimum = 0
         }
@@ -228,43 +228,43 @@ export default new Vuex.Store({
           value.lipidValueMinimum = 0
         }
         return axios.post('/search/nutrient', value)
-        .then(res => {
-          commit('foodList', res.data)
-        })
-        .catch(err => {
-          console.log(err)
-        })
+          .then(res => {
+            commit('foodList', res.data)
+          })
+          .catch(err => {
+            console.log(err)
+          })
       }, 1000);
     },
     makeBookmark(context, food) {
       if (context.state.user === null) {
-          context.dispatch('flashMessage', {
-            message: 'ログインが必要です',
-            color: 'blue',
-            status: true,
-          })
-        router.push('/login') 
+        context.dispatch('flashMessage', {
+          message: 'ログインが必要です',
+          color: 'blue',
+          status: true,
+        })
+        router.push('/login')
       }
       else {
         return axios.post('/bookmarks/create', food)
-        .then(res => {
-          context.commit('addToBookmarkedFoods', res.data)
-        })
-        .catch(err => {
-          console.log(err)
-        })
+          .then(res => {
+            context.commit('addToBookmarkedFoods', res.data)
+          })
+          .catch(err => {
+            console.log(err)
+          })
       }
     },
     removeBookmark({ commit }, food) {
       return axios.post('/bookmarks/destroy', food)
-      .then(res => {
-        commit('deleteFromBookmarkedFoods', res.data)
-      })
-      .catch(err => {
-        console.log(err)
-      })
+        .then(res => {
+          commit('deleteFromBookmarkedFoods', res.data)
+        })
+        .catch(err => {
+          console.log(err)
+        })
     },
-    flashMessage({ commit }, {message, color, status}) {
+    flashMessage({ commit }, { message, color, status }) {
       commit('setMessage', message)
       commit('setColor', color)
       commit('setStatus', status)
