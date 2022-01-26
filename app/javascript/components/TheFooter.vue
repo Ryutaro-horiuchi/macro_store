@@ -24,9 +24,7 @@
               <strong>利用規約</strong>
             </router-link>
           </v-col>
-          <v-divider
-            vertical
-          />
+          <v-divider vertical />
           <v-col
             cols="4"
             class="text-caption text-md-body-2"
@@ -38,9 +36,7 @@
               <strong>プライバシーポリシー</strong>
             </router-link>
           </v-col>
-          <v-divider
-            vertical
-          />
+          <v-divider vertical />
           <v-col
             cols="4"
             class="text-caption text-md-body-2"
@@ -55,7 +51,7 @@
         </v-row>
       </v-card-text>
       <v-card-text class="white--text body-2">
-        &copy; 2021 - Macro Store
+        &copy; 2022 - Macro Store
         <v-icon @click="twitterShare">
           mdi-twitter
         </v-icon>
@@ -68,11 +64,19 @@
 export default {
   methods: {
     twitterShare() {
-      const shareURL = 'https://twitter.com/intent/tweet?&url=' + 'https://www.macrostore.jp' + '&text=' + 'ダイエットに最適なカロリー（PFC）を提案。数値を元にコンビニ食品を検索、保存できるサービス' + '%20%23MacroStore'+ '%20%23コンビニ' + '%20%23ダイエット' + '%20%23ボディメイク'
-      location.href = shareURL
-    }
-  }
-}
+      const shareURL =
+        "https://twitter.com/intent/tweet?&url=" +
+        "https://www.macrostore.jp" +
+        "&text=" +
+        "ダイエットに最適なカロリー（PFC）を提案。数値を元にコンビニ食品を検索、保存できるサービス" +
+        "%20%23MacroStore" +
+        "%20%23コンビニ" +
+        "%20%23ダイエット" +
+        "%20%23ボディメイク";
+      location.href = shareURL;
+    },
+  },
+};
 </script>
 
 <style scoped>

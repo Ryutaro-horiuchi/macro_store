@@ -10,7 +10,7 @@
           cols="10"
           md="12"
           class="logo"
-        > 
+        >
           <v-img
             :src="logoImg"
             max-height="300"
@@ -24,7 +24,7 @@
         <v-col>
           <div
             class="text-center text-h5 text-md-h3"
-            style="margin-top: 50px; margin-bottom: 30px;"
+            style="margin-top: 50px; margin-bottom: 30px"
           >
             Macro Storeでできること
           </div>
@@ -44,7 +44,7 @@
           </div>
           <br>
           <div class="text-left text-body-2 text-md-h6">
-            コンビニ食品を名前で検索したり、摂取したい栄養素量（炭水化物、たんぱく質、脂質別)に検索できます
+            コンビニ食品を名前で検索したり、摂取したいPFC（炭水化物・たんぱく質・脂質)別に検索できます
           </div>
         </v-col>
         <v-col cols="6">
@@ -101,7 +101,7 @@
           </div>
           <br>
           <div class="text-left text-body-2 text-md-h6">
-            気になった食品と、摂取カロリーを保存することができ、いつでもチェックすることができるようになります。
+            気になった食品と、摂取カロリーを保存することができ、いつでもチェックすることができるようになります
           </div>
         </v-col>
         <v-col cols="6">
@@ -117,7 +117,7 @@
     <v-container style="margin-bottom: 100px">
       <div
         class="text-center text-h5 text-md-h3"
-        style="margin-top: 50px; margin-bottom: 30px;"
+        style="margin-top: 50px; margin-bottom: 30px"
       >
         カロリー計算から始めよう
       </div>
@@ -139,10 +139,9 @@ export default {
       dataImg: require("../../../assets/images/undraw_app_data_re_vg5c (2).png"),
       swipeImg: require("../../../assets/images/undraw_swipe_options_2e4v (2).png"),
       logoImg: require("../../../assets/images/MacroStore-logo.png"),
-    }
-  }
-}
-
+    };
+  },
+};
 </script>
 
 <style scoped>
@@ -156,23 +155,23 @@ export default {
 }
 
 .top-page::before {
-  background-color: rgba(0,0,0,0.4);
+  background-color: rgba(0, 0, 0, 0.4);
   position: absolute;
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
-  content: '';
+  content: "";
 }
 
 .logo {
   position: absolute;
   left: 20px;
-  top: 90px
+  top: 90px;
 }
 
 .text-center {
-  color: #D63D17;
+  color: #d63d17;
 }
 
 .text-left {
