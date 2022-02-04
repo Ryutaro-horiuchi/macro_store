@@ -83,8 +83,6 @@
       </v-row>
       <v-dialog
         v-model="foodDialog"
-        width="600"
-        max-height="600"
         persistent
         @click:outside="closeDialog"
       >
