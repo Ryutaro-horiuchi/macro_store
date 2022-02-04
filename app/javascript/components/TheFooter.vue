@@ -33,7 +33,7 @@
               to="/privacy"
               class="link"
             >
-              <strong>プライバシーポリシー</strong>
+              <strong>プライバシー<br>ポリシー</strong>
             </router-link>
           </v-col>
           <v-divider vertical />
