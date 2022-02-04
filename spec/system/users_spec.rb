@@ -37,7 +37,8 @@ RSpec.describe "ユーザー", type: :system do
           fill_in 'ユーザー名', with: 'hoge'
           fill_in 'メールアドレス', with: 'hogehoge@example.com'
           fill_in 'パスワード', with: 'hogehoge'
-          fill_in 'パスワード (確認用)', with: 'hogehoge' 
+          fill_in 'パスワード (確認用)', with: 'hogehoge'
+          check 'checkbox' 
         end
         
         context '正常' do
@@ -72,6 +73,10 @@ RSpec.describe "ユーザー", type: :system do
 
           it 'パスワード (確認用)が有効でない時、「登録する」ボタンが表示されていない' do
             fill_in 'パスワード (確認用)', with: 'fugafuga'
+            expect(page).to_not have_button('登録する')
+          end
+          it 'チェックボックスにチェックがついていない時、「登録する」ボタンが表示されていない' do
+            uncheck 'checkbox'
             expect(page).to_not have_button('登録する')
           end
         end
