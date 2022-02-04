@@ -182,6 +182,7 @@ export default new Vuex.Store({
         color: 'success',
         status: true,
       })
+      router.push('/')
     },
     update(context, params) {
       console.log(params)
