@@ -87,16 +87,14 @@
             class="mt-5"
           >
             <v-col cols="6">
-              <v-form>
-                <v-text-field
-                  id="weight"
-                  v-model="weight"
-                  outlined
-                  background-color="white"
-                  suffix="kg"
-                  :rules="weightRules"
-                />
-              </v-form>
+              <v-text-field
+                id="weight"
+                v-model="weight"
+                outlined
+                background-color="white"
+                suffix="kg"
+                :rules="weightRules"
+              />
             </v-col>
           </v-row>
         </v-col>
@@ -188,7 +186,7 @@ export default {
       selectedExercise: null,
       ingestionCalorie: { calorie: 0, carbohydrate: 0, protein: 0, lipid: 0 },
       weightRules: [
-        v => !!v || '',
+        v => !!v || '値が入力されていません',
         v => /^[\d]+$/.test(v) || '数値を入力してください',
         v => /^[\d]{2,3}$/.test(v) || '2桁〜3桁の間で入力してください'
       ],
