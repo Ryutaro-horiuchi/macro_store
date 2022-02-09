@@ -135,9 +135,9 @@ export default {
   },
   data() {
     return {
-      foodImg: require("../../../assets/images/undraw_online_groceries_a02y (1).png"),
-      dataImg: require("../../../assets/images/undraw_app_data_re_vg5c (2).png"),
-      swipeImg: require("../../../assets/images/undraw_swipe_options_2e4v (2).png"),
+      foodImg: require("../../../assets/images/undraw_online_groceries_a02y__1_-removebg-preview.png"),
+      dataImg: require("../../../assets/images/undraw_app_data_re_vg5c__2_-removebg-preview.png"),
+      swipeImg: require("../../../assets/images/undraw_swipe_options_2e4v__2_-removebg-preview .png"),
       logoImg: require("../../../assets/images/MacroStore-logo.png"),
     };
   },
