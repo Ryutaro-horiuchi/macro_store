@@ -218,7 +218,7 @@ export default {
   },
   methods: {
     calculateCalorie() {
-      this.ingestionCalorie["calorie"]　= (this.selectedAge * this.weight * this.selectedExercise - 300) / 3;
+      this.ingestionCalorie["calorie"] = (this.selectedAge * this.weight * this.selectedExercise - 300) / 3;
       this.ingestionCalorie["carbohydrate"] = this.ingestionCalorie["calorie"] * 0.55 / 4 
       this.ingestionCalorie["protein"] = this.ingestionCalorie["calorie"] * 0.25 / 4 
       this.ingestionCalorie["lipid"] = this.ingestionCalorie["calorie"] * 0.2 / 9 

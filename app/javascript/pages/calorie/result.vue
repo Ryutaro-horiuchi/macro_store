@@ -106,13 +106,10 @@
             </v-container>
           </template>
           <FoodNutrientSearchForm
-            :carbohydrate-minimum.sync="nutrients.carbohydrateMinimum"
-            :carbohydrate-maximum.sync="nutrients.carbohydrateMaximum"
-            :protein-minimum.sync="nutrients.proteinMinimum"
-            :protein-maximum.sync="nutrients.proteinMaximum"
-            :lipid-minimum.sync="nutrients.lipidMinimum"
-            :lipid-maximum.sync="nutrients.lipidMaximum"
+            @loading="loading = $event"
             @search-nutrient="searchNutrient"
+            @null-validation="nullValidation = $event"
+            @error-message="errorMessage = $event"
           />
         </v-row>
       </v-container>
@@ -179,22 +176,13 @@ export default {
       nullValidation: false,
       errorMessage: null,
       updateDialog: false,
-      nutrients: {
-        proteinMinimum: null,
-        proteinMaximum: null,
-        carbohydrateMinimum: null,
-        carbohydrateMaximum: null,
-        lipidMinimum: null,
-        lipidMaximum: null,
-      },
-      params: {},
-    };
+      params: {}
+    }
   },
   computed: {
-    ...mapGetters(["ingestionCal", "user"]),
+    ...mapGetters(["ingestionCal", "user"])
   },
   created() {
-    this.turnOnValueForm();
     this.checkDialog();
   },
   methods: {
@@ -213,42 +201,9 @@ export default {
     closeDialog() {
       this.updateDialog = false;
     },
-    turnOnValueForm() {
-      if (this.ingestionCal.protein) {
-        this.nutrients.proteinMinimum = this.ingestionCal.protein - 30;
-        this.nutrients.proteinMaximum = this.ingestionCal.protein;
-        this.nutrients.carbohydrateMinimum =
-          this.ingestionCal.carbohydrate - 30;
-        this.nutrients.carbohydrateMaximum = this.ingestionCal.carbohydrate;
-        this.nutrients.lipidMinimum = this.ingestionCal.lipid - 10;
-        this.nutrients.lipidMaximum = this.ingestionCal.lipid;
-        this.checkNegative();
-      }
-    },
-    checkNegative() {
-      Object.keys(this.nutrients).forEach((key) => {
-        if (Math.sign(this.nutrients[key]) === -1) {
-          this.nutrients[key] = 0;
-        }
-      });
-    },
-    checkNumericNull() {
-      let array = [];
-      Object.values(this.nutrients).forEach(function (value) {
-        array.push(value);
-      });
-      array = array.filter((v) => !!v);
-      return array.length ? true : false;
-    },
-    searchNutrient() {
-      if (this.checkNumericNull()) {
-        this.loading = true;
-        this.$store.dispatch("searchNutrient", this.nutrients);
-      } else {
-        this.nullValidation = true;
-        this.errorMessage = "数値を入力してください";
-      }
-    },
+    searchNutrient(nutrients) {
+      this.$store.dispatch("searchNutrient", nutrients)
+    }
   },
 };
 </script>
