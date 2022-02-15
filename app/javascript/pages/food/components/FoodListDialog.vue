@@ -27,7 +27,7 @@
     </v-row>
     <v-row justify="center">
       <v-col cols="9">
-        <FoodBarChart
+        <FoodListBarChart
           :key="food.id"
           :food="food"
         />
@@ -95,16 +95,16 @@
 
 <script>
 import { mapActions, mapGetters } from "vuex";
-import FoodBarChart from './components/FoodBarChart.vue'
+import FoodListBarChart from './FoodListBarChart.vue'
 
 export default {
   components: {
-    FoodBarChart
+    FoodListBarChart
   },
   data() {
     return {
       add_nutrients: { calorie: 0, carbohydrate: 0, protein: 0, lipid: 0 },
-      sevenImg: require("../../../assets/images/seven_eleven.logo")
+      sevenImg: require("../../../../assets/images/seven_eleven.logo.png")
     }
   },
   computed: {

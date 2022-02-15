@@ -1,15 +1,7 @@
 <template>
   <div style="margin-top: 100px; margin-bottom: 100px">
     <template v-if="loading">
-      <v-row
-        justify="center"
-        class="loader"
-      >
-        <vue-loaders-line-spin-fade-loader
-          color="#D63D17"
-          scale="2"
-        />
-      </v-row>
+      <BaseLoading />
     </template>
     <template v-if="!loading">
       <v-container class="mt-14">
@@ -105,7 +97,7 @@
               </v-row>
             </v-container>
           </template>
-          <FoodNutrientSearchForm
+          <FoodSearchFormNutrient
             @loading="loading = $event"
             @search-nutrient="searchNutrient"
             @null-validation="nullValidation = $event"
@@ -129,32 +121,12 @@
             今回の計算結果を保存しますか？
           </v-card-text>
           <v-row style="margin-top: 20px">
-            <v-col cols="6">
-              <v-row justify="center">
-                <v-btn
-                  color="#1c65ac"
-                  dark
-                  large
-                  elevation="3"
-                  @click="closeDialog"
-                >
-                  閉じる
-                </v-btn>
-              </v-row>
-            </v-col>
-            <v-col cols="6">
-              <v-row justify="center">
-                <v-btn
-                  color="#1c65ac"
-                  dark
-                  large
-                  elevation="3"
-                  @click="turnOnCalculationResultParams"
-                >
-                  保存する
-                </v-btn>
-              </v-row>
-            </v-col>
+            <BaseButton @my-click="closeDialog">
+              閉じる
+            </BaseButton>
+            <BaseButton @my-click="turnOnCalculationResultParams">
+              保存する
+            </BaseButton>
           </v-row>
         </v-container>
       </v-card>
@@ -164,11 +136,15 @@
 
 <script>
 import { mapGetters, mapActions } from "vuex";
-import FoodNutrientSearchForm from "../food/components/FoodNutrientSearchForm.vue";
+import FoodSearchFormNutrient from "../food/components/FoodSearchFormNutrient.vue";
+import BaseLoading from "../../../javascript/components/BaseLoading.vue"
+import BaseButton from "../../../javascript/components/BaseButton.vue"
 
 export default {
   components: {
-    FoodNutrientSearchForm,
+    FoodSearchFormNutrient,
+    BaseLoading,
+    BaseButton
   },
   data() {
     return {

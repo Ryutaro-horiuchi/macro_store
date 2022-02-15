@@ -39,7 +39,7 @@
 </template>
 
 <script>
-import FoodList from "../food/components/FoodList.vue";
+import FoodList from "../../food/components/FoodList.vue";
 import { mapGetters } from "vuex";
 
 export default {

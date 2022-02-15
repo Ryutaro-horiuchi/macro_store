@@ -139,21 +139,9 @@
         justify="center"
         class="my-10"
       >
-        <v-col
-          cols="6"
-        >
-          <v-row justify="center">
-            <v-btn
-              color="#1c65ac"
-              dark
-              x-large
-              elevation="3"
-              @click="toTopPage"
-            >
-              戻る
-            </v-btn>
-          </v-row>
-        </v-col> 
+        <BaseButton @my-click="toTopPage">
+          戻る
+        </BaseButton>
         <v-col
           cols="6"
         >
@@ -176,7 +164,12 @@
 </template>
 
 <script>
+import BaseButton from "../../../../javascript/components/BaseButton.vue"
+
 export default {
+  components: {
+    BaseButton
+  },
   data() {
     return {
       isValid: false,

@@ -5,18 +5,10 @@
     style="margin-bottom: 150px"
   >
     <template v-if="loading">
-      <v-row
-        justify="center"
-        class="loader"
-      >
-        <vue-loaders-line-spin-fade-loader
-          color="#D63D17"
-          scale="2"
-        />
-      </v-row>
+      <BaseLoading />
     </template>
     <template v-if="!loading">
-      <FoodNameSearchForm
+      <FoodSearchFormName
         @loading="loading = $event"
         @search-name="searchName"
         @null-validation="nullValidation = $event"
@@ -32,7 +24,7 @@
           </v-row>
         </v-container>
       </template>
-      <FoodNutrientSearchForm
+      <FoodSearchFormNutrient
         @loading="loading = $event"
         @search-nutrient="searchNutrient"
         @null-validation="nullValidation = $event"
@@ -41,19 +33,21 @@
         <p class="text-body-2 text-md-body-1">
           ※摂取カロリー計算の質問に応えていただくと、おすすめの数値が反映されます。
         </p>
-      </FoodNutrientSearchForm>
+      </FoodSearchFormNutrient>
     </template>
   </v-container>
 </template>
 
 <script>
-import FoodNameSearchForm from "./components/FoodNameSearchForm.vue";
-import FoodNutrientSearchForm from "./components/FoodNutrientSearchForm.vue";
+import FoodSearchFormName from "./components/FoodSearchFormName.vue";
+import FoodSearchFormNutrient from "./components/FoodSearchFormNutrient.vue";
+import BaseLoading from "../../../javascript/components/BaseLoading.vue";
 
 export default {
   components: {
-    FoodNameSearchForm,
-    FoodNutrientSearchForm,
+    FoodSearchFormName,
+    FoodSearchFormNutrient,
+    BaseLoading
   },
   data() {
     return {

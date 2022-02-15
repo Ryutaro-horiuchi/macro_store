@@ -48,7 +48,7 @@ class Scraping
       carbohydrate = array[3]
     end
 
-    food = Food.where(name: name)
+    food = Food.find_by(name: name)
 
     return unless food.blank? && protein.present?
 

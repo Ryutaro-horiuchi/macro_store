@@ -99,10 +99,12 @@ RSpec.describe "カロリー計算", type: :system do
     context 'カロリー計算すると確認モーダルが表示される' do
       before do
         click_button '計算する'
-        expect(page).to have_content('今回の計算結果を保存しますか？')
+        using_wait_time(3) do
+          expect(page).to have_content('今回の計算結果を保存しますか？')
+        end
       end
 
-      it '保存するボタンを押すと、ユーザー情報が更新される' do
+      fit '保存するボタンを押すと、ユーザー情報が更新される' do
         click_button '保存する'
         using_wait_time(1) do
           expect(page).to have_content('ユーザー情報を更新しました')
@@ -112,7 +114,7 @@ RSpec.describe "カロリー計算", type: :system do
         end
       end
 
-      it '閉じるボタンを押すと、ユーザー情報は変わらない' do
+      fit '閉じるボタンを押すと、ユーザー情報は変わらない' do
         click_button '閉じる'
         click_button 'nav'
         click_link 'mypage'

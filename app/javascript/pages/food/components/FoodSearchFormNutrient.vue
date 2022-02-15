@@ -99,42 +99,24 @@
       </v-col>
     </v-row>
     <v-row justify="center">
-      <v-col cols="6">
-        <v-row justify="center">
-          <v-btn
-            class="mx-auto"
-            color="#1c65ac"
-            dark
-            x-large
-            elevation="3"
-            @click="reset"
-          >
-            クリア
-          </v-btn>
-        </v-row>
-      </v-col>
-      <v-col cols="6">
-        <v-row justify="center">
-          <v-btn
-            class="mx-auto"
-            color="#1c65ac"
-            dark
-            x-large
-            elevation="3"
-            @click="searchNutrient"
-          >
-            この条件で検索
-          </v-btn>
-        </v-row>
-      </v-col>
+      <BaseButton @my-click="reset">
+        クリア
+      </BaseButton>
+      <BaseButton @my-click="searchNutrient">
+        この条件で検索
+      </BaseButton>
     </v-row>
   </v-container>
 </template>
 
 <script>
 import { mapGetters } from "vuex";
+import BaseButton from "../../../components/BaseButton.vue"
 
 export default {
+  components: {
+    BaseButton
+  },
   data() {
     return {
       nutrients: {
@@ -185,7 +167,6 @@ export default {
       });
     },
     reset() {
-      console.log("reset")
       this.$refs.form.reset();
     },
     // 栄養素フォームのnullチェック。全てnullだった場合falseを返す

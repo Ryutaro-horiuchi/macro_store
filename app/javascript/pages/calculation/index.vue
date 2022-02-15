@@ -5,7 +5,7 @@
 </template>
 
 <script>
-import CalCalculation from "../../top/components/CalCalculation.vue"
+import CalCalculation from "./components/CalCalculation.vue";
 export default {
   components: {
     CalCalculation

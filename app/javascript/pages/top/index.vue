@@ -127,7 +127,7 @@
 </template>
 
 <script>
-import CalCalculation from "./components/CalCalculation.vue";
+import CalCalculation from "../../pages/calculation/components/CalCalculation.vue";
 
 export default {
   components: {
