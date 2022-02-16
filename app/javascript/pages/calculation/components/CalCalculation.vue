@@ -139,9 +139,13 @@
         justify="center"
         class="my-10"
       >
-        <BaseButton @my-click="toTopPage">
-          戻る
-        </BaseButton>
+        <v-col cols="6">
+          <v-row justify="center">
+            <BaseButton @my-click="toTopPage">
+              戻る
+            </BaseButton>
+          </v-row>
+        </v-col>
         <v-col
           cols="6"
         >

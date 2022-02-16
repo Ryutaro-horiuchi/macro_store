@@ -121,12 +121,20 @@
             今回の計算結果を保存しますか？
           </v-card-text>
           <v-row style="margin-top: 20px">
-            <BaseButton @my-click="closeDialog">
-              閉じる
-            </BaseButton>
-            <BaseButton @my-click="turnOnCalculationResultParams">
-              保存する
-            </BaseButton>
+            <v-col cols="6">
+              <v-row justify="center">          
+                <BaseButton @my-click="closeDialog">
+                  閉じる
+                </BaseButton>
+              </v-row>
+            </v-col>
+            <v-col cols="6">
+              <v-row justify="center">   
+                <BaseButton @my-click="turnOnCalculationResultParams">
+                  保存する
+                </BaseButton>
+              </v-row>
+            </v-col>
           </v-row>
         </v-container>
       </v-card>

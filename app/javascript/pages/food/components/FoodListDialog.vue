@@ -41,14 +41,9 @@
           justify="center"
           class="mb-5"
         >
-          <v-btn
-            color="#1c65ac"
-            dark
-            elevation="3"
-            @click="closeDialog"
-          >
+          <BaseButton @my-click="closeDialog">
             閉じる
-          </v-btn>
+          </BaseButton>
         </v-row>
       </v-col>
       <template v-if="!isBookmarked">
@@ -59,14 +54,9 @@
             justify="center"
             class="mb-5"
           >
-            <v-btn
-              color="#1c65ac"
-              dark
-              elevation="3"
-              @click="makeBookmark(food)"
-            >
+            <BaseButton @my-click="makeBookmark(food)">
               お気に入りに追加
-            </v-btn>        
+            </BaseButton>     
           </v-row>
         </v-col>
       </template>
@@ -78,14 +68,9 @@
             justify="center"
             class="mb-5"
           >
-            <v-btn
-              color="#1c65ac"
-              dark
-              elevation="3"
-              @click="removeBookmark(food)"
-            >
+            <BaseButton @my-click="removeBookmark(food)">
               お気に入りから削除
-            </v-btn>        
+            </BaseButton>      
           </v-row>
         </v-col>
       </template> 
@@ -95,11 +80,13 @@
 
 <script>
 import { mapActions, mapGetters } from "vuex";
-import FoodListBarChart from './FoodListBarChart.vue'
+import FoodListBarChart from "./FoodListBarChart.vue";
+import BaseButton from "../../../components/BaseButton.vue";
 
 export default {
   components: {
-    FoodListBarChart
+    FoodListBarChart,
+    BaseButton
   },
   data() {
     return {

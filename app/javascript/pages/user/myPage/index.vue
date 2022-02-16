@@ -33,9 +33,13 @@
         justify="center"
         style="margin-top: 80px"
       >
-      <BaseButton @my-click="toUserEditPage">
-        編集する
-      </BaseButton>
+        <v-col cols="6">
+          <v-row justify="center">
+            <BaseButton @my-click="toUserEditPage">
+              編集する
+            </BaseButton>
+          </v-row>
+        </v-col>
       </v-row>
     </template>
   </UserForm>

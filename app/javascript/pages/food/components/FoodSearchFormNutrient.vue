@@ -99,12 +99,20 @@
       </v-col>
     </v-row>
     <v-row justify="center">
-      <BaseButton @my-click="reset">
-        クリア
-      </BaseButton>
-      <BaseButton @my-click="searchNutrient">
-        この条件で検索
-      </BaseButton>
+      <v-col cols="6">
+        <v-row justify="center">
+          <BaseButton @my-click="reset">
+            クリア
+          </BaseButton>
+        </v-row>
+      </v-col>
+      <v-col cols="6">
+        <v-row justify="center">
+          <BaseButton @my-click="searchNutrient">
+            この条件で検索
+          </BaseButton>
+        </v-row>
+      </v-col>
     </v-row>
   </v-container>
 </template>
