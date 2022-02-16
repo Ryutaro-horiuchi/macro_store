@@ -1,15 +1,7 @@
 <template>
   <div style="margin-top: 100px; margin-bottom: 100px">
     <template v-if="loading">
-      <v-row
-        justify="center"
-        class="loader"
-      >
-        <vue-loaders-line-spin-fade-loader
-          color="#D63D17"
-          scale="2"
-        />
-      </v-row>
+      <BaseLoading />
     </template>
     <template v-if="!loading">
       <v-container class="mt-14">
@@ -105,14 +97,11 @@
               </v-row>
             </v-container>
           </template>
-          <FoodNutrientSearchForm
-            :carbohydrate-minimum.sync="nutrients.carbohydrateMinimum"
-            :carbohydrate-maximum.sync="nutrients.carbohydrateMaximum"
-            :protein-minimum.sync="nutrients.proteinMinimum"
-            :protein-maximum.sync="nutrients.proteinMaximum"
-            :lipid-minimum.sync="nutrients.lipidMinimum"
-            :lipid-maximum.sync="nutrients.lipidMaximum"
+          <FoodSearchFormNutrient
+            @loading="loading = $event"
             @search-nutrient="searchNutrient"
+            @null-validation="nullValidation = $event"
+            @error-message="errorMessage = $event"
           />
         </v-row>
       </v-container>
@@ -133,29 +122,17 @@
           </v-card-text>
           <v-row style="margin-top: 20px">
             <v-col cols="6">
-              <v-row justify="center">
-                <v-btn
-                  color="#1c65ac"
-                  dark
-                  large
-                  elevation="3"
-                  @click="closeDialog"
-                >
+              <v-row justify="center">          
+                <BaseButton @my-click="closeDialog">
                   閉じる
-                </v-btn>
+                </BaseButton>
               </v-row>
             </v-col>
             <v-col cols="6">
-              <v-row justify="center">
-                <v-btn
-                  color="#1c65ac"
-                  dark
-                  large
-                  elevation="3"
-                  @click="turnOnCalculationResultParams"
-                >
+              <v-row justify="center">   
+                <BaseButton @my-click="turnOnCalculationResultParams">
                   保存する
-                </v-btn>
+                </BaseButton>
               </v-row>
             </v-col>
           </v-row>
@@ -167,11 +144,15 @@
 
 <script>
 import { mapGetters, mapActions } from "vuex";
-import FoodNutrientSearchForm from "../food/components/FoodNutrientSearchForm.vue";
+import FoodSearchFormNutrient from "../food/components/FoodSearchFormNutrient.vue";
+import BaseLoading from "../../../javascript/components/BaseLoading.vue"
+import BaseButton from "../../../javascript/components/BaseButton.vue"
 
 export default {
   components: {
-    FoodNutrientSearchForm,
+    FoodSearchFormNutrient,
+    BaseLoading,
+    BaseButton
   },
   data() {
     return {
@@ -179,22 +160,13 @@ export default {
       nullValidation: false,
       errorMessage: null,
       updateDialog: false,
-      nutrients: {
-        proteinMinimum: null,
-        proteinMaximum: null,
-        carbohydrateMinimum: null,
-        carbohydrateMaximum: null,
-        lipidMinimum: null,
-        lipidMaximum: null,
-      },
-      params: {},
-    };
+      params: {}
+    }
   },
   computed: {
-    ...mapGetters(["ingestionCal", "user"]),
+    ...mapGetters(["ingestionCal", "user"])
   },
   created() {
-    this.turnOnValueForm();
     this.checkDialog();
   },
   methods: {
@@ -213,42 +185,9 @@ export default {
     closeDialog() {
       this.updateDialog = false;
     },
-    turnOnValueForm() {
-      if (this.ingestionCal.protein) {
-        this.nutrients.proteinMinimum = this.ingestionCal.protein - 30;
-        this.nutrients.proteinMaximum = this.ingestionCal.protein;
-        this.nutrients.carbohydrateMinimum =
-          this.ingestionCal.carbohydrate - 30;
-        this.nutrients.carbohydrateMaximum = this.ingestionCal.carbohydrate;
-        this.nutrients.lipidMinimum = this.ingestionCal.lipid - 10;
-        this.nutrients.lipidMaximum = this.ingestionCal.lipid;
-        this.checkNegative();
-      }
-    },
-    checkNegative() {
-      Object.keys(this.nutrients).forEach((key) => {
-        if (Math.sign(this.nutrients[key]) === -1) {
-          this.nutrients[key] = 0;
-        }
-      });
-    },
-    checkNumericNull() {
-      let array = [];
-      Object.values(this.nutrients).forEach(function (value) {
-        array.push(value);
-      });
-      array = array.filter((v) => !!v);
-      return array.length ? true : false;
-    },
-    searchNutrient() {
-      if (this.checkNumericNull()) {
-        this.loading = true;
-        this.$store.dispatch("searchNutrient", this.nutrients);
-      } else {
-        this.nullValidation = true;
-        this.errorMessage = "数値を入力してください";
-      }
-    },
+    searchNutrient(nutrients) {
+      this.$store.dispatch("searchNutrient", nutrients)
+    }
   },
 };
 </script>

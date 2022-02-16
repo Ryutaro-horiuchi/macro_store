@@ -16,7 +16,7 @@
           color="#FFFFFF"
         >
           <v-text-field
-            v-model="setSearchFood"
+            v-model="params.name"
             hide-details
             background-color="#EEEEEE"
             placeholder="名前検索"
@@ -39,25 +39,24 @@
 
 <script>
 export default {
-  props: {
-    name: {
-      type: String,
-      default: "",
-    },
-  },
-  computed: {
-    setSearchFood: {
-      get() {
-        return this.name;
-      },
-      set(newVal) {
-        return this.$emit("update:name", newVal);
-      },
-    },
+  data() {
+    return {
+      params: { name: null }
+    }
   },
   methods: {
+    // 名前フォームのnullチェック。
+    checkStringNull() {
+      return this.params.name ? true : false;
+    },
     searchName() {
-      this.$emit("searchName");
+      if (this.checkStringNull()) {
+        this.$emit("loading", true)
+        this.$emit("search-name", this.params);
+      } else {
+        this.$emit("null-validation", true);
+        this.$emit("error-message", "文字を入力してください");
+      }
     },
   },
 };

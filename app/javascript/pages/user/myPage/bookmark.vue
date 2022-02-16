@@ -23,28 +23,24 @@
         justify="center"
         class="mt-10"
       >
-        <v-btn
-          color="#1c65ac"
-          class="mx-auto"
-          dark
-          x-large
-          elevation="3"
-          @click="toSearchPage"
-        >
+        <BaseButton @my-click="toSearchPage">
           食品を探す
-        </v-btn>
+        </BaseButton>
       </v-row>
     </template>
   </FoodList>
 </template>
 
 <script>
-import FoodList from "../food/components/FoodList.vue";
 import { mapGetters } from "vuex";
+import FoodList from "../../food/components/FoodList.vue";
+import BaseButton from "../../../components/BaseButton.vue";
+
 
 export default {
   components: {
-    FoodList
+    FoodList,
+    BaseButton
   },
   computed: {
     ...mapGetters(["bookmarkedFoods"])

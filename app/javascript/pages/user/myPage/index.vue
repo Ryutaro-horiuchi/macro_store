@@ -33,15 +33,13 @@
         justify="center"
         style="margin-top: 80px"
       >
-        <v-btn
-          color="#1c65ac"
-          dark
-          x-large
-          elevation="3"
-          @click="toUserEditPage"
-        >
-          編集する
-        </v-btn>
+        <v-col cols="6">
+          <v-row justify="center">
+            <BaseButton @my-click="toUserEditPage">
+              編集する
+            </BaseButton>
+          </v-row>
+        </v-col>
       </v-row>
     </template>
   </UserForm>
@@ -50,10 +48,12 @@
 <script>
 import { mapGetters } from "vuex";
 import UserForm from "../components/UserForm.vue";
+import BaseButton from "../../../components/BaseButton.vue";
 
 export default {
   components: {
     UserForm,
+    BaseButton
   },
   data() {
     return {

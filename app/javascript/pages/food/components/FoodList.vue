@@ -75,7 +75,7 @@
                 cols="10"
                 md="8"
               >
-                <FoodBarChart :food="food" />
+                <FoodListBarChart :food="food" />
               </v-col>
             </v-row>
           </v-card>
@@ -86,7 +86,7 @@
         persistent
         @click:outside="closeDialog"
       >
-        <Dialog />
+        <FoodListDialog />
       </v-dialog>
       <!-- 下スクロールした時に、次のページを取得するコンポーネント
             @infiniteで画面最下部までスクロールした際に発火 -->
@@ -112,15 +112,15 @@
 
 <script>
 import { mapGetters, mapActions } from "vuex";
-import Dialog from '../dialog.vue'
+import FoodListDialog from './FoodListDialog.vue';
+import FoodListBarChart from './FoodListBarChart.vue';
 import InfiniteLoading from 'vue-infinite-loading';
-import FoodBarChart from './FoodBarChart.vue';
 
 export default {
   components: {
-    Dialog,
+    FoodListDialog,
+    FoodListBarChart,
     InfiniteLoading,
-    FoodBarChart,
   },
   props: {
     foods: {
