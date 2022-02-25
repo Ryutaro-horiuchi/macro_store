@@ -1,13 +1,14 @@
 version: 2.1 # Use 2.1 to enable using orbs and other features.
 
+orbs: 
+  browser-tools: circleci/browser-tools@1.2.4
 jobs:
   build:
     docker:
-      - image: circleci/ruby:2.6.4-node
-        # Dockerに2.7.5のイメージがまだないため、出来次第image指定
+      - image: cimg/ruby:2.7.5-browsers
         environment:
           - BUNDLER_VERSION: 2.2.26
-          - RAILS_ENV: "test"
+          - RAILS_ENV: test
           - PGHOST: 127.0.0.1
       - image: circleci/postgres:13.4
         environment:
@@ -18,8 +19,13 @@ jobs:
 
     steps:
       - checkout # ~/macro_storeディレクトリ内にgithubのコードをプルダウンする
+      - browser-tools/install-browser-tools
       - run:
-          name: "Node.js と npm の更新"
+          command: |
+            google-chrome --version
+            chromedriver --version
+      - run:
+          name: "Update of node.js and npm"
           command: |
             curl -sSL "https://nodejs.org/dist/v14.17.0/node-v14.17.0-linux-x64.tar.xz" | sudo tar --strip-components=2 -xJ -C /usr/local/bin/ node-v14.17.0-linux-x64/bin/node
             curl https://www.npmjs.com/install.sh | sudo bash
@@ -55,8 +61,7 @@ jobs:
           command: bundle exec rails_best_practices
       - run:
           name: lint
-          command: |
-            yarn run lint
-      # - run:
-      #     name: rspec
-      #     command: bundle exec rspec
+          command: yarn run lint
+      - run:
+          name: rspec
+          command: bundle exec rspec
