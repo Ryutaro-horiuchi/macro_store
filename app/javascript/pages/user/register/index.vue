@@ -42,7 +42,7 @@
             color="#1c65ac"
             dark
             block
-            @click="signUp"
+            @click="signup"
           >
             <!-- disabledはtrueの場合にボタンを無効にする。この時はvalidが有効ではない時がtrueであり、無効になる。 -->
             <span>登録する</span>
@@ -81,9 +81,9 @@ export default {
     }
   },
   methods: {
-    signUp() {
+    signup() {
       this.loading = true
-      this.$store.dispatch('signUp', this.params)
+      this.$store.dispatch('signup', this.params)
       setTimeout(() => {
         this.formReset()
         this.loading = false

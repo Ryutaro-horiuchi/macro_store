@@ -3,7 +3,7 @@ class Api::UsersController < ApplicationController
 
   def create
     user = User.new(user_params)
-    if user.save!
+    if user.save
       render json: user
     else
       render json: user.errors, status: :bad_request
@@ -11,7 +11,7 @@ class Api::UsersController < ApplicationController
   end
 
   def update
-    if current_user.update!(update_params)
+    if current_user.update(update_params)
       render json: current_user
     else
       render json: curretn_user.errors, status: :bad_request

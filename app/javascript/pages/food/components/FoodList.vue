@@ -83,7 +83,6 @@
       </v-row>
       <v-dialog
         v-model="foodDialog"
-        persistent
         @click:outside="closeDialog"
       >
         <FoodListDialog />
@@ -130,12 +129,13 @@ export default {
   },
   data() {
     return {
-      getFoods: [], //foodListから切り取ったデータを格納。この配列データがブラウザに表示される
-      foodList: [], // 新しく取得した全データ。
+      getFoods: [], //foodListから切り取ったデータを格納。この配列データをブラウザに表示
+      foodList: [], // 新しく取得した全データ
       page: 0,
       pageSize: 20, // １ページに表示するデータ件数
       initialized: false, //データアクセスが完了した後にtrueを設定するフラグ
-      sevenImg: require("../../../../assets/images/seven_eleven.logo.png")
+      sevenImg: require("../../../../assets/images/seven_eleven.logo.png"),
+      scrollHeight: null
     }
   },
   computed: {
@@ -143,7 +143,6 @@ export default {
     hasNext() {
       return this.initialized 
     },
-
   },
   mounted() {
     // 現在表示中のページ番号をURLに設定する為に、スクロール時にイベントを発火
@@ -160,17 +159,19 @@ export default {
       // ページ番号を取得できない場合は1ページ目を表示
       this.page = 1
     }
-
     // 初期データ取得をする
     this.fetchFoods(null, this.page)
-  },
-  methods: {
-    toSearchPage() {
-      this.$emit("to-search-page")
-    }
+    this.$nextTick(function() {
+      setTimeout(() => {
+        this.scrollHeight = document.documentElement.scrollHeight
+      }, 500)
+    })
   },
   methods: {
     ...mapActions(["openDialog", "closeDialog", "makeBookmark", "removeBookmark"]),
+    toSearchPage() {
+      this.$emit("to-search-page")
+    },
     isBookmarked(food) {
       return this.bookmarkedFoods.some(v => v.id === food.id)
     },
@@ -197,7 +198,6 @@ export default {
         this.getFoods = this.getFoods.concat(this.foodList)
         this.page = page
 
-        // $state.loaded()でデータの読込完了を通知する
         if($state) $state.loaded();
         this.$nextTick(() => {
           this.initialized = true
@@ -206,8 +206,7 @@ export default {
     },
     scroll() {
       // 現在のスクロールY座標から、画面に表示されているページ番号を計算する
-      let scroll_position = window.pageYOffset || document.documentElement.scrollTop
-      let page = Math.ceil(((scroll_position + 0.5) / 7234))
+      let page = Math.ceil(((window.pageYOffset + 0.5) / this.scrollHeight))
       // urlを書き換え（urlパラメータにページ番号を設定)
       window.history.replaceState(null, null, "/?page=" + page)
     }
