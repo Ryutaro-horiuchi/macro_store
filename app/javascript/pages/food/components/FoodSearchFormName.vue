@@ -57,10 +57,7 @@ export default {
         this.$emit("null-validation", true);
         this.$emit("error-message", "文字を入力してください");
       }
-    },
-  },
+    }
+  }
 };
 </script>
-
-<style>
-</style>

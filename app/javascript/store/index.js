@@ -22,12 +22,11 @@ export default new Vuex.Store({
     flashMessage: "",
     flashColor: null,
     flashStatus: false,
-    drawer: false,
-    foodDialog: false,
-    endDialog: false,
+    drawer: false, // ナビゲーションのドロワー
+    foodDialog: false, //食品詳細
     user: null,
-    foods: null,
-    food: null,
+    foods: null, //検索結果後の食品配列
+    food: null, //ダイアログに表示される食品データ
     bookmarkedFoods: [],
     ingestionCal: null,
   },
@@ -37,7 +36,6 @@ export default new Vuex.Store({
     flashStatus: state => state.flashStatus,
     drawer: state => state.drawer,
     foodDialog: state => state.foodDialog,
-    endDialog: state => state.endDialog,
     user: state => state.user,
     bookmarkedFoods: state => state.bookmarkedFoods,
     foods: state => state.foods,
@@ -72,12 +70,6 @@ export default new Vuex.Store({
     },
     closeDialog(state) {
       state.foodDialog = false
-    },
-    openEndDialog(state) {
-      state.endDialog = true
-    },
-    closeEndDialog(state) {
-      state.endDialog = false
     },
     saveIngestionCal(state, calorie) {
       state.ingestionCal = calorie
@@ -120,11 +112,11 @@ export default new Vuex.Store({
         commit('setUser', null)
       }
     },
-    signUp(context, params) {
+    signup(context, params) {
       if (context.getters.ingestionCal !== null) {
         Object.assign(params.user, context.getters.ingestionCal)
       }
-      return axios.post('/signUp', params)
+      return axios.post('/signup', params)
         .then(res => {
           router.push('/login')
           context.dispatch('flashMessage', {
@@ -144,19 +136,10 @@ export default new Vuex.Store({
     login(context, user) {
       return axios.post('/login', user)
         .then(res => {
-          // localStorage.setItem('idToken', res.data.token)
           localStorage.idToken = res.data.token
           axios.defaults.headers.common['Authorization'] = `Bearer ${localStorage.idToken}`
           const loginUser = res.data.user
           context.commit('setUser', loginUser)
-          if (loginUser.calorie) {
-            const ingestionCal = {}
-            ingestionCal["calorie"] = loginUser.calorie
-            ingestionCal["carbohydrate"] = loginUser.carbohydrate
-            ingestionCal["protein"] = loginUser.protein
-            ingestionCal["lipid"] = loginUser.lipid
-            context.commit('saveIngestionCal', ingestionCal)
-          }
           context.commit('setBookmarkedFoods', res.data.foods)
           context.dispatch('flashMessage', {
             message: 'ログインしました',
@@ -176,7 +159,6 @@ export default new Vuex.Store({
     logout(context) {
       localStorage.removeItem('idToken')
       context.commit('setUser', null)
-      context.commit('clearIngestionCal')
       context.dispatch('flashMessage', {
         message: 'ログアウトしました',
         color: 'success',
@@ -185,7 +167,6 @@ export default new Vuex.Store({
       router.push('/')
     },
     update(context, params) {
-      console.log(params)
       axios.patch('/update', params)
         .then(res => {
           context.commit('setUser', res.data)

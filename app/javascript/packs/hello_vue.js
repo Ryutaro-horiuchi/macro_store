@@ -48,8 +48,3 @@ router.beforeEach((to, from, next) => {
     }
   })
 })
-if (process.env.NODE_ENV === "production") {
-  router.afterEach((to, from) => {
-    gtag('set', 'page_path', to.path);
-  })
-}

@@ -160,7 +160,6 @@ export default {
       nullValidation: false,
       errorMessage: null,
       updateDialog: false,
-      params: {}
     }
   },
   computed: {
@@ -172,8 +171,7 @@ export default {
   methods: {
     ...mapActions(["update"]),
     turnOnCalculationResultParams() {
-      Object.assign(this.params, this.ingestionCal);
-      this.update(this.params);
+      this.update(this.ingestionCal);
     },
     checkDialog() {
       if (this.user) {
