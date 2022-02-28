@@ -21,7 +21,7 @@ export default {
     return {
       rules: [
         v => !!v || '',
-        v => /[\w+\-.]+@[a-z\d\-.]+\.[a-z]+/.test(v) || ''
+        v => /^[\w+\-]+@[a-z\d\-]+\.[a-z]+\.*[a-z]*$/.test(v) || ''
       ]
     }
   },

@@ -1,6 +1,6 @@
 class Api::FoodsController < ApplicationController
   def search_name
-    foods = Food.where('name like ?', "%#{params[:name]}%")
+    foods = Food.where("name like ?", "%#{params[:name]}%")
     render json: foods
   end
 
