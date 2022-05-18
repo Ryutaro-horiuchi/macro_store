@@ -21,7 +21,7 @@ RSpec.describe "Foods", type: :system do
       it_behaves_like '商品が出てくる'
     end
     
-    it '文字を入力しないと検索できない' do
+    it '文字未入力だと検索できない' do
       click_button 'magnify'
       expect(page).to have_current_path('/search')
       expect(page).to have_content("文字を入力してください")
@@ -46,11 +46,24 @@ RSpec.describe "Foods", type: :system do
       end
       it_behaves_like '商品が出てくる'
     end
+    
+    shared_examples_for '検索できない' do
+      it {
+        click_button 'この条件で検索'
+        expect(page).to have_current_path('/search')
+        expect(page).to have_content('数値を入力してください')
+      }
+    end
+    
+    context '文字を入力すると' do
+      before do
+        fill_in 'proteinMin', with: 'hogehoge'
+      end
+      it_behaves_like '検索できない'
+    end
 
-    it '数値を入力しないと、検索できない' do
-      click_button 'この条件で検索'
-      expect(page).to have_current_path('/search')
-      expect(page).to have_content('数値を入力してください')
+    context '数値未入力だと' do
+      it_behaves_like '検索できない'
     end
   end
 

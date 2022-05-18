@@ -177,17 +177,15 @@ export default {
     reset() {
       this.$refs.form.reset();
     },
-    // 栄養素フォームのnullチェック。全てnullだった場合falseを返す
-    checkNumericNull() {
-      let array = [];
+    typeCheck() {
+      const array = [];
       Object.values(this.nutrients).forEach(function (value) {
         array.push(value);
       });
-      array = array.filter((v) => !!v);
-      return array.length ? true : false;
+      return array.some((ele) => typeof ele === "number")
     },
     searchNutrient() {
-      if (this.checkNumericNull()) {
+      if (this.typeCheck() ) {
         this.$emit("loading", true);
         this.$emit("search-nutrient", this.nutrients);
       } else {
